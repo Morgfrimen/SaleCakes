@@ -6,14 +6,18 @@
         xmlns:components="clr-namespace:SaleCakes.Components"
         xmlns:res="clr-namespace:SaleCakes.Properties"
         xmlns:converters="clr-namespace:SaleCakes.Converters"
+        xmlns:vm="clr-namespace:SaleCakes.ViewModel"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Кондитер"
+        
         Height="{Binding RelativeSource={RelativeSource Self}, Path=MinHeight}"
         Width="{Binding RelativeSource={RelativeSource Self}, Path=MinWidth}"
         MinHeight="450" MinWidth="800">
 
-    
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
 
     <Window.Resources>
         <converters:ByteArrayToImageSourceConverter x:Key="ImageSourceConverter" />
@@ -27,8 +31,10 @@
     </Window.Background>
 
     <Grid>
-        <components:AuthorizationComponent Visibility="Visible" />
-        <Frame Visibility="Collapsed" NavigationUIVisibility="Hidden"
+        <components:AuthorizationComponent 
+            DataContext="{Binding}"
+            Visibility="{Binding VisibilityAutorized}" />
+        <Frame Visibility="{Binding VisibilityMenu}" NavigationUIVisibility="Hidden"
                Source="../Pages/MainMenu.xaml"></Frame>
     </Grid>
 
