@@ -11,7 +11,7 @@ public class RepositoryRoleUserTests
     private const string ConnectionString = "Server=.\\SQLEXPRESS;Database=SaleCakes;Trusted_Connection=true;";
 
     [Fact]
-    public async void Add_Role_Test()
+    public async void Role_Test()
     {
         var role = "Директор";
         var repository = new RoleUserRepos(ConnectionString);
