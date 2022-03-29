@@ -8,10 +8,10 @@ namespace SaleCakes.Model
 {
     internal class ModelEmployee
     {
-        public ModelEmployee(Guid id, Guid autorizedData, string employeeName, string employeeSurname, string employeePatronymic, string employeePhone, string employeeEmail)
+        public ModelEmployee(Guid id, Guid autorizedDataId, string employeeName, string employeeSurname, string employeePatronymic, string employeePhone, string employeeEmail)
         {
             Id = id;
-            AutorizedData = autorizedData;
+            AutorizedDataId = autorizedDataId;
             EmployeeName = employeeName;
             EmployeeSurname = employeeSurname;
             EmployeePatronymic = employeePatronymic;
@@ -20,7 +20,7 @@ namespace SaleCakes.Model
         }
 
         public Guid Id { get; }
-        public Guid AutorizedData { get; }
+        public Guid AutorizedDataId { get; }
         public string EmployeeName { get; }
         public string EmployeeSurname { get; }
         public string EmployeePatronymic { get; }
