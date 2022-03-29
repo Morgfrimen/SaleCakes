@@ -8,16 +8,13 @@ namespace SaleCakes.Model
 {
     internal class ModelAppUsers
     {
-        private readonly Guid _id;
-        private readonly string _userRole;
-
         public ModelAppUsers(Guid id, string userRole)
         {
-            _id = id;
-            _userRole = userRole;
+            Id = id;
+            UserRole = userRole;
         }
 
-        public Guid Id { get { return _id; } }
-        public string UserRole { get { return _userRole; } }
+        public Guid Id { get; }
+        public string UserRole { get; }
     }
 }
