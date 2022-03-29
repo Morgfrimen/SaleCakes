@@ -28,7 +28,7 @@ public class UserAuthorizationRepos : IRepository<AuthorizationUserDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"SELECT * FROM SaleCakes.authorization_user where id = \'{id}\'";
+            var sqlExpression = $"Use SaleCakes; SELECT * FROM authorization_user where id = \'{id}\'";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteReaderAsync();
 
@@ -73,7 +73,7 @@ public class UserAuthorizationRepos : IRepository<AuthorizationUserDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = "SELECT * FROM SaleCakes.authorization_user";
+            var sqlExpression = "Use SaleCakes; SELECT * FROM authorization_user";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteReaderAsync();
 
@@ -124,8 +124,8 @@ public class UserAuthorizationRepos : IRepository<AuthorizationUserDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"INSERT SaleCakes.authorization_user VALUES (\'{entity.AppUsers}\'," +
-                                $"\'{entity.UserLogin}\',\'{entity.UserPassword}\',\'{entity.CreatedAt}\')";
+            var sqlExpression = $"Use SaleCakes; INSERT INTO authorization_user (user_guid,user_login,user_password,createdAt) VALUES (" +
+                                $"\'{entity.AppUsers}\',\'{entity.UserLogin}\',\'{entity.UserPassword}\',\'{entity.CreatedAt}\')";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();
 
@@ -162,7 +162,7 @@ public class UserAuthorizationRepos : IRepository<AuthorizationUserDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"DELETE SaleCakes.authorization_user WHETE id=\'{id}\'";
+            var sqlExpression = $"Use SaleCakes; DELETE authorization_user WHERE id=\'{id}\'";
 
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();
@@ -200,7 +200,7 @@ public class UserAuthorizationRepos : IRepository<AuthorizationUserDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = "UPDATE SaleCakes.authorization_user " +
+            var sqlExpression = "Use SaleCakes; UPDATE authorization_user " +
                                 $"SET user_login= \'{entity.UserLogin}\',user_password= \'{entity.UserPassword}\'" +
                                 $",createdAt= \'{entity.CreatedAt}\' WHERE id=\'{entity.Id}\'";
             var command = new SqlCommand(sqlExpression, connection);
