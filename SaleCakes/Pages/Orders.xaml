@@ -12,7 +12,7 @@
     </d:Page.Background>
 
     <Grid>
-        <ListView x:Name="listEmployeeView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,300,0">
+        <ListView x:Name="listOrdersView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,300,0">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="№" DisplayMemberBinding="{Binding Id}" Width="50"/>
