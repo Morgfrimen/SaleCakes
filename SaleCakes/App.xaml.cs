@@ -8,7 +8,7 @@ namespace SaleCakes;
 /// </summary>
 public partial class App : Application
 {
-    private const string DefaultConnectionString = $"Server=.\\SQLEXPRESS;Database=SaleCakes;Trusted_Connection=true;";
+    private const string DefaultConnectionString = "Server=.\\SQLEXPRESS;Database=SaleCakes;Trusted_Connection=true;";
 
     protected override void OnStartup(StartupEventArgs e)
     {
