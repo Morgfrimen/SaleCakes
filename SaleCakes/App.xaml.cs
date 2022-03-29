@@ -8,6 +8,8 @@ namespace SaleCakes;
 /// </summary>
 public partial class App : Application
 {
+    private const string DefaultConnectionString = $"Server=.\\SQLEXPRESS;Database=SaleCakes;Trusted_Connection=true;";
+
     protected override void OnStartup(StartupEventArgs e)
     {
         DispatcherUnhandledException += GlobalErrorsEvent;
@@ -22,7 +24,7 @@ public partial class App : Application
 
         if (settings[SaleCakes.Properties.Resources.Config_Key_ConnectionString] == null)
         {
-            settings.Add(SaleCakes.Properties.Resources.Config_Key_ConnectionString, string.Empty);
+            settings.Add(SaleCakes.Properties.Resources.Config_Key_ConnectionString, DefaultConnectionString);
             configFile.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
         }
