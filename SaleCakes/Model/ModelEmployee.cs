@@ -8,31 +8,23 @@ namespace SaleCakes.Model
 {
     internal class ModelEmployee
     {
-        private readonly Guid _id;
-        private readonly Guid _autorizedData;
-        private readonly string _employeeName;
-        private readonly string _employeeSurname;
-        private readonly string _employeePatronymic;
-        private readonly string _employeePhone;
-        private readonly string _employeeEmail;
-
         public ModelEmployee(Guid id, Guid autorizedData, string employeeName, string employeeSurname, string employeePatronymic, string employeePhone, string employeeEmail)
         {
-            _id = id;
-            _autorizedData = autorizedData;
-            _employeeName = employeeName;
-            _employeeSurname = employeeSurname;
-            _employeePatronymic = employeePatronymic;
-            _employeePhone = employeePhone;
-            _employeeEmail = employeeEmail;
+            Id = id;
+            AutorizedData = autorizedData;
+            EmployeeName = employeeName;
+            EmployeeSurname = employeeSurname;
+            EmployeePatronymic = employeePatronymic;
+            EmployeePhone = employeePhone;
+            EmployeeEmail = employeeEmail;
         }
 
-        public Guid Id { get { return _id; } }
-        public Guid AutorizedData { get { return _autorizedData; } }
-        public string EmployeeName { get { return _employeeName; } }
-        public string EmployeeSurname { get { return _employeeSurname; } }
-        public string EmployeePatronymic { get { return _employeePatronymic; } }
-        public string EmployeePhone { get { return _employeePhone; } }
-        public string EmployeeEmail { get { return _employeeEmail; } }
+        public Guid Id { get; }
+        public Guid AutorizedData { get; }
+        public string EmployeeName { get; }
+        public string EmployeeSurname { get; }
+        public string EmployeePatronymic { get; }
+        public string EmployeePhone { get; }
+        public string EmployeeEmail { get; }
     }
 }
