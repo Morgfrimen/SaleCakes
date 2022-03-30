@@ -20,12 +20,20 @@ namespace SaleCakes.Pages
     /// </summary>
     public partial class Employee : Page
     {
-        List<Employee> list = new();
 
         public Employee()
         {
             InitializeComponent();
-            listEmployeeView.ItemsSource = list;
+        }
+
+        private void ButtonMainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MainMenu());
+        }
+
+        private void ButtonEdit_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
