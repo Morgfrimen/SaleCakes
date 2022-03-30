@@ -13,27 +13,44 @@ create table authorization_user
 	createdAt Date
 );
 
-CREATE TABLE cake
+CREATE TABLE shortcake
 (
 	id uniqueidentifier DEFAULT NEWID() PRIMARY KEY,
-	weight DECIMAL(18,2) not null,
-	tier int not null DEFAULT 1,
+	name VARCHAR(500) not null,
+	price DECIMAL(18,2) not null
+);
 
+
+CREATE TABLE decor
+(
+	id uniqueidentifier DEFAULT NEWID() PRIMARY KEY,
+	name VARCHAR(500) not null,
+	price DECIMAL(18,2) not null
 );
 
 CREATE TABLE stuffing
 (
 	id uniqueidentifier DEFAULT NEWID() PRIMARY KEY,
 	name VARCHAR(500) not null,
-	price VARCHAR(500) not null
+	price DECIMAL(18,2) not null
 );
 
-CREATE TABLE decor
+CREATE TABLE tiers(
+	id uniqueidentifier DEFAULT NEWID() PRIMARY KEY,
+	stuffing uniqueidentifier foreign key references stuffing(id),
+	decor uniqueidentifier foreign key references decor(id),
+	shortcake uniqueidentifier foreign key references shortcake(id)
+);
+
+
+CREATE TABLE cake
 (
 	id uniqueidentifier DEFAULT NEWID() PRIMARY KEY,
-	name VARCHAR(500) not null,
-	price VARCHAR(500) not null
+	weight DECIMAL(18,2) not null,
+	tiers uniqueidentifier not null  foreign key references tiers(id)
 );
+
+
 
 create table order_client
 (
@@ -43,12 +60,12 @@ create table order_client
 	order_cake uniqueidentifier foreign key references cake(id),
 	order_condites uniqueidentifier foreign key references authorization_user(id),
 	order_emoloyee uniqueidentifier foreign key references authorization_user(id),
-	order_seller VARCHAR(1000) not null
+	order_seller DECIMAL(18,2) not null
 );
 
 create table client
 (
-	id uniqueidentifier DEFAULT NEWID()  PRIMARY KEY (id),
+	id uniqueidentifier DEFAULT NEWID() PRIMARY KEY (id),
 	client_name VARCHAR(500) not null,
 	client_surname VARCHAR(500) not null,
 	client_patronymic VARCHAR(500),
