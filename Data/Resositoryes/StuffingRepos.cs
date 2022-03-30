@@ -33,13 +33,16 @@ public class StuffingRepos : IRepository<StuffingDto>
 
             if (reader.HasRows)
             {
-                var idDto = id;
-                var nameDto = reader.GetValue(1) as string;
-                var priceDto = reader.GetValue(2) is decimal ? (decimal)reader.GetValue(2) : 0;
+                while (await reader.ReadAsync())
+                {
+                    var idDto = id;
+                    var nameDto = reader.GetValue(1) as string;
+                    var priceDto = reader.GetValue(2) is decimal ? (decimal)reader.GetValue(2) : 0;
 
-                var roleUserDto = new StuffingDto(idDto, nameDto,priceDto);
+                    var roleUserDto = new StuffingDto(idDto, nameDto, priceDto);
 
-                return roleUserDto;
+                    return roleUserDto; 
+                }
             }
 
             return null;

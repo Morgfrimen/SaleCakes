@@ -38,11 +38,22 @@ public class RepositoryTierTests
         collection = await repository.GetAllAsync();
         Assert.NotNull(collection);
 
-        var updateStuffingDtoDto = collection.FirstOrDefault(item => item.StuffingId == stuffing.Id);
-        updateStuffingDtoDto = new TiersDto(updateStuffingDtoDto.Id, stuffing.Id, decor.Id, shortcake.Id);
-        Assert.True(await repository.UpdateAsync(updateStuffingDtoDto));
+        var updateTiersDto = collection.FirstOrDefault(item => item.StuffingId == stuffing.Id);
+        updateTiersDto = new TiersDto(updateTiersDto.Id, stuffing.Id, decor.Id, shortcake.Id);
+        Assert.True(await repository.UpdateAsync(updateTiersDto));
 
-        Assert.True(await repository.DeleteAsync(updateStuffingDtoDto.Id));
+        var getDto = await repository.GetByIdAsync(updateTiersDto.Id);
+
+        Assert.Equal(getDto.Id, updateTiersDto.Id);
+
+        Assert.True(await repository.DeleteAsync(updateTiersDto.Id));
+
+
+        collection = await repository.GetAllAsync();
+        if (collection is null)
+            return;
+        foreach (var dto in collection)
+            Assert.True(await repository.DeleteAsync(dto.Id));
     }
 
     private async Task<StuffingDto> AddStuffingDto()

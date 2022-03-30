@@ -33,10 +33,20 @@ public class RepositoryShortcakeTests
         collection = await repository.GetAllAsync();
         Assert.NotNull(collection);
 
-        var updateStuffingDtoDto = collection.FirstOrDefault(item => item.Name == name);
-        updateStuffingDtoDto = new ShortcakeDto(updateStuffingDtoDto!.Id, name, price + 10);
-        Assert.True(await repository.UpdateAsync(updateStuffingDtoDto));
+        var updateShortcaketoDto = collection.FirstOrDefault(item => item.Name == name);
+        updateShortcaketoDto = new ShortcakeDto(updateShortcaketoDto!.Id, name, price + 10);
+        Assert.True(await repository.UpdateAsync(updateShortcaketoDto));
 
-        Assert.True(await repository.DeleteAsync(updateStuffingDtoDto.Id));
+        var getDto = await repository.GetByIdAsync(updateShortcaketoDto.Id);
+
+        Assert.Equal(getDto.Id, updateShortcaketoDto.Id);
+
+        Assert.True(await repository.DeleteAsync(updateShortcaketoDto.Id));
+
+        collection = await repository.GetAllAsync();
+        if (collection is null)
+            return;
+        foreach (var dto in collection)
+            Assert.True(await repository.DeleteAsync(dto.Id));
     }
 }

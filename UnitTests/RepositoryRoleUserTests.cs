@@ -12,6 +12,15 @@ public class RepositoryRoleUserTests
     [Fact]
     public async void Role_Test()
     {
+        var repositoryAuto = new UserAuthorizationRepos(ConnectionString);
+
+        var collectionAuto = await repositoryAuto.GetAllAsync();
+        if (collectionAuto is not null)
+        {
+            foreach (var dto in collectionAuto)
+                Assert.True(await repositoryAuto.DeleteAsync(dto.Id)); 
+        }
+
         var role = "Директор";
         var repository = new RoleUserRepos(ConnectionString);
         var roleUserDto = new RoleUserDto(role);
@@ -36,6 +45,17 @@ public class RepositoryRoleUserTests
         updateRoleDto = new RoleUserDto(updateRoleDto.Id, "Клиент");
         Assert.True(await repository.UpdateAsync(updateRoleDto));
 
+        var getDto = await repository.GetByIdAsync(updateRoleDto.Id);
+
+        Assert.Equal(getDto.Id, updateRoleDto.Id);
+
         Assert.True(await repository.DeleteAsync(updateRoleDto.Id));
+
+        collection = await repository.GetAllAsync();
+        if (collection is null)
+            return;
+        foreach (var dto in collection)
+            Assert.True(await repository.DeleteAsync(dto.Id));
+
     }
 }

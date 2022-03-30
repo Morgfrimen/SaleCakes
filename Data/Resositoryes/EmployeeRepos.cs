@@ -34,17 +34,20 @@ public class EmployeeRepos : IRepository<EmployeeDto>
 
             if (reader.HasRows)
             {
-                var idDto = id;
-                var autorizedUserDto = reader.GetValue(1) is Guid ? (Guid)reader.GetValue(1) : default;
-                var firstDto = reader.GetValue(2) as string;
-                var lastDto = reader.GetValue(3) as string;
-                var patronymicDto = reader.GetValue(4) as string;
-                var phoneDto = reader.GetValue(5) as string;
-                var emailDto = reader.GetValue(6) as string;
+                while (await reader.ReadAsync())
+                {
+                    var idDto = id;
+                    var autorizedUserDto = reader.GetValue(1) is Guid ? (Guid)reader.GetValue(1) : default;
+                    var firstDto = reader.GetValue(2) as string;
+                    var lastDto = reader.GetValue(3) as string;
+                    var patronymicDto = reader.GetValue(4) as string;
+                    var phoneDto = reader.GetValue(5) as string;
+                    var emailDto = reader.GetValue(6) as string;
 
-                var employeeDto = new EmployeeDto(idDto, autorizedUserDto, firstDto, lastDto, patronymicDto, phoneDto, emailDto);
+                    var employeeDto = new EmployeeDto(idDto, autorizedUserDto, firstDto, lastDto, patronymicDto, phoneDto, emailDto);
 
-                return employeeDto;
+                    return employeeDto; 
+                }
             }
 
             return null;

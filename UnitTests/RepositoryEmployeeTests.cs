@@ -52,18 +52,28 @@ public class RepositoryEmployeeTests
         collection = await repository.GetAllAsync();
         Assert.NotNull(collection);
 
-        var employeeDto = collection.FirstOrDefault(item => item.AutorizedUserId == userAuthorizationUserDto.Id);
+        var updateEmployeeDto = collection.FirstOrDefault(item => item.AutorizedUserId == userAuthorizationUserDto.Id);
 
-        employeeDto = new EmployeeDto(employeeDto.Id,
+        updateEmployeeDto = new EmployeeDto(updateEmployeeDto.Id,
             userAuthorizationUserDto.Id,
             "5555",
             "Багратионович",
             "Васильевич",
             "8-800-553-55-55",
             "santa@ru.con");
-        Assert.True(await repository.UpdateAsync(employeeDto));
+        Assert.True(await repository.UpdateAsync(updateEmployeeDto));
 
-        Assert.True(await repository.DeleteAsync(employeeDto.Id));
+        var getDto = await repository.GetByIdAsync(updateEmployeeDto.Id);
+
+        Assert.Equal(getDto.Id, updateEmployeeDto.Id);
+
+        Assert.True(await repository.DeleteAsync(updateEmployeeDto.Id));
+
+        collection = await repository.GetAllAsync();
+        if (collection is null)
+            return;
+        foreach (var dto in collection)
+            Assert.True(await repository.DeleteAsync(dto.Id));
     }
 
     private async Task<RoleUserDto> AddRole()

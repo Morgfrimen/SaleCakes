@@ -34,14 +34,17 @@ public class TiersRepos : IRepository<TiersDto>
 
             if (reader.HasRows)
             {
-                var idDto = id;
-                var stuffingId = reader.GetValue(1) is Guid ? (Guid)reader.GetValue(1) : default;
-                var decorId = reader.GetValue(2) is Guid ? (Guid)reader.GetValue(2) : default;
-                var shortcakeId = reader.GetValue(3) is Guid ? (Guid)reader.GetValue(3) : default;
+                while (await reader.ReadAsync())
+                {
+                    var idDto = id;
+                    var stuffingId = reader.GetValue(1) is Guid ? (Guid)reader.GetValue(1) : default;
+                    var decorId = reader.GetValue(2) is Guid ? (Guid)reader.GetValue(2) : default;
+                    var shortcakeId = reader.GetValue(3) is Guid ? (Guid)reader.GetValue(3) : default;
 
-                var tiersDto = new TiersDto(idDto,stuffingId,decorId,shortcakeId);
+                    var tiersDto = new TiersDto(idDto, stuffingId, decorId, shortcakeId);
 
-                return tiersDto;
+                    return tiersDto; 
+                }
             }
 
             return null;

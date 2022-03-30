@@ -34,12 +34,15 @@ public class RoleUserRepos : IRepository<RoleUserDto>
 
             if (reader.HasRows)
             {
-                var idDto = id;
-                var userRoleDto = reader.GetValue(2) as string;
+                while (await reader.ReadAsync())
+                {
+                    var idDto = id;
+                    var userRoleDto = reader.GetValue(1) as string;
 
-                var roleUserDto = new RoleUserDto(idDto, userRoleDto);
+                    var roleUserDto = new RoleUserDto(idDto, userRoleDto);
 
-                return roleUserDto;
+                    return roleUserDto; 
+                }
             }
 
             return null;

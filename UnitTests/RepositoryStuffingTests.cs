@@ -37,6 +37,17 @@ public class RepositoryStuffingTests
         updateStuffingDtoDto = new StuffingDto(updateStuffingDtoDto!.Id, name, price + 10);
         Assert.True(await repository.UpdateAsync(updateStuffingDtoDto));
 
+        var getDto = await repository.GetByIdAsync(updateStuffingDtoDto.Id);
+
+        Assert.Equal(getDto.Id, updateStuffingDtoDto.Id);
+
         Assert.True(await repository.DeleteAsync(updateStuffingDtoDto.Id));
+
+        collection = await repository.GetAllAsync();
+        if (collection is null)
+            return;
+
+        foreach (var dto in collection)
+            Assert.True(await repository.DeleteAsync(dto.Id));
     }
 }

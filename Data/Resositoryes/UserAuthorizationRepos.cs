@@ -34,15 +34,20 @@ public class UserAuthorizationRepos : IRepository<AuthorizationUserDto>
 
             if (reader.HasRows)
             {
-                var idDto = id;
-                var userDto = reader.GetValue(1) is Guid ? (Guid)reader.GetValue(1) : default;
-                var userLoginDto = reader.GetValue(2) as string;
-                var userPasswordDto = reader.GetValue(3) as string;
-                var createdAtDto = reader.GetValue(4) is DateTime ? (DateTime)reader.GetValue(4) : default;
+                while (await reader.ReadAsync())
+                {
+                    var idDto = id;
+                    var userDto = reader.GetValue(1) is Guid 
+                        ? (Guid?)reader.GetValue(1)
+                        : default;
+                    var userLoginDto = reader.GetValue(2) as string;
+                    var userPasswordDto = reader.GetValue(3) as string;
+                    var createdAtDto = reader.GetValue(4) is DateTime ? (DateTime)reader.GetValue(4) : default;
 
-                var authorizationUserDto = new AuthorizationUserDto(idDto, userDto, userLoginDto!, userPasswordDto!, createdAtDto);
+                    var authorizationUserDto = new AuthorizationUserDto(idDto, userDto!.Value, userLoginDto!, userPasswordDto!, createdAtDto);
 
-                return authorizationUserDto;
+                    return authorizationUserDto;
+                }
             }
 
             return null;
