@@ -8,19 +8,15 @@ namespace SaleCakes.Model
 {
     internal class ModelDecor
     {
-        private readonly Guid _id;
-        private readonly string _name;
-        private readonly string _price;
-
-        public ModelDecor(Guid id, string name, string price)
+        public ModelDecor(Guid id, string name, decimal price)
         {
-            _id = id;
-            _name = name;
-            _price = price;
+            Id = id;
+            Name = name;
+            Price = price;
         }
 
-        public Guid Id { get { return _id; } }
-        public string Name { get { return _name; } }
-        public string Price { get { return _price; } }
+        public Guid Id { get; }
+        public string Name { get; }
+        public decimal Price { get; }
     }
 }

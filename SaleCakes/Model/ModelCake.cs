@@ -8,19 +8,15 @@ namespace SaleCakes.Model
 {
     internal class ModelCake
     {
-        private readonly Guid _id;
-        private readonly double _weight;
-        private readonly int _tier;
-
-        public ModelCake(Guid id, double weight, int tier)
+        public ModelCake(Guid id, double weight, Guid tier)
         {
-            _id = id;
-            _weight = weight;
-            _tier = tier;
+            Id = id;
+            Weight = weight;
+            Tier = tier;
         }
 
-        public Guid Id { get { return _id; } }
-        public double Weight { get { return _weight; } }
-        public int Tier { get { return _tier; } }
+        public Guid Id { get; }
+        public double Weight { get; }
+        public Guid Tier { get; }
     }
 }

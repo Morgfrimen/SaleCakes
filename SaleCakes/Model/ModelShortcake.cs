@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace SaleCakes.Model
 {
-    internal class ModelStuffing
+    internal class ModelShortcake
     {
-        public ModelStuffing(Guid id, string name, decimal price)
+        public ModelShortcake(Guid id, string name, string price)
         {
             Id = id;
             Name = name;
@@ -16,7 +16,9 @@ namespace SaleCakes.Model
         }
 
         public Guid Id { get; }
+
         public string Name { get; }
-        public decimal Price { get; }
+
+        public string Price { get; }
     }
 }
