@@ -2,7 +2,7 @@
 
 public class AuthorizationUserDto
 {
-    public AuthorizationUserDto(Guid appUsers,string userLogin, string userPassword, DateTime createdAt) :this(userLogin, userPassword, createdAt)
+    public AuthorizationUserDto(Guid appUsers, string userLogin, string userPassword, DateTime createdAt) : this(userLogin, userPassword, createdAt)
     {
         AppUsers = appUsers;
     }
@@ -15,7 +15,7 @@ public class AuthorizationUserDto
     }
 
     public AuthorizationUserDto(Guid id, Guid appUsers, string userLogin, string userPassword, DateTime createdAt)
-        : this(appUsers,userLogin, userPassword, createdAt)
+        : this(appUsers, userLogin, userPassword, createdAt)
     {
         Id = id;
     }

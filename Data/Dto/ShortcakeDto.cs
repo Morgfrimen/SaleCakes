@@ -2,7 +2,7 @@
 
 public record ShortcakeDto
 {
-    public ShortcakeDto(Guid id, string name, decimal price) :this(name, price)
+    public ShortcakeDto(Guid id, string name, decimal price) : this(name, price)
     {
         Id = id;
     }

@@ -2,7 +2,7 @@
 
 public record StuffingDto
 {
-    public StuffingDto(Guid id, string name, decimal price) :this(name, price)
+    public StuffingDto(Guid id, string name, decimal price) : this(name, price)
     {
         Id = id;
     }

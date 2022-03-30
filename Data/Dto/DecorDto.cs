@@ -2,7 +2,7 @@
 
 public record DecorDto
 {
-    public DecorDto(Guid id, string name, decimal price) :this(name, price)
+    public DecorDto(Guid id, string name, decimal price) : this(name, price)
     {
         Id = id;
     }
