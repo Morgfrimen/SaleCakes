@@ -12,28 +12,54 @@
     </d:Page.Background>
 
     <Grid>
-        <ListView x:Name="listDecorView" 
-                  d:ItemsSource="{d:SampleData ItemCount=5}" 
-                  Margin="0,0,400,0">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="№" DisplayMemberBinding="{Binding Id}" Width="50"/>
-                    <GridViewColumn Header="Вес" DisplayMemberBinding="{Binding Weight}" Width="150"/>
-                    <GridViewColumn Header="Высота" DisplayMemberBinding="{Binding Tier}" Width="200"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Button Content="Редактировать" 
-                HorizontalAlignment="Left" 
-                Margin="545,225,0,0" 
-                VerticalAlignment="Top" 
-                Height="40" 
-                Width="100" FontSize="14" FontWeight="Normal"/>
-        <TextBox HorizontalAlignment="Left" Margin="416,30,0,0" TextWrapping="Wrap" Text="Выбран торт №" VerticalAlignment="Top" Width="115" Height="25" FontSize="14" Background="{x:Null}" BorderBrush="{x:Null}"/>
-        <TextBox x:Name="orderId" HorizontalAlignment="Left" Margin="565,35,0,0" TextWrapping="Wrap" Text="Номер заказа" VerticalAlignment="Top" Width="60" Height="25" FontSize="14" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="-0.368,0.695"/>
-        <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Margin="565,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="170" FontSize="16"/>
-        <TextBlock HorizontalAlignment="Left" Margin="431,95,0,0" TextWrapping="Wrap" Text="Новой вес: " VerticalAlignment="Top" Height="30" FontSize="16"/>
-        <TextBlock HorizontalAlignment="Left" Margin="431,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" FontSize="16"><Run Text="Нов"/><Run Language="ru-ru" Text="ая высота"/><LineBreak/><Run Language="ru-ru"/><Run Text=":"/></TextBlock>
-        <TextBox x:Name="phoneTextBox" HorizontalAlignment="Left" Margin="565,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="170" FontSize="16"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.Resources>
+            <Style TargetType="Button"
+                   BasedOn="{StaticResource ButtonDefault}" />
+        </Grid.Resources>
+        <Grid Grid.Column="0">
+            <ListView x:Name="listDecorView" 
+                      d:ItemsSource="{d:SampleData ItemCount=5}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="№" DisplayMemberBinding="{Binding Id}" Width="50"/>
+                        <GridViewColumn Header="Вес" DisplayMemberBinding="{Binding Weight}" Width="150"/>
+                        <GridViewColumn Header="Высота" DisplayMemberBinding="{Binding Tier}" Width="200"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="3" Content="Редактировать" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Height="40" 
+                    Width="120" FontSize="14" FontWeight="Normal" Click="ButtonEdit_Click"/>
+            <Button Grid.Row="4" Content="Главное меню" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Height="40" 
+                    Width="120" FontSize="14" FontWeight="Normal" Click="ButtonMainMenu_Click"/>
+            <TextBlock Grid.Row="0" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Выбран торт №" VerticalAlignment="Center" Width="115" Height="26" FontSize="14" Background="{x:Null}" Margin="10,0,0,0"/>
+            <TextBlock Grid.Row="0" x:Name="orderId" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Номер заказа" VerticalAlignment="Center" Width="100" Height="25" FontSize="14" Background="{x:Null}" RenderTransformOrigin="-0.368,0.695"/>
+            <TextBox Grid.Row="1" x:Name="weightTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Height="30" Width="170" FontSize="16"/>
+            <TextBlock Grid.Row="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Новой вес: " VerticalAlignment="Center" Height="30" FontSize="16" Margin="10,0,0,0"/>
+            <TextBlock Grid.Row="2" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Height="30" FontSize="16" Margin="10,0,0,0" Width="105" Text="Новая высота:"/>
+            <TextBox Grid.Row="2" x:Name="tierTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Height="30" Width="150" FontSize="16"/>
+        </Grid>
+
+
     </Grid>
 </Page>

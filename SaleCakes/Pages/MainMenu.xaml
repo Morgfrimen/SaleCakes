@@ -29,11 +29,11 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" Content="Данные о заказах" />
-            <Button Grid.Row="1" Content="Данные о клиентах" />
-            <Button Grid.Row="2" Content="Данные о декоре" />
-            <Button Grid.Row="3" Content="Данные о сотрудниках" />
-            <Button Grid.Row="4" Content="Данные о тортах" />
+            <Button Grid.Row="0" Content="Данные о заказах" Click="ButtonOrders_Click" />
+            <Button Grid.Row="1" Content="Данные о клиентах" Click="ButtonClients_Click" />
+            <Button Grid.Row="2" Content="Данные о декоре" Click="ButtonDecor_Click" />
+            <Button Grid.Row="3" Content="Данные о сотрудниках" Click="ButtonEmployee_Click" />
+            <Button Grid.Row="4" Content="Данные о тортах" Click="ButtonCakes_Click" />
         </Grid>
 
         <Grid Grid.Column="1">

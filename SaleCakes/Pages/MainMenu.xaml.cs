@@ -11,5 +11,30 @@ namespace SaleCakes.Pages
         {
             InitializeComponent();
         }
+
+        private void ButtonOrders_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Orders());
+        }
+
+        private void ButtonClients_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Clients());
+        }
+
+        private void ButtonDecor_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Decor());
+        }
+
+        private void ButtonEmployee_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Employee());
+        }
+
+        private void ButtonCakes_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Cakes());
+        }
     }
 }
