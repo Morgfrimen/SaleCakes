@@ -44,13 +44,13 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition Height = "100"/>
                 <RowDefinition Height = "50"/>
-                <RowDefinition Height = "70"/>
+                <RowDefinition Height="100" />
             </Grid.RowDefinitions>
             <Button Grid.Row="7" Content="Редактировать" 
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center" 
                     Height="40" 
-                    Width="120" FontSize="14" FontWeight="Normal"/>
+                    Width="120" FontSize="14" FontWeight="Normal" Click="ButtonEdit_Click"/>
             <Button Grid.Row="8" Content="Главное меню" 
                     HorizontalAlignment="Center" 
                     VerticalAlignment="Center" 

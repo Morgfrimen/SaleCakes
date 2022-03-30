@@ -24,5 +24,14 @@ namespace SaleCakes.Pages
         {
             InitializeComponent();
         }
+        private void ButtonMainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new MainMenu());
+        }
+
+        private void ButtonEdit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

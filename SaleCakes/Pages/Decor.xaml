@@ -23,8 +23,7 @@
         </Grid.Resources>
         <Grid Grid.Column="0">
             <ListView x:Name="listDecorView" 
-                      d:ItemsSource="{d:SampleData ItemCount=5}" 
-                      Margin="0,0,400,0">
+                      d:ItemsSource="{d:SampleData ItemCount=5}" >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="№" DisplayMemberBinding="{Binding Id}" Width="50"/>
@@ -34,16 +33,31 @@
                 </ListView.View>
             </ListView>
         </Grid>
-            <Button Content="Добавить" 
-                    HorizontalAlignment="Left" 
-                    Margin="546,0,0,0" 
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+            <Button Grid.Row="5" Content="Добавить" 
+                    HorizontalAlignment="Center" 
                     VerticalAlignment="Center" 
                     Height="40" 
-                    Width="100" FontSize="14" FontWeight="Normal"/>
-        <TextBox x:Name="orderId" HorizontalAlignment="Left" Margin="521,30,0,0" TextWrapping="Wrap" Text="Новая начинка" VerticalAlignment="Top" Width="150" Height="25" FontSize="16" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="-0.368,0.695" TextAlignment="Center"/>
-        <TextBox x:Name="nameTextBox" HorizontalAlignment="Left" Margin="566,78,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="170" FontSize="16"/>
-        <TextBlock HorizontalAlignment="Left" Margin="474,78,0,0" TextWrapping="Wrap" Text="Название:" VerticalAlignment="Top" Height="30" FontSize="16"/>
-        <TextBlock HorizontalAlignment="Left" Margin="474,127,0,0" TextWrapping="Wrap" Text="Цена:" VerticalAlignment="Top" Height="30" FontSize="16"/>
-        <TextBox x:Name="phoneTextBox" HorizontalAlignment="Left" Margin="566,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30" Width="170" FontSize="16"/>
-    </Grid>
+                    Width="120" FontSize="14" FontWeight="Normal" Click="ButtonEdit_Click"/>
+            <Button Grid.Row="6" Content="Главное меню" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Height="40" 
+                    Width="120" FontSize="14" FontWeight="Normal" Click="ButtonMainMenu_Click"/>
+            <TextBlock Grid.Row="0" x:Name="orderId" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Новая начинка" VerticalAlignment="Center" Width="150" Height="25" FontSize="16" Background="{x:Null}" TextAlignment="Center"/>
+            <TextBox Grid.Row="2" x:Name="nameTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Height="30" Width="170" FontSize="16"/>
+            <TextBlock Grid.Row="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Название:" VerticalAlignment="Center" Height="30" FontSize="16"/>
+            <TextBlock Grid.Row="3" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Цена:" VerticalAlignment="Center" Height="30" FontSize="16"/>
+            <TextBox Grid.Row="4" x:Name="priceTextBox" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Height="30" Width="170" FontSize="16"/>
+            </Grid>
+        </Grid>
 </Page>
