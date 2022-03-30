@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.Linq;
+﻿using System.Linq;
 using Data.Dto;
 using Data.Resositoryes;
 using Xunit;
@@ -39,5 +38,4 @@ public class RepositoryRoleUserTests
 
         Assert.True(await repository.DeleteAsync(updateRoleDto.Id));
     }
-
 }

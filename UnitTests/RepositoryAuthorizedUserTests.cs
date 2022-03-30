@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Data.Dto;
@@ -21,7 +20,7 @@ public class RepositoryAuthorizedUserTests
         var password = "32213221";
         var createAt = DateTime.Now;
         var repository = new UserAuthorizationRepos(ConnectionString);
-        var authorizationUserDto = new AuthorizationUserDto(roleDto.Id, login,password,createAt);
+        var authorizationUserDto = new AuthorizationUserDto(roleDto.Id, login, password, createAt);
 
         Assert.True(await repository.AddAsync(authorizationUserDto));
 
@@ -42,7 +41,7 @@ public class RepositoryAuthorizedUserTests
         Assert.NotNull(collection);
 
         var updateRoleDto = collection.FirstOrDefault(item => item.UserLogin == login);
-        updateRoleDto = new AuthorizationUserDto(updateRoleDto.Id, roleDto.Id,"updateRoleDto.Id", "3221",DateTime.Now);
+        updateRoleDto = new AuthorizationUserDto(updateRoleDto.Id, roleDto.Id, "updateRoleDto.Id", "3221", DateTime.Now);
         Assert.True(await repository.UpdateAsync(updateRoleDto));
 
         Assert.True(await repository.DeleteAsync(updateRoleDto.Id));
@@ -58,5 +57,4 @@ public class RepositoryAuthorizedUserTests
         var collection = await repository.GetAllAsync();
         return collection.FirstOrDefault(item => item.UserRole == role)!;
     }
-
 }
