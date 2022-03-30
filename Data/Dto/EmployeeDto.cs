@@ -2,12 +2,12 @@
 
 public record EmployeeDto
 {
-    public EmployeeDto(Guid id, Guid autorizedUserId, string firstName, string lastName, string patronymic, string phone, string email) : this(firstName, autorizedUserId, lastName, patronymic, phone, email)
+    public EmployeeDto(Guid id, Guid autorizedUserId, string firstName, string lastName, string patronymic, string phone, string email) : this(autorizedUserId, firstName, lastName, patronymic, phone, email)
     {
         Id = id;
     }
 
-    public EmployeeDto(string firstName, Guid autorizedUserId, string lastName, string? patronymic, string phone, string email)
+    public EmployeeDto(Guid autorizedUserId, string firstName, string lastName, string? patronymic, string phone, string email)
     {
         FirstName = firstName;
         LastName = lastName;

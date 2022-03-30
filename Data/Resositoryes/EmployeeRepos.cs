@@ -28,7 +28,7 @@ public class EmployeeRepos : IRepository<EmployeeDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"SELECT * FROM SaleCakes.employee where id = \'{id}\'";
+            var sqlExpression = $"Use SaleCakes; SELECT * FROM employee where id = \'{id}\'";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteReaderAsync();
 
@@ -75,7 +75,7 @@ public class EmployeeRepos : IRepository<EmployeeDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = "SELECT * FROM SaleCakes.employee";
+            var sqlExpression = "Use SaleCakes; SELECT * FROM employee";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteReaderAsync();
 
@@ -128,7 +128,10 @@ public class EmployeeRepos : IRepository<EmployeeDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"INSERT SaleCakes.employee VALUES (\'{entity.AutorizedUserId}\'," +
+            var sqlExpression = "Use SaleCakes; INSERT INTO employee " +
+                                "(autorized_data,employee_name,employee_surname,employee_patronymic,employee_phone,employee_email)" +
+                                " VALUES" +
+                                $" (\'{entity.AutorizedUserId}\'," +
                                 $"\'{entity.FirstName}\',\'{entity.LastName}\',\'{entity.Patronymic}\'," +
                                 $"\'{entity.Phone}\',\'{entity.Email}\')";
             var command = new SqlCommand(sqlExpression, connection);
@@ -167,7 +170,7 @@ public class EmployeeRepos : IRepository<EmployeeDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"DELETE SaleCakes.employee WHETE id=\'{id}\'";
+            var sqlExpression = $"Use SaleCakes; DELETE employee WHERE id=\'{id}\'";
 
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();
@@ -205,7 +208,7 @@ public class EmployeeRepos : IRepository<EmployeeDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = "UPDATE SaleCakes.employee " +
+            var sqlExpression = "Use SaleCakes; UPDATE employee " +
                                 $"SET employee_name= \'{entity.FirstName}\',employee_surname= \'{entity.LastName}\'" +
                                 $",employee_patronymic= \'{entity.Patronymic}\',employee_phone=\'{entity.Phone}\'," +
                                 $"employee_email=\'{entity.Email}\' " +
