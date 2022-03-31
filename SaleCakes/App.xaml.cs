@@ -28,6 +28,13 @@ public partial class App : Application
             configFile.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
         }
+
+        if (settings[SaleCakes.Properties.Resources.Config_Key_ConnectionString].Value == string.Empty)
+        {
+            settings[SaleCakes.Properties.Resources.Config_Key_ConnectionString].Value = DefaultConnectionString;
+            configFile.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
+        }
     }
 
     private static void GlobalErrorsEvent(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
