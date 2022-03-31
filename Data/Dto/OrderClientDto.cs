@@ -1,18 +1,18 @@
 ﻿namespace Data.Dto;
 
-public record OrderClient
+public record OrderClientDto
 {
-    public OrderClient(DateTime orderCreateAt, string orderAdress, Guid cakeId, Guid conditer, Guid employee, decimal orderSeller)
+    public OrderClientDto(DateTime orderCreateAt, string orderAdress, Guid cakeId, Guid conditerId, Guid employeeId, decimal orderSeller)
     {
         OrderCreateAt = orderCreateAt;
         OrderAdress = orderAdress;
         CakeId = cakeId;
-        Conditer = conditer;
-        Employee = employee;
+        ConditerId = conditerId;
+        EmployeeId = employeeId;
         OrderSeller = orderSeller;
     }
 
-    public OrderClient(Guid id, DateTime orderCreateAt, string orderAdress, Guid cakeId, Guid conditer, Guid employee, decimal orderSeller) 
+    public OrderClientDto(Guid id, DateTime orderCreateAt, string orderAdress, Guid cakeId, Guid conditer, Guid employee, decimal orderSeller) 
         : this(orderCreateAt, orderAdress, cakeId, conditer, employee, orderSeller)
     {
         Id = id;
@@ -22,7 +22,7 @@ public record OrderClient
     public DateTime OrderCreateAt { get; }
     public string OrderAdress { get; }
     public Guid CakeId { get; }
-    public Guid Conditer { get; }
-    public Guid Employee { get; }
+    public Guid ConditerId { get; }
+    public Guid EmployeeId { get; }
     public Decimal OrderSeller { get; }
 }
