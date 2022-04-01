@@ -60,7 +60,7 @@
             </Grid.Resources>
             <TextBox Grid.Row="0" Text="Логин" />
 
-            <TextBox Grid.Row="1" />
+            <TextBox Text="Пароль" Grid.Row="1" />
         </Grid>
 
         <Button Grid.Row="3" 
