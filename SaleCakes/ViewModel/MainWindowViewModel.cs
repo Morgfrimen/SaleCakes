@@ -22,4 +22,9 @@ public class MainWindowViewModel : BaseViewModel
         get => _visibilityMenu;
         set { _visibilityMenu = value; OnPropertyChanged(nameof(VisibilityMenu)); }
     }
+
+    public override void UpdateAllProperty()
+    {
+        throw new System.NotImplementedException();
+    }
 }

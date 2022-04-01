@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SaleCakes.ViewModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using SaleCakes.View;
 
 namespace SaleCakes.Pages
 {
@@ -20,9 +11,18 @@ namespace SaleCakes.Pages
     /// </summary>
     public partial class Cakes : Page
     {
+        private CakeViewModel _cakeViewModel = new CakeViewModel();
+
         public Cakes()
         {
             InitializeComponent();
+            StartPage();
+        }
+
+        private void StartPage()
+        {
+            _cakeViewModel = DataContext as CakeViewModel;
+            _cakeViewModel.LoadModes.Execute(_cakeViewModel.ModelCakes);
         }
 
         private void ButtonMainMenu_Click(object sender, RoutedEventArgs e)
@@ -33,6 +33,12 @@ namespace SaleCakes.Pages
         private void ButtonEdit_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Button_OpenAddCake_OnClick(object sender, RoutedEventArgs e)
+        {
+            var cakeAddView = new CakeAddView(){DataContext = new CakeAddViewModel(_cakeViewModel) };
+            cakeAddView.Show();
         }
     }
 }

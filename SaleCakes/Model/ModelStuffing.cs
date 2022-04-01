@@ -2,7 +2,7 @@
 
 namespace SaleCakes.Model;
 
-internal class ModelStuffing
+public class ModelStuffing
 {
     public ModelStuffing(Guid id, string name, decimal price)
     {

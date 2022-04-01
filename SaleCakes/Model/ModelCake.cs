@@ -2,7 +2,7 @@
 
 namespace SaleCakes.Model;
 
-internal class ModelCake
+public class ModelCake
 {
     public ModelCake(Guid id, double weight, Guid tier)
     {
@@ -10,6 +10,14 @@ internal class ModelCake
         Weight = weight;
         Tier = tier;
     }
+
+    public ModelCake(Guid id, decimal weight, Guid tier)
+    {
+        Id = id;
+        Weight = Convert.ToDouble(weight);
+        Tier = tier;
+    }
+    public uint Number { get; init; }
 
     public Guid Id { get; }
     public double Weight { get; }

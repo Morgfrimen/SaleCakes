@@ -10,6 +10,8 @@ public partial class App : Application
 {
     private const string DefaultConnectionString = "Server=.\\SQLEXPRESS;Database=SaleCakes;Trusted_Connection=true;";
 
+    internal static string ConnectionString { get; private set; } = "";
+
     protected override void OnStartup(StartupEventArgs e)
     {
         DispatcherUnhandledException += GlobalErrorsEvent;
@@ -35,6 +37,8 @@ public partial class App : Application
             configFile.Save(ConfigurationSaveMode.Modified);
             ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
         }
+
+        ConnectionString = settings[SaleCakes.Properties.Resources.Config_Key_ConnectionString].Value;
     }
 
     private static void GlobalErrorsEvent(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)

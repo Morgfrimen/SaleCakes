@@ -13,8 +13,8 @@
 
 	<ItemGroup>
 		<Folder Include="Resources\" />
-		<Folder Include="ViewModel\" />
-		<Folder Include="Converters\" />
+		<Folder Include="Command\" />
+		<Folder Include="Extension\" />
 	</ItemGroup>
 
 	<ItemGroup>
