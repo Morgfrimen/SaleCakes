@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using SaleCakes.View;
 
 namespace SaleCakes.Pages
 {
@@ -35,6 +36,12 @@ namespace SaleCakes.Pages
         private void ButtonCakes_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             NavigationService.Navigate(new Cakes());
+        }
+
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var EmployeeAddView = new EmployeeAddView();
+            EmployeeAddView.Show();
         }
     }
 }
