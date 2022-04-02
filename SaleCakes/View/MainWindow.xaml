@@ -7,13 +7,19 @@
         xmlns:converters="clr-namespace:SaleCakes.Converters"
         xmlns:vm="clr-namespace:SaleCakes.ViewModel"
         xmlns:components="clr-namespace:SaleCakes.View.Components"
-        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}">
+        <!--mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Кондитер"
 
         Height="{Binding RelativeSource={RelativeSource Self}, Path=MinHeight}"
         Width="{Binding RelativeSource={RelativeSource Self}, Path=MinWidth}"
-        MinHeight="450" MinWidth="800">
+        MinHeight="450" MinWidth="800">-->
 
     <Window.DataContext>
         <vm:MainWindowViewModel />
@@ -23,19 +29,26 @@
         <converters:ByteArrayToImageSourceConverter x:Key="ImageSourceConverter" />
     </Window.Resources>
 
-    <Window.Background>
+    <!--<Window.Background>
         <ImageBrush
             ImageSource="{Binding 
             Source={x:Static res:Resources.BackgrountMain},
             Converter={StaticResource ImageSourceConverter}}"
             Stretch="UniformToFill" />
-    </Window.Background>
+    </Window.Background>-->
 
     <Grid>
-        <components:AuthorizationComponent
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*"></ColumnDefinition>
+            <ColumnDefinition Width="100*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+
+            <components:AuthorizationComponent
+            Grid.Column="1"
             DataContext="{Binding}"
             Visibility="{Binding VisibilityAutorized}" />
-        <Frame x:Name="FrameMenuPage" Visibility="{Binding VisibilityMenu}" 
+        <Frame x:Name="FrameMenuPage" Grid.Column="1" Visibility="{Binding VisibilityMenu}" 
                NavigationUIVisibility="Hidden" />
     </Grid>
 
