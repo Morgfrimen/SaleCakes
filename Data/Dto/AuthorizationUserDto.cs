@@ -1,4 +1,4 @@
-﻿namespace Data.Legacy.Dto;
+﻿namespace Data.Dto;
 
 public class AuthorizationUserDto
 {
