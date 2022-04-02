@@ -13,10 +13,6 @@
             <ColumnDefinition Width="300" />
         </Grid.ColumnDefinitions>
 
-        <Grid.Resources>
-            <Style TargetType="Button"
-                   BasedOn="{StaticResource ButtonDefault}" />
-        </Grid.Resources>
         <Grid Grid.Column="0">
             <ListView x:Name="listOrdersView" d:ItemsSource="{d:SampleData ItemCount=5}">
                 <ListView.View>

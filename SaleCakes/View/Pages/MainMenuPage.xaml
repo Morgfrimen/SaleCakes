@@ -14,11 +14,6 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Grid.Resources>
-            <Style TargetType="Button"
-                   BasedOn="{StaticResource ButtonDefault}" />
-        </Grid.Resources>
-
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition />
