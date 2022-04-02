@@ -46,7 +46,7 @@
     </Page.Resources>
     
     
-    <Grid Background="#FF515151">
+    <!--<Grid Background="#FF515151">
         <Grid x:Name="GridMenu" HorizontalAlignment="Left" Width="70" Background="#FF116FA4">
             <StackPanel>
                 <Grid Height="70" Background="White"/>
@@ -77,7 +77,7 @@
                 </Grid>
             </Button>
         </Grid>
-    </Grid>
+    </Grid>-->
 
 
     <!--<Grid>
