@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace Data.Entries;
 
-namespace Data.Entries
+internal class CakeDesign
 {
-    public partial class CakeDesign
-    {
-        public Guid Id { get; set; }
-        public Guid? CakeId { get; set; }
-        public Guid? TierId { get; set; }
+    internal Guid Id { get; set; }
+    internal Guid? CakeId { get; set; }
+    internal Guid? TierId { get; set; }
 
-        public virtual CakeEntry? Cake { get; set; }
-        public virtual TierEntry? Tier { get; set; }
-    }
+    internal virtual CakeEntry? Cake { get; set; }
+    internal virtual TierEntry? Tier { get; set; }
 }

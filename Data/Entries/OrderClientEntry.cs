@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace Data.Entries;
 
-namespace Data.Entries
+internal class OrderClientEntry
 {
-    public partial class OrderClientEntry
+    internal OrderClientEntry()
     {
-        public OrderClientEntry()
-        {
-            ClientDesigns = new HashSet<ClientDesign>();
-            Clients = new HashSet<ClientEntry>();
-        }
-
-        public Guid Id { get; set; }
-        public DateTime OrderCreatedAt { get; set; }
-        public string OrderAdress { get; set; } = null!;
-        public Guid? OrderCake { get; set; }
-        public Guid? OrderCondites { get; set; }
-        public Guid? OrderEmoloyee { get; set; }
-        public decimal OrderSeller { get; set; }
-
-        public virtual CakeEntry? OrderCakeNavigation { get; set; }
-        public virtual AuthorizationUserEntry? OrderConditesNavigation { get; set; }
-        public virtual AuthorizationUserEntry? OrderEmoloyeeNavigation { get; set; }
-        public virtual ICollection<ClientDesign> ClientDesigns { get; set; }
-        public virtual ICollection<ClientEntry> Clients { get; set; }
+        ClientDesigns = new HashSet<ClientDesign>();
+        Clients = new HashSet<ClientEntry>();
     }
+
+    internal Guid Id { get; set; }
+    internal DateTime OrderCreatedAt { get; set; }
+    internal string OrderAdress { get; set; } = null!;
+    internal Guid? OrderCake { get; set; }
+    internal Guid? OrderCondites { get; set; }
+    internal Guid? OrderEmoloyee { get; set; }
+    internal decimal OrderSeller { get; set; }
+
+    internal virtual CakeEntry? OrderCakeNavigation { get; set; }
+    internal virtual AuthorizationUserEntry? OrderConditesNavigation { get; set; }
+    internal virtual AuthorizationUserEntry? OrderEmoloyeeNavigation { get; set; }
+    internal virtual ICollection<ClientDesign> ClientDesigns { get; set; }
+    internal virtual ICollection<ClientEntry> Clients { get; set; }
 }

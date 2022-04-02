@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace Data.Entries;
 
-namespace Data.Entries
+internal class EmployeeEntry
 {
-    public partial class EmployeeEntry
-    {
-        public Guid Id { get; set; }
-        public Guid? AutorizedData { get; set; }
-        public string EmployeeName { get; set; } = null!;
-        public string EmployeeSurname { get; set; } = null!;
-        public string? EmployeePatronymic { get; set; }
-        public string EmployeePhone { get; set; } = null!;
-        public string EmployeeEmail { get; set; } = null!;
-        public bool IsWork { get; set; }
+    internal Guid Id { get; set; }
+    internal Guid? AutorizedData { get; set; }
+    internal string EmployeeName { get; set; } = null!;
+    internal string EmployeeSurname { get; set; } = null!;
+    internal string? EmployeePatronymic { get; set; }
+    internal string EmployeePhone { get; set; } = null!;
+    internal string EmployeeEmail { get; set; } = null!;
+    internal bool IsWork { get; set; }
 
-        public virtual AuthorizationUserEntry? AutorizedDataNavigation { get; set; }
-    }
+    internal virtual AuthorizationUserEntry? AutorizedDataNavigation { get; set; }
 }

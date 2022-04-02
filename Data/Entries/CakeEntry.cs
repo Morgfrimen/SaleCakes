@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace Data.Entries;
 
-namespace Data.Entries
+internal class CakeEntry
 {
-    public partial class CakeEntry
+    internal CakeEntry()
     {
-        public CakeEntry()
-        {
-            CakeDesigns = new HashSet<CakeDesign>();
-            OrderClients = new HashSet<OrderClientEntry>();
-        }
-
-        public Guid Id { get; set; }
-        public decimal Weight { get; set; }
-        public string Name { get; set; } = null!;
-
-        public virtual ICollection<CakeDesign> CakeDesigns { get; set; }
-        public virtual ICollection<OrderClientEntry> OrderClients { get; set; }
+        CakeDesigns = new HashSet<CakeDesign>();
+        OrderClients = new HashSet<OrderClientEntry>();
     }
+
+    internal Guid Id { get; set; }
+    internal decimal Weight { get; set; }
+    internal string Name { get; set; } = null!;
+
+    internal virtual ICollection<CakeDesign> CakeDesigns { get; set; }
+    internal virtual ICollection<OrderClientEntry> OrderClients { get; set; }
 }

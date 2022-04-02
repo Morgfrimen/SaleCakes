@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using SaleCakes.Command;
+using SaleCakes.Model;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Data.Legacy.Resositoryes;
-using SaleCakes.Command;
-using SaleCakes.Model;
-using Shared.Extension;
 
 namespace SaleCakes.ViewModel;
 
@@ -35,28 +32,28 @@ public class CakeViewModel : BaseViewModel
 
     internal ICommand LoadModes { get; } = new RelayCommand(async cakes =>
     {
-        var cakeRepos = new CakeRepos(App.ConnectionString);
-        var cakeDtos = await cakeRepos.GetAllAsync();
+        //var cakeRepos = new CakeRepos(App.ConnectionString);
+        //var cakeDtos = await cakeRepos.GetAllAsync();
 
-        if (cakeDtos is null)
-        {
-            return;
-        }
+        //if (cakeDtos is null)
+        //{
+        //    return;
+        //}
 
-        var cak = cakes as ObservableCollection<CakeModel>;
+        //var cak = cakes as ObservableCollection<CakeModel>;
 
-        cak.Clear();
-        var listCakeModel = new List<CakeModel>();
-        var count = default(uint);
+        //cak.Clear();
+        //var listCakeModel = new List<CakeModel>();
+        //var count = default(uint);
 
-        foreach (var cakeDto in cakeDtos)
-        {
-            count++;
-            var modes = new CakeModel(cakeDto.Id, cakeDto.Weight, cakeDto.TiersId) { Number = count };
-            listCakeModel.Add(modes);
-        }
+        //foreach (var cakeDto in cakeDtos)
+        //{
+        //    count++;
+        //    var modes = new CakeModel(cakeDto.Id, cakeDto.Weight, cakeDto.TiersId) { Number = count };
+        //    listCakeModel.Add(modes);
+        //}
 
-        cak = cak.AddRange(listCakeModel);
+        //cak = cak.AddRange(listCakeModel);
     });
 
     public override void UpdateAllProperty()

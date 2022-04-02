@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace Data.Entries;
 
-namespace Data.Entries
+internal class ShortcakeEntry
 {
-    public partial class ShortcakeEntry
+    internal ShortcakeEntry()
     {
-        public ShortcakeEntry()
-        {
-            Tiers = new HashSet<TierEntry>();
-        }
-
-        public Guid Id { get; set; }
-        public string Name { get; set; } = null!;
-        public decimal Price { get; set; }
-
-        public virtual ICollection<TierEntry> Tiers { get; set; }
+        Tiers = new HashSet<TierEntry>();
     }
+
+    internal Guid Id { get; set; }
+    internal string Name { get; set; } = null!;
+    internal decimal Price { get; set; }
+
+    internal virtual ICollection<TierEntry> Tiers { get; set; }
 }
