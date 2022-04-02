@@ -1,22 +1,22 @@
 ﻿create table app_users
 (
 	id uniqueidentifier DEFAULT NEWID() PRIMARY KEY (id),
-	user_role VARCHAR(500)
+	user_role VARCHAR(500) unique
 );
 
 create table authorization_user
 (
 	id uniqueidentifier DEFAULT NEWID() PRIMARY KEY (id),
 	user_guid uniqueidentifier references app_users(id),
-	user_login VARCHAR(500),
-	user_password varchar(20),
+	user_login VARCHAR(500) unique not null ,
+	user_password varchar(20) not null,
 	createdAt Date
 );
 
 CREATE TABLE shortcake
 (
 	id uniqueidentifier DEFAULT NEWID() PRIMARY KEY,
-	name VARCHAR(500) not null,
+	name VARCHAR(500) unique not null,
 	price DECIMAL(18,2) not null
 );
 
@@ -24,22 +24,30 @@ CREATE TABLE shortcake
 CREATE TABLE decor
 (
 	id uniqueidentifier DEFAULT NEWID() PRIMARY KEY,
-	name VARCHAR(500) not null,
+	name VARCHAR(500) unique not null,
 	price DECIMAL(18,2) not null
 );
 
 CREATE TABLE stuffing
 (
 	id uniqueidentifier DEFAULT NEWID() PRIMARY KEY,
-	name VARCHAR(500) not null,
+	name VARCHAR(500) unique not null,
 	price DECIMAL(18,2) not null
 );
 
-CREATE TABLE tiers(
+CREATE TABLE tiers
+(
 	id uniqueidentifier DEFAULT NEWID() PRIMARY KEY,
 	stuffing uniqueidentifier foreign key references stuffing(id),
 	decor uniqueidentifier foreign key references decor(id),
 	shortcake uniqueidentifier foreign key references shortcake(id)
+);
+
+create table cakeDesign
+(
+	id uniqueidentifier DEFAULT NEWID() PRIMARY KEY,
+	cakeId uniqueidentifier foreign key references cake(id),
+	tierId uniqueidentifier foreign key references tiers(id),
 );
 
 
@@ -47,10 +55,9 @@ CREATE TABLE cake
 (
 	id uniqueidentifier DEFAULT NEWID() PRIMARY KEY,
 	weight DECIMAL(18,2) not null,
-	tiers uniqueidentifier not null  foreign key references tiers(id)
+	name varchar(500) unique not null,
+	cakeDesignId uniqueidentifier not null foreign key references cakeDesign(id)
 );
-
-
 
 create table order_client
 (
@@ -74,6 +81,14 @@ create table client
 	client_orders uniqueidentifier foreign key references order_client(id)
 );
 
+create table clientDesign
+(
+	id uniqueidentifier DEFAULT NEWID() PRIMARY KEY (id),
+	clientId uniqueidentifier foreign key references client(id),
+	orderId uniqueidentifier foreign key references order_client(id),
+
+);
+
 create table employee
 (
 	id uniqueidentifier DEFAULT NEWID() PRIMARY KEY (id),
@@ -81,6 +96,7 @@ create table employee
 	employee_name VARCHAR(500) not null,
 	employee_surname VARCHAR(500) not null,
 	employee_patronymic VARCHAR(500),
-	employee_phone varchar(30) not null,
-	employee_email varchar(500) not null
+	employee_phone varchar(30) unique not null,
+	employee_email varchar(500) unique not null,
+	isWork boolean not null 
 );
