@@ -1,18 +1,19 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using SaleCakes.View.Pages;
 
-namespace SaleCakes.View.Pages;
+namespace SaleCakes.View.Components;
 
 /// <summary>
 ///     Логика взаимодействия для MainMenuPage.xaml
 /// </summary>
-public partial class MainMenuPage : Page
+public partial class MainMenuComponent : UserControl
 {
     private readonly CakesPage _cakesPagePage;
     private bool _stateClosed = true;
 
-    public MainMenuPage(CakesPage cakesPagePage)
+    public MainMenuComponent(CakesPage cakesPagePage)
     {
         _cakesPagePage = cakesPagePage;
         InitializeComponent();

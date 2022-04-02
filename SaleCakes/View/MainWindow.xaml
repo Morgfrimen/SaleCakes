@@ -21,10 +21,10 @@
     </Window.Resources>
 
     <Grid>
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5*"></ColumnDefinition>
-            <ColumnDefinition Width="100*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         
         <components:AuthorizationComponent
             Grid.Column="1"
