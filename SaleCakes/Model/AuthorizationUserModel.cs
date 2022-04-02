@@ -2,9 +2,9 @@
 
 namespace SaleCakes.Model;
 
-internal class ModelAuthorizationUser
+internal class AuthorizationUserModel
 {
-    public ModelAuthorizationUser(Guid id, Guid appUsers, string userLogin, string userPassword, DateTime createdAt)
+    public AuthorizationUserModel(Guid id, Guid appUsers, string userLogin, string userPassword, DateTime createdAt)
     {
         Id = id;
         AppUsers = appUsers;

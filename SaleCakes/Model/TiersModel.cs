@@ -2,9 +2,9 @@
 
 namespace SaleCakes.Model;
 
-public class ModelTiers
+public class TiersModel
 {
-    public ModelTiers(Guid id, Guid stuffingId, Guid decorId, Guid shortcakeId)
+    public TiersModel(Guid id, Guid stuffingId, Guid decorId, Guid shortcakeId)
     {
         Id = id;
         StuffingId = stuffingId;

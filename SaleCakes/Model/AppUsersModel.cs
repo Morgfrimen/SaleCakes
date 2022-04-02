@@ -2,9 +2,9 @@
 
 namespace SaleCakes.Model;
 
-internal class ModelAppUsers
+internal class AppUsersModel
 {
-    public ModelAppUsers(Guid id, string userRole)
+    public AppUsersModel(Guid id, string userRole)
     {
         Id = id;
         UserRole = userRole;

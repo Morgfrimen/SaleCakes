@@ -2,9 +2,9 @@
 
 namespace SaleCakes.Model;
 
-internal class ModelOrderClient
+internal class OrderClientModel
 {
-    public ModelOrderClient(Guid id, DateTime orderCreatedAt, string orderAdress, Guid orderCake, Guid orderCondites, Guid orderEmployee, string orderSeller)
+    public OrderClientModel(Guid id, DateTime orderCreatedAt, string orderAdress, Guid orderCake, Guid orderCondites, Guid orderEmployee, string orderSeller)
     {
         Id = id;
         OrderCreatedAt = orderCreatedAt;

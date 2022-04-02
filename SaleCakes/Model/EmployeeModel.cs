@@ -2,9 +2,9 @@
 
 namespace SaleCakes.Model;
 
-internal class ModelEmployee
+internal class EmployeeModel
 {
-    public ModelEmployee(Guid id, Guid autorizedDataId, string employeeName, string employeeSurname, string employeePatronymic, string employeePhone, string employeeEmail)
+    public EmployeeModel(Guid id, Guid autorizedDataId, string employeeName, string employeeSurname, string employeePatronymic, string employeePhone, string employeeEmail)
     {
         Id = id;
         AutorizedDataId = autorizedDataId;

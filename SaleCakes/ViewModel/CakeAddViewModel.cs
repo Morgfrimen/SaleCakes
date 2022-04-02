@@ -65,7 +65,7 @@ public class CakeAddViewModel : BaseViewModel
         var collection = await cakeRepos.GetAllAsync();
         var model = collection.LastOrDefault();
 
-        tierContainer.ParentCakeViewModel.ModelCakes.Add(new ModelCake(model.Id, model.Weight, model.TiersId)
+        tierContainer.ParentCakeViewModel.ModelCakes.Add(new CakeModel(model.Id, model.Weight, model.TiersId)
             { Number = (uint)(tierContainer.ParentCakeViewModel.ModelCakes.Count + 1) });
         tierContainer.ParentCakeViewModel.UpdateAllProperty();
     });

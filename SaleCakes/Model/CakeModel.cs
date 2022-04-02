@@ -2,16 +2,16 @@
 
 namespace SaleCakes.Model;
 
-public class ModelCake
+public class CakeModel
 {
-    public ModelCake(Guid id, double weight, Guid tier)
+    public CakeModel(Guid id, double weight, Guid tier)
     {
         Id = id;
         Weight = weight;
         Tier = tier;
     }
 
-    public ModelCake(Guid id, decimal weight, Guid tier)
+    public CakeModel(Guid id, decimal weight, Guid tier)
     {
         Id = id;
         Weight = Convert.ToDouble(weight);

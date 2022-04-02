@@ -10,10 +10,10 @@ namespace SaleCakes.ViewModel;
 
 public class CakeViewModel : BaseViewModel
 {
-    private ObservableCollection<ModelCake> _modelCakes = new();
-    private ObservableCollection<ModelStuffing> _stuffings;
+    private ObservableCollection<CakeModel> _modelCakes = new();
+    private ObservableCollection<StuffingModel> _stuffings;
 
-    public ObservableCollection<ModelCake> ModelCakes
+    public ObservableCollection<CakeModel> ModelCakes
     {
         get => _modelCakes;
         set
@@ -23,7 +23,7 @@ public class CakeViewModel : BaseViewModel
         }
     }
 
-    public ObservableCollection<ModelStuffing> Stuffings
+    public ObservableCollection<StuffingModel> Stuffings
     {
         get => _stuffings;
         set
@@ -43,16 +43,16 @@ public class CakeViewModel : BaseViewModel
             return;
         }
 
-        var cak = cakes as ObservableCollection<ModelCake>;
+        var cak = cakes as ObservableCollection<CakeModel>;
 
         cak.Clear();
-        var listCakeModel = new List<ModelCake>();
+        var listCakeModel = new List<CakeModel>();
         var count = default(uint);
 
         foreach (var cakeDto in cakeDtos)
         {
             count++;
-            var modes = new ModelCake(cakeDto.Id, cakeDto.Weight, cakeDto.TiersId) { Number = count };
+            var modes = new CakeModel(cakeDto.Id, cakeDto.Weight, cakeDto.TiersId) { Number = count };
             listCakeModel.Add(modes);
         }
 

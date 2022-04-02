@@ -2,9 +2,9 @@
 
 namespace SaleCakes.Model;
 
-internal class ModelShortcake
+internal class ShortcakeModel
 {
-    public ModelShortcake(Guid id, string name, string price)
+    public ShortcakeModel(Guid id, string name, string price)
     {
         Id = id;
         Name = name;

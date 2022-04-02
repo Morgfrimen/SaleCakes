@@ -2,9 +2,9 @@
 
 namespace SaleCakes.Model;
 
-public class ModelStuffing
+internal class DecorModel
 {
-    public ModelStuffing(Guid id, string name, decimal price)
+    public DecorModel(Guid id, string name, decimal price)
     {
         Id = id;
         Name = name;
