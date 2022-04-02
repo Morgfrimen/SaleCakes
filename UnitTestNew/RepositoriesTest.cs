@@ -122,6 +122,39 @@ public class RepositoriesTest : IClassFixture<Startup>
         _ = await shortcakeRepositories.ClearTableAsync();
     }
 
+    [Fact]
+    [PriorityTest(3)]
+    public async void RoleRepositories_Success_Test()
+    {
+        var shortcakeRepositories = _serviceProvider.GetService<IAppUserRepositories>()!;
+        _ = await shortcakeRepositories.ClearTableAsync();
+
+        RoleUserDto? shortcakeDto = new("Директор");
+        var entryAsync = await shortcakeRepositories.AddEntryAsync(shortcakeDto);
+        Assert.True(entryAsync.ResultOperation != default);
+
+        RoleUserDto? updateDecorDto = new(entryAsync.ResultOperation, "Князь");
+        entryAsync = await shortcakeRepositories.UpdateEntryAsync(updateDecorDto);
+
+        var findDto = await shortcakeRepositories.GetByRoleAsync("Князь");
+        Assert.NotNull(findDto.ResultOperation);
+        Assert.Equal(entryAsync.ResultOperation, findDto.ResultOperation!.Id);
+
+        var getDto = await shortcakeRepositories.GetByIdAsync(findDto.ResultOperation.Id);
+        Assert.Equal(getDto.ResultOperation.Id, findDto.ResultOperation.Id);
+        Assert.Equal(getDto.ResultOperation.UserRole, findDto.ResultOperation.UserRole);
+
+        Result<IEnumerable<RoleUserDto>>? collection = await shortcakeRepositories.GetAllAsync();
+        Assert.Equal(collection.ResultOperation.First().Id, getDto.ResultOperation.Id);
+
+        var delete = await shortcakeRepositories.DeleteEntryAsync(getDto.ResultOperation.Id);
+        Assert.True(delete.ResultOperation);
+        collection = await shortcakeRepositories.GetAllAsync();
+        Assert.Empty(collection.ResultOperation);
+
+        _ = await shortcakeRepositories.ClearTableAsync();
+    }
+
     ~RepositoriesTest()
     {
         _ = _dbContext!.DisposeAsync();

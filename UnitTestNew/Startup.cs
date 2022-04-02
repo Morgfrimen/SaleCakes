@@ -24,6 +24,7 @@ public class Startup
         _ = serviceCollection.AddTransient<IDecorRepositories, DecorRepositories>();
         _ = serviceCollection.AddTransient<IStuffingRepositories, StuffingRepositories>();
         _ = serviceCollection.AddTransient<IShortcakeRepositories, ShortcakeRepositories>();
+        _ = serviceCollection.AddTransient<IAppUserRepositories, AppUserRepositories>();
 
         ServiceProvider = serviceCollection.BuildServiceProvider();
     }
