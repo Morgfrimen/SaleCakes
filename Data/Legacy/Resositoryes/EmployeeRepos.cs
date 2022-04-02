@@ -1,20 +1,20 @@
 ﻿using System.Data.SqlClient;
-using Data.Abstract;
-using Data.Dto;
+using Data.Legacy.Abstract;
+using Data.Legacy.Dto;
 
 //TODO: CantelationToken?
-namespace Data.Resositoryes;
+namespace Data.Legacy.Resositoryes;
 
-public class UserAuthorizationRepos : IRepository<AuthorizationUserDto>
+public class EmployeeRepos : IRepository<EmployeeDto>
 {
     private readonly string? _connectionString;
 
-    public UserAuthorizationRepos(string? connectionStringString)
+    public EmployeeRepos(string? connectionStringString)
     {
         _connectionString = connectionStringString;
     }
 
-    public async Task<AuthorizationUserDto?> GetByIdAsync(Guid id)
+    public async Task<EmployeeDto?> GetByIdAsync(Guid id)
     {
         SqlConnection connection = default;
 
@@ -28,7 +28,7 @@ public class UserAuthorizationRepos : IRepository<AuthorizationUserDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"Use SaleCakes; SELECT * FROM authorization_user where id = \'{id}\'";
+            var sqlExpression = $"Use SaleCakes; SELECT * FROM employee where id = \'{id}\'";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteReaderAsync();
 
@@ -37,16 +37,16 @@ public class UserAuthorizationRepos : IRepository<AuthorizationUserDto>
                 while (await reader.ReadAsync())
                 {
                     var idDto = id;
-                    var userDto = reader.GetValue(1) is Guid 
-                        ? (Guid?)reader.GetValue(1)
-                        : default;
-                    var userLoginDto = reader.GetValue(2) as string;
-                    var userPasswordDto = reader.GetValue(3) as string;
-                    var createdAtDto = reader.GetValue(4) is DateTime ? (DateTime)reader.GetValue(4) : default;
+                    var autorizedUserDto = reader.GetValue(1) is Guid ? (Guid)reader.GetValue(1) : default;
+                    var firstDto = reader.GetValue(2) as string;
+                    var lastDto = reader.GetValue(3) as string;
+                    var patronymicDto = reader.GetValue(4) as string;
+                    var phoneDto = reader.GetValue(5) as string;
+                    var emailDto = reader.GetValue(6) as string;
 
-                    var authorizationUserDto = new AuthorizationUserDto(idDto, userDto!.Value, userLoginDto!, userPasswordDto!, createdAtDto);
+                    var employeeDto = new EmployeeDto(idDto, autorizedUserDto, firstDto, lastDto, patronymicDto, phoneDto, emailDto);
 
-                    return authorizationUserDto;
+                    return employeeDto; 
                 }
             }
 
@@ -64,7 +64,7 @@ public class UserAuthorizationRepos : IRepository<AuthorizationUserDto>
         }
     }
 
-    public async Task<IEnumerable<AuthorizationUserDto>?> GetAllAsync()
+    public async Task<IEnumerable<EmployeeDto>?> GetAllAsync()
     {
         SqlConnection connection = default;
 
@@ -78,24 +78,26 @@ public class UserAuthorizationRepos : IRepository<AuthorizationUserDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = "Use SaleCakes; SELECT * FROM authorization_user";
+            var sqlExpression = "Use SaleCakes; SELECT * FROM employee";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteReaderAsync();
 
             if (reader.HasRows)
             {
-                var listEmployees = new List<AuthorizationUserDto>();
+                var listEmployees = new List<EmployeeDto>();
 
                 while (await reader.ReadAsync())
                 {
                     var idDto = reader.GetValue(0) is Guid ? (Guid)reader.GetValue(0) : default;
-                    var userDto = reader.GetValue(1) is Guid ? (Guid)reader.GetValue(1) : default;
-                    var userLoginDto = reader.GetValue(2) as string;
-                    var userPasswordDto = reader.GetValue(3) as string;
-                    var createdAtDto = reader.GetValue(4) is DateTime ? (DateTime)reader.GetValue(4) : default;
+                    var autorizedUserDto = reader.GetValue(1) is Guid ? (Guid)reader.GetValue(1) : default;
+                    var firstDto = reader.GetValue(2) as string;
+                    var lastDto = reader.GetValue(3) as string;
+                    var patronymicDto = reader.GetValue(4) as string;
+                    var phoneDto = reader.GetValue(5) as string;
+                    var emailDto = reader.GetValue(6) as string;
 
-                    var authorizationUserDto = new AuthorizationUserDto(idDto, userDto, userLoginDto!, userPasswordDto!, createdAtDto);
-                    listEmployees.Add(authorizationUserDto);
+                    var employeeDto = new EmployeeDto(idDto, autorizedUserDto, firstDto, lastDto, patronymicDto, phoneDto, emailDto);
+                    listEmployees.Add(employeeDto);
                 }
 
                 return listEmployees;
@@ -115,7 +117,7 @@ public class UserAuthorizationRepos : IRepository<AuthorizationUserDto>
         }
     }
 
-    public async Task<bool> AddAsync(AuthorizationUserDto entity)
+    public async Task<bool> AddAsync(EmployeeDto entity)
     {
         SqlConnection? connection = default;
 
@@ -129,8 +131,12 @@ public class UserAuthorizationRepos : IRepository<AuthorizationUserDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"Use SaleCakes; INSERT INTO authorization_user (user_guid,user_login,user_password,createdAt) VALUES (" +
-                                $"\'{entity.AppUsers}\',\'{entity.UserLogin}\',\'{entity.UserPassword}\',\'{entity.CreatedAt}\')";
+            var sqlExpression = "Use SaleCakes; INSERT INTO employee " +
+                                "(autorized_data,employee_name,employee_surname,employee_patronymic,employee_phone,employee_email)" +
+                                " VALUES" +
+                                $" (\'{entity.AutorizedUserId}\'," +
+                                $"\'{entity.FirstName}\',\'{entity.LastName}\',\'{entity.Patronymic}\'," +
+                                $"\'{entity.Phone}\',\'{entity.Email}\')";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();
 
@@ -167,7 +173,7 @@ public class UserAuthorizationRepos : IRepository<AuthorizationUserDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"Use SaleCakes; DELETE authorization_user WHERE id=\'{id}\'";
+            var sqlExpression = $"Use SaleCakes; DELETE employee WHERE id=\'{id}\'";
 
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();
@@ -191,7 +197,7 @@ public class UserAuthorizationRepos : IRepository<AuthorizationUserDto>
         }
     }
 
-    public async Task<bool> UpdateAsync(AuthorizationUserDto entity)
+    public async Task<bool> UpdateAsync(EmployeeDto entity)
     {
         SqlConnection? connection = default;
 
@@ -205,9 +211,11 @@ public class UserAuthorizationRepos : IRepository<AuthorizationUserDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = "Use SaleCakes; UPDATE authorization_user " +
-                                $"SET user_login= \'{entity.UserLogin}\',user_password= \'{entity.UserPassword}\'" +
-                                $",createdAt= \'{entity.CreatedAt}\' WHERE id=\'{entity.Id}\'";
+            var sqlExpression = "Use SaleCakes; UPDATE employee " +
+                                $"SET employee_name= \'{entity.FirstName}\',employee_surname= \'{entity.LastName}\'" +
+                                $",employee_patronymic= \'{entity.Patronymic}\',employee_phone=\'{entity.Phone}\'," +
+                                $"employee_email=\'{entity.Email}\' " +
+                                $" WHERE id=\'{entity.Id}\'";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();
 

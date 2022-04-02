@@ -1,4 +1,4 @@
-﻿namespace Data.Abstract;
+﻿namespace Data.Legacy.Abstract;
 
 public interface IRepository<T>
 {

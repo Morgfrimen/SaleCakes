@@ -1,4 +1,4 @@
-﻿namespace Data.Dto;
+﻿namespace Data.Legacy.Dto;
 
 public record CakeDto
 {

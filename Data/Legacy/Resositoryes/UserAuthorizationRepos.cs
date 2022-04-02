@@ -1,19 +1,20 @@
-﻿using Data.Abstract;
-using Data.Dto;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
+using Data.Legacy.Abstract;
+using Data.Legacy.Dto;
 
-namespace Data.Resositoryes;
+//TODO: CantelationToken?
+namespace Data.Legacy.Resositoryes;
 
-public class StuffingRepos : IRepository<StuffingDto>
+public class UserAuthorizationRepos : IRepository<AuthorizationUserDto>
 {
     private readonly string? _connectionString;
 
-    public StuffingRepos(string? connectionStringString)
+    public UserAuthorizationRepos(string? connectionStringString)
     {
         _connectionString = connectionStringString;
     }
 
-    public async Task<StuffingDto?> GetByIdAsync(Guid id)
+    public async Task<AuthorizationUserDto?> GetByIdAsync(Guid id)
     {
         SqlConnection connection = default;
 
@@ -27,7 +28,7 @@ public class StuffingRepos : IRepository<StuffingDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"Use SaleCakes; SELECT * FROM stuffing where id = \'{id}\'";
+            var sqlExpression = $"Use SaleCakes; SELECT * FROM authorization_user where id = \'{id}\'";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteReaderAsync();
 
@@ -36,12 +37,16 @@ public class StuffingRepos : IRepository<StuffingDto>
                 while (await reader.ReadAsync())
                 {
                     var idDto = id;
-                    var nameDto = reader.GetValue(1) as string;
-                    var priceDto = reader.GetValue(2) is decimal ? (decimal)reader.GetValue(2) : 0;
+                    var userDto = reader.GetValue(1) is Guid 
+                        ? (Guid?)reader.GetValue(1)
+                        : default;
+                    var userLoginDto = reader.GetValue(2) as string;
+                    var userPasswordDto = reader.GetValue(3) as string;
+                    var createdAtDto = reader.GetValue(4) is DateTime ? (DateTime)reader.GetValue(4) : default;
 
-                    var roleUserDto = new StuffingDto(idDto, nameDto, priceDto);
+                    var authorizationUserDto = new AuthorizationUserDto(idDto, userDto!.Value, userLoginDto!, userPasswordDto!, createdAtDto);
 
-                    return roleUserDto; 
+                    return authorizationUserDto;
                 }
             }
 
@@ -59,7 +64,7 @@ public class StuffingRepos : IRepository<StuffingDto>
         }
     }
 
-    public async Task<IEnumerable<StuffingDto>?> GetAllAsync()
+    public async Task<IEnumerable<AuthorizationUserDto>?> GetAllAsync()
     {
         SqlConnection connection = default;
 
@@ -73,22 +78,24 @@ public class StuffingRepos : IRepository<StuffingDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = "Use SaleCakes; SELECT * FROM stuffing";
+            var sqlExpression = "Use SaleCakes; SELECT * FROM authorization_user";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteReaderAsync();
 
             if (reader.HasRows)
             {
-                var listEmployees = new List<StuffingDto>();
+                var listEmployees = new List<AuthorizationUserDto>();
 
                 while (await reader.ReadAsync())
                 {
                     var idDto = reader.GetValue(0) is Guid ? (Guid)reader.GetValue(0) : default;
-                    var nameDto = reader.GetValue(1) as string;
-                    var priceDto = reader.GetValue(2) is decimal ? (decimal)reader.GetValue(2) : 0;
+                    var userDto = reader.GetValue(1) is Guid ? (Guid)reader.GetValue(1) : default;
+                    var userLoginDto = reader.GetValue(2) as string;
+                    var userPasswordDto = reader.GetValue(3) as string;
+                    var createdAtDto = reader.GetValue(4) is DateTime ? (DateTime)reader.GetValue(4) : default;
 
-                    var stuffingDto = new StuffingDto(idDto, nameDto , priceDto);
-                    listEmployees.Add(stuffingDto);
+                    var authorizationUserDto = new AuthorizationUserDto(idDto, userDto, userLoginDto!, userPasswordDto!, createdAtDto);
+                    listEmployees.Add(authorizationUserDto);
                 }
 
                 return listEmployees;
@@ -108,7 +115,7 @@ public class StuffingRepos : IRepository<StuffingDto>
         }
     }
 
-    public async Task<bool> AddAsync(StuffingDto entity)
+    public async Task<bool> AddAsync(AuthorizationUserDto entity)
     {
         SqlConnection? connection = default;
 
@@ -122,7 +129,8 @@ public class StuffingRepos : IRepository<StuffingDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"Use SaleCakes; INSERT INTO stuffing (name,price) VALUES (\'{entity.Name}\',{entity.Price})";
+            var sqlExpression = $"Use SaleCakes; INSERT INTO authorization_user (user_guid,user_login,user_password,createdAt) VALUES (" +
+                                $"\'{entity.AppUsers}\',\'{entity.UserLogin}\',\'{entity.UserPassword}\',\'{entity.CreatedAt}\')";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();
 
@@ -159,7 +167,7 @@ public class StuffingRepos : IRepository<StuffingDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"Use SaleCakes; DELETE stuffing WHERE id=\'{id}\'";
+            var sqlExpression = $"Use SaleCakes; DELETE authorization_user WHERE id=\'{id}\'";
 
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();
@@ -183,7 +191,7 @@ public class StuffingRepos : IRepository<StuffingDto>
         }
     }
 
-    public async Task<bool> UpdateAsync(StuffingDto entity)
+    public async Task<bool> UpdateAsync(AuthorizationUserDto entity)
     {
         SqlConnection? connection = default;
 
@@ -197,8 +205,9 @@ public class StuffingRepos : IRepository<StuffingDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = "Use SaleCakes; UPDATE stuffing " +
-                                $"SET name= \'{entity.Name}\', price={entity.Price} WHERE id=\'{entity.Id}\'";
+            var sqlExpression = "Use SaleCakes; UPDATE authorization_user " +
+                                $"SET user_login= \'{entity.UserLogin}\',user_password= \'{entity.UserPassword}\'" +
+                                $",createdAt= \'{entity.CreatedAt}\' WHERE id=\'{entity.Id}\'";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();
 

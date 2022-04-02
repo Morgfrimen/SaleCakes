@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Data.Dto;
-using Data.Resositoryes;
+using Data.Legacy.Dto;
+using Data.Legacy.Resositoryes;
 using SaleCakes.Command;
 
 namespace SaleCakes.ViewModel

@@ -1,10 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Data.Abstract;
 using System.Xml.Linq;
-using Data.Dto;
-using Data.Resositoryes;
+using Data.Legacy.Dto;
+using Data.Legacy.Resositoryes;
 using Xunit;
 
 namespace UnitTests;

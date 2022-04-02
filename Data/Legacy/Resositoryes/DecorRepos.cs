@@ -1,8 +1,8 @@
-﻿using Data.Abstract;
-using Data.Dto;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
+using Data.Legacy.Abstract;
+using Data.Legacy.Dto;
 
-namespace Data.Resositoryes;
+namespace Data.Legacy.Resositoryes;
 
 public class DecorRepos : IRepository<DecorDto>
 {

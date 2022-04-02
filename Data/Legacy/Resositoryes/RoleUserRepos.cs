@@ -1,9 +1,9 @@
 ﻿using System.Data.SqlClient;
-using Data.Abstract;
-using Data.Dto;
+using Data.Legacy.Abstract;
+using Data.Legacy.Dto;
 
 //TODO: CantelationToken?
-namespace Data.Resositoryes;
+namespace Data.Legacy.Resositoryes;
 
 public class RoleUserRepos : IRepository<RoleUserDto>
 {

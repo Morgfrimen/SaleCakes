@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using Data.Dto;
-using Data.Resositoryes;
+using Data.Legacy.Dto;
+using Data.Legacy.Resositoryes;
 using Xunit;
 
 namespace UnitTests;

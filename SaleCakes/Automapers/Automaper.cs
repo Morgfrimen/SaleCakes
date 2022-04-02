@@ -1,4 +1,4 @@
-﻿using Data.Dto;
+﻿using Data.Legacy.Dto;
 using SaleCakes.Model;
 
 namespace SaleCakes.Automapers;

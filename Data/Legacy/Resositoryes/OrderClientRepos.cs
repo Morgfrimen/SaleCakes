@@ -1,19 +1,19 @@
-﻿using Data.Abstract;
-using Data.Dto;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
+using Data.Legacy.Abstract;
+using Data.Legacy.Dto;
 
-namespace Data.Resositoryes;
+namespace Data.Legacy.Resositoryes;
 
-public class CakeRepos : IRepository<CakeDto>
+public class OrderClientRepos : IRepository<OrderClientDto>
 {
     private readonly string? _connectionString;
 
-    public CakeRepos(string? connectionStringString)
+    public OrderClientRepos(string? connectionStringString)
     {
         _connectionString = connectionStringString;
     }
 
-    public async Task<CakeDto?> GetByIdAsync(Guid id)
+    public async Task<OrderClientDto?> GetByIdAsync(Guid id)
     {
         SqlConnection connection = default;
 
@@ -27,7 +27,7 @@ public class CakeRepos : IRepository<CakeDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"Use SaleCakes; SELECT * FROM cake where id = \'{id}\'";
+            var sqlExpression = $"Use SaleCakes; SELECT * FROM order_client where id = \'{id}\'";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteReaderAsync();
 
@@ -36,10 +36,14 @@ public class CakeRepos : IRepository<CakeDto>
                 while (await reader.ReadAsync())
                 {
                     var dto = id;
-                    var weight = reader.GetValue(1) is decimal ? (decimal)reader.GetValue(1) : 0;
-                    var tiersId = reader.GetValue(2) is Guid ? (Guid)reader.GetValue(2) : default;
+                    var orderCreateAt = reader.GetValue(1) is DateTime ? (DateTime)reader.GetValue(1) : default;
+                    var orderAdress = reader.GetValue(2) is string ? (string)reader.GetValue(2) : default;
+                    var orderCake = reader.GetValue(3) is Guid ? (Guid)reader.GetValue(3) : default;
+                    var orderConditess = reader.GetValue(4) is Guid ? (Guid)reader.GetValue(4) : default;
+                    var orderEmoloyee = reader.GetValue(5) is Guid ? (Guid)reader.GetValue(5) : default;
+                    var orderSeller = reader.GetValue(6) is decimal ? (decimal)reader.GetValue(6) : default;
 
-                    var decorDto = new CakeDto(dto, weight, tiersId);
+                    var decorDto = new OrderClientDto(dto, orderCreateAt, orderAdress, orderCake, orderConditess, orderEmoloyee,orderSeller);
 
                     return decorDto;
                 }
@@ -59,7 +63,7 @@ public class CakeRepos : IRepository<CakeDto>
         }
     }
 
-    public async Task<IEnumerable<CakeDto>?> GetAllAsync()
+    public async Task<IEnumerable<OrderClientDto>?> GetAllAsync()
     {
         SqlConnection connection = default;
 
@@ -73,22 +77,26 @@ public class CakeRepos : IRepository<CakeDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = "Use SaleCakes; SELECT * FROM cake";
+            var sqlExpression = "Use SaleCakes; SELECT * FROM order_client";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteReaderAsync();
 
             if (reader.HasRows)
             {
-                var listEmployees = new List<CakeDto>();
+                var listEmployees = new List<OrderClientDto>();
 
                 while (await reader.ReadAsync())
                 {
                     var dto = reader.GetValue(0) is Guid ? (Guid)reader.GetValue(0) : default;
-                    var weight = reader.GetValue(1) is decimal ? (decimal)reader.GetValue(1) : 0;
-                    var tiersId = reader.GetValue(2) is Guid ? (Guid)reader.GetValue(2) : default;
+                    var orderCreateAt = reader.GetValue(1) is DateTime ? (DateTime)reader.GetValue(1) : default;
+                    var orderAdress = reader.GetValue(2) is string ? (string)reader.GetValue(2) : default;
+                    var orderCake = reader.GetValue(3) is Guid ? (Guid)reader.GetValue(3) : default;
+                    var orderConditess = reader.GetValue(4) is Guid ? (Guid)reader.GetValue(4) : default;
+                    var orderEmoloyee = reader.GetValue(5) is Guid ? (Guid)reader.GetValue(5) : default;
+                    var orderSeller = reader.GetValue(6) is decimal ? (decimal)reader.GetValue(6) : default;
 
-                    var decorDto = new CakeDto(dto, weight, tiersId);
-                    listEmployees.Add(decorDto);
+                    var orderClientDto = new OrderClientDto(dto, orderCreateAt, orderAdress, orderCake, orderConditess, orderEmoloyee, orderSeller);
+                    listEmployees.Add(orderClientDto);
                 }
 
                 return listEmployees;
@@ -108,7 +116,7 @@ public class CakeRepos : IRepository<CakeDto>
         }
     }
 
-    public async Task<bool> AddAsync(CakeDto entity)
+    public async Task<bool> AddAsync(OrderClientDto entity)
     {
         SqlConnection? connection = default;
 
@@ -122,7 +130,9 @@ public class CakeRepos : IRepository<CakeDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"Use SaleCakes; INSERT INTO cake (weight,tiers) VALUES ({entity.Weight},\'{entity.TiersId}\')";
+            var sqlExpression = $"Use SaleCakes; INSERT INTO order_client (order_createdAt,order_adress,order_cake," +
+                                $"order_condites,order_emoloyee,order_seller) VALUES ({entity.OrderCreateAt},\'{entity.OrderAdress}\'," +
+                                $"\'{entity.CakeId}\',\'{entity.ConditerId}\',\'{entity.EmployeeId}\',{entity.OrderSeller})";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();
 
@@ -159,7 +169,7 @@ public class CakeRepos : IRepository<CakeDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"Use SaleCakes; DELETE cake WHERE id=\'{id}\'";
+            var sqlExpression = $"Use SaleCakes; DELETE order_client WHERE id=\'{id}\'";
 
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();
@@ -183,7 +193,7 @@ public class CakeRepos : IRepository<CakeDto>
         }
     }
 
-    public async Task<bool> UpdateAsync(CakeDto entity)
+    public async Task<bool> UpdateAsync(OrderClientDto entity)
     {
         SqlConnection? connection = default;
 
@@ -197,8 +207,11 @@ public class CakeRepos : IRepository<CakeDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = "Use SaleCakes; UPDATE cake " +
-                                $"SET weight={entity.Weight}, tiers=\'{entity.TiersId}\' WHERE id=\'{entity.Id}\'";
+            var sqlExpression = "Use SaleCakes; UPDATE order_client " +
+                                $"SET order_createdAt={entity.OrderCreateAt}, order_adress=\'{entity.OrderAdress}\'," +
+                                $"order_cake=\'{entity.CakeId}\', order_condites=\'{entity.ConditerId}\',"+
+                                $"order_emoloyee=\'{entity.EmployeeId}\', order_seller={entity.OrderAdress}," +
+                                $" WHERE id=\'{entity.Id}\'";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();
 

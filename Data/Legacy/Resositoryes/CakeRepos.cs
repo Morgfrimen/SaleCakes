@@ -1,20 +1,19 @@
 ﻿using System.Data.SqlClient;
-using Data.Abstract;
-using Data.Dto;
+using Data.Legacy.Abstract;
+using Data.Legacy.Dto;
 
-//TODO: CantelationToken?
-namespace Data.Resositoryes;
+namespace Data.Legacy.Resositoryes;
 
-public class EmployeeRepos : IRepository<EmployeeDto>
+public class CakeRepos : IRepository<CakeDto>
 {
     private readonly string? _connectionString;
 
-    public EmployeeRepos(string? connectionStringString)
+    public CakeRepos(string? connectionStringString)
     {
         _connectionString = connectionStringString;
     }
 
-    public async Task<EmployeeDto?> GetByIdAsync(Guid id)
+    public async Task<CakeDto?> GetByIdAsync(Guid id)
     {
         SqlConnection connection = default;
 
@@ -28,7 +27,7 @@ public class EmployeeRepos : IRepository<EmployeeDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"Use SaleCakes; SELECT * FROM employee where id = \'{id}\'";
+            var sqlExpression = $"Use SaleCakes; SELECT * FROM cake where id = \'{id}\'";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteReaderAsync();
 
@@ -36,17 +35,13 @@ public class EmployeeRepos : IRepository<EmployeeDto>
             {
                 while (await reader.ReadAsync())
                 {
-                    var idDto = id;
-                    var autorizedUserDto = reader.GetValue(1) is Guid ? (Guid)reader.GetValue(1) : default;
-                    var firstDto = reader.GetValue(2) as string;
-                    var lastDto = reader.GetValue(3) as string;
-                    var patronymicDto = reader.GetValue(4) as string;
-                    var phoneDto = reader.GetValue(5) as string;
-                    var emailDto = reader.GetValue(6) as string;
+                    var dto = id;
+                    var weight = reader.GetValue(1) is decimal ? (decimal)reader.GetValue(1) : 0;
+                    var tiersId = reader.GetValue(2) is Guid ? (Guid)reader.GetValue(2) : default;
 
-                    var employeeDto = new EmployeeDto(idDto, autorizedUserDto, firstDto, lastDto, patronymicDto, phoneDto, emailDto);
+                    var decorDto = new CakeDto(dto, weight, tiersId);
 
-                    return employeeDto; 
+                    return decorDto;
                 }
             }
 
@@ -64,7 +59,7 @@ public class EmployeeRepos : IRepository<EmployeeDto>
         }
     }
 
-    public async Task<IEnumerable<EmployeeDto>?> GetAllAsync()
+    public async Task<IEnumerable<CakeDto>?> GetAllAsync()
     {
         SqlConnection connection = default;
 
@@ -78,26 +73,22 @@ public class EmployeeRepos : IRepository<EmployeeDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = "Use SaleCakes; SELECT * FROM employee";
+            var sqlExpression = "Use SaleCakes; SELECT * FROM cake";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteReaderAsync();
 
             if (reader.HasRows)
             {
-                var listEmployees = new List<EmployeeDto>();
+                var listEmployees = new List<CakeDto>();
 
                 while (await reader.ReadAsync())
                 {
-                    var idDto = reader.GetValue(0) is Guid ? (Guid)reader.GetValue(0) : default;
-                    var autorizedUserDto = reader.GetValue(1) is Guid ? (Guid)reader.GetValue(1) : default;
-                    var firstDto = reader.GetValue(2) as string;
-                    var lastDto = reader.GetValue(3) as string;
-                    var patronymicDto = reader.GetValue(4) as string;
-                    var phoneDto = reader.GetValue(5) as string;
-                    var emailDto = reader.GetValue(6) as string;
+                    var dto = reader.GetValue(0) is Guid ? (Guid)reader.GetValue(0) : default;
+                    var weight = reader.GetValue(1) is decimal ? (decimal)reader.GetValue(1) : 0;
+                    var tiersId = reader.GetValue(2) is Guid ? (Guid)reader.GetValue(2) : default;
 
-                    var employeeDto = new EmployeeDto(idDto, autorizedUserDto, firstDto, lastDto, patronymicDto, phoneDto, emailDto);
-                    listEmployees.Add(employeeDto);
+                    var decorDto = new CakeDto(dto, weight, tiersId);
+                    listEmployees.Add(decorDto);
                 }
 
                 return listEmployees;
@@ -117,7 +108,7 @@ public class EmployeeRepos : IRepository<EmployeeDto>
         }
     }
 
-    public async Task<bool> AddAsync(EmployeeDto entity)
+    public async Task<bool> AddAsync(CakeDto entity)
     {
         SqlConnection? connection = default;
 
@@ -131,12 +122,7 @@ public class EmployeeRepos : IRepository<EmployeeDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = "Use SaleCakes; INSERT INTO employee " +
-                                "(autorized_data,employee_name,employee_surname,employee_patronymic,employee_phone,employee_email)" +
-                                " VALUES" +
-                                $" (\'{entity.AutorizedUserId}\'," +
-                                $"\'{entity.FirstName}\',\'{entity.LastName}\',\'{entity.Patronymic}\'," +
-                                $"\'{entity.Phone}\',\'{entity.Email}\')";
+            var sqlExpression = $"Use SaleCakes; INSERT INTO cake (weight,tiers) VALUES ({entity.Weight},\'{entity.TiersId}\')";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();
 
@@ -173,7 +159,7 @@ public class EmployeeRepos : IRepository<EmployeeDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"Use SaleCakes; DELETE employee WHERE id=\'{id}\'";
+            var sqlExpression = $"Use SaleCakes; DELETE cake WHERE id=\'{id}\'";
 
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();
@@ -197,7 +183,7 @@ public class EmployeeRepos : IRepository<EmployeeDto>
         }
     }
 
-    public async Task<bool> UpdateAsync(EmployeeDto entity)
+    public async Task<bool> UpdateAsync(CakeDto entity)
     {
         SqlConnection? connection = default;
 
@@ -211,11 +197,8 @@ public class EmployeeRepos : IRepository<EmployeeDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = "Use SaleCakes; UPDATE employee " +
-                                $"SET employee_name= \'{entity.FirstName}\',employee_surname= \'{entity.LastName}\'" +
-                                $",employee_patronymic= \'{entity.Patronymic}\',employee_phone=\'{entity.Phone}\'," +
-                                $"employee_email=\'{entity.Email}\' " +
-                                $" WHERE id=\'{entity.Id}\'";
+            var sqlExpression = "Use SaleCakes; UPDATE cake " +
+                                $"SET weight={entity.Weight}, tiers=\'{entity.TiersId}\' WHERE id=\'{entity.Id}\'";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();
 

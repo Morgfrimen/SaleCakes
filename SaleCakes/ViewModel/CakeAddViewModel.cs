@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
-using Data.Dto;
-using Data.Resositoryes;
+using Data.Legacy.Dto;
+using Data.Legacy.Resositoryes;
 using SaleCakes.Command;
 using SaleCakes.Model;
 
@@ -55,7 +55,7 @@ public class CakeAddViewModel : BaseViewModel
     });
 
 
-    //Stuffing,Decor,Shortcake
+    //Stuffing,Decor,ShortcakeEntry
     public TierContainer Tier
     {
         get => _tier;

@@ -1,19 +1,19 @@
-﻿using Data.Abstract;
-using Data.Dto;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
+using Data.Legacy.Abstract;
+using Data.Legacy.Dto;
 
-namespace Data.Resositoryes;
+namespace Data.Legacy.Resositoryes;
 
-public class ShortcakeRepos : IRepository<ShortcakeDto>
+public class StuffingRepos : IRepository<StuffingDto>
 {
     private readonly string? _connectionString;
 
-    public ShortcakeRepos(string? connectionStringString)
+    public StuffingRepos(string? connectionStringString)
     {
         _connectionString = connectionStringString;
     }
 
-    public async Task<ShortcakeDto?> GetByIdAsync(Guid id)
+    public async Task<StuffingDto?> GetByIdAsync(Guid id)
     {
         SqlConnection connection = default;
 
@@ -27,7 +27,7 @@ public class ShortcakeRepos : IRepository<ShortcakeDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"Use SaleCakes; SELECT * FROM shortcake where id = \'{id}\'";
+            var sqlExpression = $"Use SaleCakes; SELECT * FROM stuffing where id = \'{id}\'";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteReaderAsync();
 
@@ -39,7 +39,7 @@ public class ShortcakeRepos : IRepository<ShortcakeDto>
                     var nameDto = reader.GetValue(1) as string;
                     var priceDto = reader.GetValue(2) is decimal ? (decimal)reader.GetValue(2) : 0;
 
-                    var roleUserDto = new ShortcakeDto(idDto, nameDto, priceDto);
+                    var roleUserDto = new StuffingDto(idDto, nameDto, priceDto);
 
                     return roleUserDto; 
                 }
@@ -59,7 +59,7 @@ public class ShortcakeRepos : IRepository<ShortcakeDto>
         }
     }
 
-    public async Task<IEnumerable<ShortcakeDto>?> GetAllAsync()
+    public async Task<IEnumerable<StuffingDto>?> GetAllAsync()
     {
         SqlConnection connection = default;
 
@@ -73,13 +73,13 @@ public class ShortcakeRepos : IRepository<ShortcakeDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = "Use SaleCakes; SELECT * FROM shortcake";
+            var sqlExpression = "Use SaleCakes; SELECT * FROM stuffing";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteReaderAsync();
 
             if (reader.HasRows)
             {
-                var listEmployees = new List<ShortcakeDto>();
+                var listEmployees = new List<StuffingDto>();
 
                 while (await reader.ReadAsync())
                 {
@@ -87,8 +87,8 @@ public class ShortcakeRepos : IRepository<ShortcakeDto>
                     var nameDto = reader.GetValue(1) as string;
                     var priceDto = reader.GetValue(2) is decimal ? (decimal)reader.GetValue(2) : 0;
 
-                    var ShortcakeDto = new ShortcakeDto(idDto, nameDto , priceDto);
-                    listEmployees.Add(ShortcakeDto);
+                    var stuffingDto = new StuffingDto(idDto, nameDto , priceDto);
+                    listEmployees.Add(stuffingDto);
                 }
 
                 return listEmployees;
@@ -108,7 +108,7 @@ public class ShortcakeRepos : IRepository<ShortcakeDto>
         }
     }
 
-    public async Task<bool> AddAsync(ShortcakeDto entity)
+    public async Task<bool> AddAsync(StuffingDto entity)
     {
         SqlConnection? connection = default;
 
@@ -122,7 +122,7 @@ public class ShortcakeRepos : IRepository<ShortcakeDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"Use SaleCakes; INSERT INTO shortcake (name,price) VALUES (\'{entity.Name}\',{entity.Price})";
+            var sqlExpression = $"Use SaleCakes; INSERT INTO stuffing (name,price) VALUES (\'{entity.Name}\',{entity.Price})";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();
 
@@ -159,7 +159,7 @@ public class ShortcakeRepos : IRepository<ShortcakeDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"Use SaleCakes; DELETE shortcake WHERE id=\'{id}\'";
+            var sqlExpression = $"Use SaleCakes; DELETE stuffing WHERE id=\'{id}\'";
 
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();
@@ -183,7 +183,7 @@ public class ShortcakeRepos : IRepository<ShortcakeDto>
         }
     }
 
-    public async Task<bool> UpdateAsync(ShortcakeDto entity)
+    public async Task<bool> UpdateAsync(StuffingDto entity)
     {
         SqlConnection? connection = default;
 
@@ -197,7 +197,7 @@ public class ShortcakeRepos : IRepository<ShortcakeDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = "Use SaleCakes; UPDATE shortcake " +
+            var sqlExpression = "Use SaleCakes; UPDATE stuffing " +
                                 $"SET name= \'{entity.Name}\', price={entity.Price} WHERE id=\'{entity.Id}\'";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();

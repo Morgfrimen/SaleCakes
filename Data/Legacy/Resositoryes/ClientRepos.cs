@@ -1,20 +1,19 @@
-﻿using Data.Abstract;
-using Data.Dto;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
+using Data.Legacy.Abstract;
+using Data.Legacy.Dto;
 
-namespace Data.Resositoryes;
+namespace Data.Legacy.Resositoryes;
 
-public class TiersRepos : IRepository<TiersDto>
+public class ClientRepos : IRepository<ClientDto>
 {
     private readonly string? _connectionString;
 
-    public TiersRepos(string? connectionStringString)
+    public ClientRepos(string? connectionStringString)
     {
         _connectionString = connectionStringString;
     }
 
-
-    public async Task<TiersDto?> GetByIdAsync(Guid id)
+    public async Task<ClientDto?> GetByIdAsync(Guid id)
     {
         SqlConnection connection = default;
 
@@ -28,7 +27,7 @@ public class TiersRepos : IRepository<TiersDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"Use SaleCakes; SELECT * FROM tiers where id = \'{id}\'";
+            var sqlExpression = $"Use SaleCakes; SELECT * FROM client where id = \'{id}\'";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteReaderAsync();
 
@@ -36,14 +35,17 @@ public class TiersRepos : IRepository<TiersDto>
             {
                 while (await reader.ReadAsync())
                 {
-                    var idDto = id;
-                    var stuffingId = reader.GetValue(1) is Guid ? (Guid)reader.GetValue(1) : default;
-                    var decorId = reader.GetValue(2) is Guid ? (Guid)reader.GetValue(2) : default;
-                    var shortcakeId = reader.GetValue(3) is Guid ? (Guid)reader.GetValue(3) : default;
+                    var dto = id;
+                    var name = reader.GetValue(1) is string ? (string)reader.GetValue(1) : default;
+                    var surname = reader.GetValue(2) is string ? (string)reader.GetValue(2) : default;
+                    var patronymic = reader.GetValue(3) is string ? (string)reader.GetValue(3) : default;
+                    var phone = reader.GetValue(4) is string ? (string)reader.GetValue(4) : default;
+                    var email = reader.GetValue(5) is string ? (string)reader.GetValue(5) : default;
+                    var orders = reader.GetValue(6) is Guid[]? (Guid[])reader.GetValue(6) : default;
 
-                    var tiersDto = new TiersDto(idDto, stuffingId, decorId, shortcakeId);
+                    var decorDto = new ClientDto(dto, name,surname,patronymic,phone,email, orders);
 
-                    return tiersDto; 
+                    return decorDto;
                 }
             }
 
@@ -61,7 +63,7 @@ public class TiersRepos : IRepository<TiersDto>
         }
     }
 
-    public async Task<IEnumerable<TiersDto>?> GetAllAsync()
+    public async Task<IEnumerable<ClientDto>?> GetAllAsync()
     {
         SqlConnection connection = default;
 
@@ -75,23 +77,26 @@ public class TiersRepos : IRepository<TiersDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = "Use SaleCakes; SELECT * FROM tiers";
+            var sqlExpression = "Use SaleCakes; SELECT * FROM client";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteReaderAsync();
 
             if (reader.HasRows)
             {
-                var listEmployees = new List<TiersDto>();
+                var listEmployees = new List<ClientDto>();
 
                 while (await reader.ReadAsync())
                 {
-                    var idDto = reader.GetValue(0) is Guid ? (Guid)reader.GetValue(0) : default;
-                    var stuffingId = reader.GetValue(1) is Guid ? (Guid)reader.GetValue(1) : default;
-                    var decorId = reader.GetValue(2) is Guid ? (Guid)reader.GetValue(2) : default;
-                    var shortcakeId = reader.GetValue(3) is Guid ? (Guid)reader.GetValue(3) : default;
+                    var dto = reader.GetValue(0) is Guid ? (Guid)reader.GetValue(0) : default; ;
+                    var name = reader.GetValue(1) is string ? (string)reader.GetValue(1) : default;
+                    var surname = reader.GetValue(2) is string ? (string)reader.GetValue(2) : default;
+                    var patronymic = reader.GetValue(3) is string ? (string)reader.GetValue(3) : default;
+                    var phone = reader.GetValue(4) is string ? (string)reader.GetValue(4) : default;
+                    var email = reader.GetValue(5) is string ? (string)reader.GetValue(5) : default;
+                    var orders = reader.GetValue(6) is Guid[]? (Guid[])reader.GetValue(6) : default;
 
-                    var tiersDto = new TiersDto(idDto, stuffingId, decorId, shortcakeId);
-                    listEmployees.Add(tiersDto);
+                    var clientDto = new ClientDto(dto, name, surname, patronymic, phone, email, orders);
+                    listEmployees.Add(clientDto);
                 }
 
                 return listEmployees;
@@ -111,7 +116,7 @@ public class TiersRepos : IRepository<TiersDto>
         }
     }
 
-    public async Task<bool> AddAsync(TiersDto entity)
+    public async Task<bool> AddAsync(ClientDto entity)
     {
         SqlConnection? connection = default;
 
@@ -125,8 +130,8 @@ public class TiersRepos : IRepository<TiersDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"Use SaleCakes; INSERT INTO tiers (stuffing,decor,shortcake) " +
-                                $"VALUES (\'{entity.StuffingId}\',\'{entity.DecorId}\',\'{entity.ShortcakeId}\')";
+            var sqlExpression = $"Use SaleCakes; INSERT INTO client (client_name,client_surname,client_patronymic,client_phone,client_email,client_orders) " +
+                                $"VALUES ({entity.ClientName},\'{entity.ClientSurname}\',\'{entity.ClientPatronymic}\',\'{entity.Phone}\',\'{entity.Email}\',\'{entity.OrdersId}\')";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();
 
@@ -163,7 +168,7 @@ public class TiersRepos : IRepository<TiersDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"Use SaleCakes; DELETE tiers WHERE id=\'{id}\'";
+            var sqlExpression = $"Use SaleCakes; DELETE client WHERE id=\'{id}\'";
 
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();
@@ -187,7 +192,7 @@ public class TiersRepos : IRepository<TiersDto>
         }
     }
 
-    public async Task<bool> UpdateAsync(TiersDto entity)
+    public async Task<bool> UpdateAsync(ClientDto entity)
     {
         SqlConnection? connection = default;
 
@@ -201,8 +206,11 @@ public class TiersRepos : IRepository<TiersDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = "Use SaleCakes; UPDATE tiers " +
-                                $"SET stuffing= \'{entity.StuffingId}\', decor= \'{entity.DecorId}\',shortcake= \'{entity.ShortcakeId}\' WHERE id=\'{entity.Id}\'";
+            var sqlExpression = "Use SaleCakes; UPDATE client " +
+                                $"SET client_name={entity.ClientName}, client_surname=\'{entity.ClientSurname}\'" +
+                                $"client_name={entity.ClientPatronymic}, client_surname=\'{entity.Phone}\'" +
+                                $"client_name={entity.Phone}, client_surname=\'{entity.Email}\'" +
+                                $" WHERE id=\'{entity.Id}\'";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();
 

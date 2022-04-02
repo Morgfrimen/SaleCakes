@@ -1,10 +1,10 @@
-﻿using Data.Resositoryes;
-using SaleCakes.Command;
+﻿using SaleCakes.Command;
 using SaleCakes.Extension;
 using SaleCakes.Model;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Data.Legacy.Resositoryes;
 
 namespace SaleCakes.ViewModel;
 
