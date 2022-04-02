@@ -359,17 +359,17 @@ public class SaleCakesDbContext : DbContext
 
             _ = entity.Property(e => e.Stuffing).HasColumnName("stuffing");
 
-            _ = entity.HasOne(d => d.DecorNavigation)
+            _ = entity.HasOne(d => d.DecorEntry)
                 .WithMany(p => p.Tiers)
                 .HasForeignKey(d => d.Decor)
                 .HasConstraintName("FK__tiers__decor__4CA06362");
 
-            _ = entity.HasOne(d => d.ShortcakeNavigation)
+            _ = entity.HasOne(d => d.ShortcakeEntry)
                 .WithMany(p => p.Tiers)
                 .HasForeignKey(d => d.Shortcake)
                 .HasConstraintName("FK__tiers__shortcake__4D94879B");
 
-            _ = entity.HasOne(d => d.StuffingNavigation)
+            _ = entity.HasOne(d => d.StuffingEntry)
                 .WithMany(p => p.Tiers)
                 .HasForeignKey(d => d.Stuffing)
                 .HasConstraintName("FK__tiers__stuffing__4BAC3F29");

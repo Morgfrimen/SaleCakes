@@ -8,15 +8,15 @@ public record TiersDto
         Id = id;
     }
 
-    public TiersDto(StuffingDto stuffingId, DecorDto decorId, ShortcakeDto shortcakeId)
+    public TiersDto(StuffingDto stuffingDto, DecorDto decorDto, ShortcakeDto shortcakeDto)
     {
-        StuffingId = stuffingId;
-        DecorId = decorId;
-        ShortcakeId = shortcakeId;
+        StuffingDto = stuffingDto;
+        DecorDto = decorDto;
+        ShortcakeDto = shortcakeDto;
     }
 
     public Guid Id { get; }
-    public StuffingDto StuffingId { get; }
-    public DecorDto DecorId { get; }
-    public ShortcakeDto ShortcakeId { get; }
+    public StuffingDto StuffingDto { get; }
+    public DecorDto DecorDto { get; }
+    public ShortcakeDto ShortcakeDto { get; }
 }
