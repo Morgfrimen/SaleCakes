@@ -8,7 +8,7 @@ internal class AppUserEntry
     }
 
     internal Guid Id { get; set; }
-    internal string? UserRole { get; set; }
+    internal string UserRole { get; set; }
 
     internal virtual ICollection<AuthorizationUserEntry> AuthorizationUsers { get; set; }
 }

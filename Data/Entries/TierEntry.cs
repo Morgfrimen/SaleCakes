@@ -12,8 +12,8 @@ internal class TierEntry
     internal Guid? Decor { get; set; }
     internal Guid? Shortcake { get; set; }
 
-    internal virtual DecorEntry? DecorNavigation { get; set; }
-    internal virtual ShortcakeEntry? ShortcakeNavigation { get; set; }
-    internal virtual StuffingEntry? StuffingNavigation { get; set; }
+    internal virtual DecorEntry DecorNavigation { get; set; }
+    internal virtual ShortcakeEntry ShortcakeNavigation { get; set; }
+    internal virtual StuffingEntry StuffingNavigation { get; set; }
     internal virtual ICollection<CakeDesign> CakeDesigns { get; set; }
 }

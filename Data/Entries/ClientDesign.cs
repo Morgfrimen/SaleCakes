@@ -6,6 +6,6 @@ internal class ClientDesign
     internal Guid? ClientId { get; set; }
     internal Guid? OrderId { get; set; }
 
-    internal virtual ClientEntry? Client { get; set; }
-    internal virtual OrderClientEntry? Order { get; set; }
+    internal virtual ClientEntry Client { get; set; }
+    internal virtual OrderClientEntry Order { get; set; }
 }

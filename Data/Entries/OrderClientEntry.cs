@@ -16,9 +16,9 @@ internal class OrderClientEntry
     internal Guid? OrderEmoloyee { get; set; }
     internal decimal OrderSeller { get; set; }
 
-    internal virtual CakeEntry? OrderCakeNavigation { get; set; }
-    internal virtual AuthorizationUserEntry? OrderConditesNavigation { get; set; }
-    internal virtual AuthorizationUserEntry? OrderEmoloyeeNavigation { get; set; }
+    internal virtual CakeEntry OrderCakeNavigation { get; set; }
+    internal virtual AuthorizationUserEntry OrderConditesNavigation { get; set; }
+    internal virtual AuthorizationUserEntry OrderEmoloyeeNavigation { get; set; }
     internal virtual ICollection<ClientDesign> ClientDesigns { get; set; }
     internal virtual ICollection<ClientEntry> Clients { get; set; }
 }

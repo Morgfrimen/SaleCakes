@@ -14,8 +14,8 @@ internal class AuthorizationUserEntry
     internal string UserPassword { get; set; } = null!;
     internal DateTime? CreatedAt { get; set; }
 
-    internal virtual AppUserEntry? UserGu { get; set; }
-    internal virtual EmployeeEntry? Employee { get; set; }
+    internal virtual AppUserEntry UserGu { get; set; }
+    internal virtual EmployeeEntry Employee { get; set; }
     internal virtual ICollection<OrderClientEntry> OrderClientOrderConditesNavigations { get; set; }
     internal virtual ICollection<OrderClientEntry> OrderClientOrderEmoloyeeNavigations { get; set; }
 }

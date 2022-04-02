@@ -49,6 +49,7 @@
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0-preview.2.22152.2" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0-preview.2.22152.2" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0-preview.2.22152.2" />
+		<PackageReference Include="xunit.extensibility.core" Version="2.4.1" />
 	</ItemGroup>
 
 	<ItemGroup>

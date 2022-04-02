@@ -7,7 +7,7 @@ public record EmployeeDto
         Id = id;
     }
 
-    public EmployeeDto(AuthorizationUserDto autorizedUserId, string firstName, string lastName, string? patronymic, string phone, string email)
+    public EmployeeDto(AuthorizationUserDto autorizedUserId, string firstName, string lastName, string patronymic, string phone, string email)
     {
         FirstName = firstName;
         LastName = lastName;
@@ -21,7 +21,7 @@ public record EmployeeDto
     public AuthorizationUserDto AutorizedUserId { get; }
     public string FirstName { get; }
     public string LastName { get; }
-    public string? Patronymic { get; }
+    public string Patronymic { get; }
     public string Phone { get; }
     public string Email { get; }
 }

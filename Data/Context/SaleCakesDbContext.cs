@@ -375,11 +375,11 @@ public class SaleCakesDbContext : DbContext
                 .HasConstraintName("FK__tiers__stuffing__4BAC3F29");
         });
 
-        OnModelCreatingPartial(modelBuilder);
+        //OnModelCreatingPartial(modelBuilder);
     }
 
-    private void OnModelCreatingPartial(ModelBuilder modelBuilder)
-    {
-        throw new NotImplementedException();
-    }
+    //private void OnModelCreatingPartial(ModelBuilder modelBuilder)
+    //{
+    //    throw new NotImplementedException();
+    //}
 }

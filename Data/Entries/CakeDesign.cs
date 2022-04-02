@@ -6,6 +6,6 @@ internal class CakeDesign
     internal Guid? CakeId { get; set; }
     internal Guid? TierId { get; set; }
 
-    internal virtual CakeEntry? Cake { get; set; }
-    internal virtual TierEntry? Tier { get; set; }
+    internal virtual CakeEntry Cake { get; set; }
+    internal virtual TierEntry Tier { get; set; }
 }

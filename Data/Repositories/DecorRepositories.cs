@@ -1,4 +1,5 @@
-﻿using Data.Context;
+﻿#nullable enable
+using Data.Context;
 using Data.Dto;
 using Data.Entries;
 using Data.Repositories.Abstract;
@@ -15,41 +16,115 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
 
     public async Task<Result<Guid>> AddEntryAsync(DecorDto entity)
     {
-        var decorEntry = new DecorEntry
+        try
         {
-            Id = entity.Id,
-            Name = entity.Name,
-            Price = entity.Price
-        };
+            var decorEntry = new DecorEntry
+            {
+                Id = entity.Id,
+                Name = entity.Name,
+                Price = entity.Price
+            };
 
-        var newEntry = await DbContext.DecorsEntries.AddAsync(decorEntry);
-        await DbContext.SaveChangesAsync();
+            var newEntry = await DbContext.DecorsEntries.AddAsync(decorEntry);
+            await DbContext.SaveChangesAsync();
 
-        return new Result<Guid>(newEntry.Entity.Id);
+            return new Result<Guid>(newEntry.Entity.Id);
+        }
+        catch (Exception ex)
+        {
+            return new Result<Guid>(new Error(ex.Message));
+        }
     }
 
     public async Task<Result<bool>> DeleteEntryAsync(Guid id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var deletedEntry = await DbContext.DecorsEntries.FirstOrDefaultAsync(item => item.Id == id);
+
+            if (deletedEntry is null)
+                return new Result<bool>(false);
+
+            _ = DbContext.DecorsEntries.Remove(deletedEntry);
+            await DbContext.SaveChangesAsync();
+            return new Result<bool>(true);
+        }
+        catch (Exception ex)
+        {
+            return new Result<bool>(new Error(ex.Message));
+        }
     }
 
     public async Task<Result<Guid>> UpdateEntryAsync(DecorDto entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            return null;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+            throw;
+        }
     }
 
-    public async Task<Result<DecorDto>> GetByIdAsync(Guid id)
+    public Task<Result<DecorDto?>> GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var resultEntry = DbContext.DecorsEntries
+                .Where(item => item.Id == id)
+                .Select(item => new DecorDto(item.Id, item.Name, item.Price)).FirstOrDefault();
+
+            return Task.FromResult(new Result<DecorDto?>(resultEntry));
+        }
+        catch (Exception ex)
+        {
+            return Task.FromResult(new Result<DecorDto?>(new Error(ex.Message)));
+        }
     }
 
     public async Task<Result<IEnumerable<DecorDto>>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        try
+        {
+            var result = DbContext.DecorsEntries.Select(item=>new DecorDto(item.Id,item.Name,item.Price));
+            await DbContext.SaveChangesAsync();
+            return new Result<IEnumerable<DecorDto>>(result);
+        }
+        catch (Exception ex)
+        {
+            return new Result<IEnumerable<DecorDto>>(new Error(ex.Message));
+        }
     }
 
-    public async Task<Result<DecorDto>> GetByNameAsync(string name)
+    public async Task<Result<bool>> ClearTableAsync()
     {
-        throw new NotImplementedException();
+        try
+        {
+            DbContext.DecorsEntries.RemoveRange(DbContext.DecorsEntries);
+            await DbContext.SaveChangesAsync();
+            return new Result<bool>(true);
+        }
+        catch (Exception ex)
+        {
+            return new Result<bool>(new Error(ex.Message));
+        }
+    }
+
+    public Task<Result<DecorDto?>> GetByNameAsync(string name)
+    {
+        try
+        {
+            var resultEntry = DbContext.DecorsEntries
+                .Where(item => item.Name == name)
+                .Select(item=>new DecorDto(item.Id,item.Name,item.Price)).FirstOrDefault();
+
+            return Task.FromResult(new Result<DecorDto?>(resultEntry));
+        }
+        catch (Exception ex)
+        {
+            return Task.FromResult(new Result<DecorDto?>(new Error(ex.Message)));
+        }
     }
 }
