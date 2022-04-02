@@ -31,7 +31,7 @@ public class CakeAddViewModel : BaseViewModel
     });
 
 
-    //Stuffing,Decor,ShortcakeEntry
+    //Stuffing,DecorPage,ShortcakeEntry
     public TierContainer Tier { get; } = new();
 
     public ICommand AddDecor { get; } = new RelayCommand(async obj =>

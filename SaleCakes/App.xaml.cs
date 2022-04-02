@@ -1,6 +1,14 @@
-﻿using System.Configuration;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using SaleCakes.View;
+using System;
+using System.Configuration;
+using System.IO;
 using System.Windows;
 using System.Windows.Threading;
+using Data.Context;
+using Microsoft.EntityFrameworkCore;
+using SaleCakes.View.Pages;
 
 namespace SaleCakes;
 
@@ -11,35 +19,29 @@ public partial class App : Application
 {
     private const string DefaultConnectionString = "Server=.\\SQLEXPRESS;Database=SaleCakes;Trusted_Connection=true;";
 
+    public IServiceProvider ServiceProvider { get; private set; }
+    public IConfiguration Configuration { get; private set; }
+
     internal static string ConnectionString { get; private set; } = "";
 
-    protected override void OnStartup(StartupEventArgs e)
+    private void ConfigureServices(IServiceCollection services)
     {
-        DispatcherUnhandledException += GlobalErrorsEvent;
+        services.Configure<AppSettings>(Configuration.GetSection(nameof(ConnectionString)));
 
-        CheckConfig();
-    }
-
-    private static void CheckConfig()
-    {
-        var configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-        var settings = configFile.AppSettings.Settings;
-
-        if (settings[SaleCakes.Properties.Resources.Config_Key_ConnectionString] == null)
+        services.AddDbContext<SaleCakesContext>(options =>
         {
-            settings.Add(SaleCakes.Properties.Resources.Config_Key_ConnectionString, DefaultConnectionString);
-            configFile.Save(ConfigurationSaveMode.Modified);
-            ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
-        }
+            options.UseSqlServer(Configuration.GetValue<string>(nameof(ConnectionString)) ?? DefaultConnectionString);
+            
+        });
 
-        if (settings[SaleCakes.Properties.Resources.Config_Key_ConnectionString].Value == string.Empty)
-        {
-            settings[SaleCakes.Properties.Resources.Config_Key_ConnectionString].Value = DefaultConnectionString;
-            configFile.Save(ConfigurationSaveMode.Modified);
-            ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
-        }
-
-        ConnectionString = settings[SaleCakes.Properties.Resources.Config_Key_ConnectionString].Value;
+        services.AddTransient<MainWindow>();
+        services.AddTransient<CakesPage>();
+        services.AddTransient<ClientsPage>();
+        services.AddTransient<DecorPage>();
+        services.AddTransient<EmployeePage>();
+        services.AddTransient<MainMenuPage>();
+        services.AddTransient<OrdersPage>();
+        services.AddTransient<CakeAddView>();
     }
 
     private static void GlobalErrorsEvent(object sender, DispatcherUnhandledExceptionEventArgs e)
@@ -49,5 +51,24 @@ public partial class App : Application
             MessageBoxButton.OK,
             MessageBoxImage.Error,
             MessageBoxResult.OK);
+    }
+
+    private void OnStartup(object sender, StartupEventArgs e)
+    {
+        DispatcherUnhandledException += GlobalErrorsEvent;
+
+        var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+        Configuration = builder.Build();
+
+        var serviceCollection = new ServiceCollection();
+        ConfigureServices(serviceCollection);
+
+        ServiceProvider = serviceCollection.BuildServiceProvider();
+        builder.Build();
+
+        var mainWindow = ServiceProvider.GetService<MainWindow>();
+        mainWindow.Show();
     }
 }

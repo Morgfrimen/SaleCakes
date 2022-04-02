@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using SaleCakes.ViewModel;
 
-namespace SaleCakes.Components;
+namespace SaleCakes.View.Components;
 
 /// <summary>
 ///     Логика взаимодействия для AuthorizationComponent.xaml

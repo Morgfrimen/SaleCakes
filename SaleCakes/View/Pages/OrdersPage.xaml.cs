@@ -1,21 +1,21 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace SaleCakes.Pages;
+namespace SaleCakes.View.Pages;
 
 /// <summary>
-///     Логика взаимодействия для Clients.xaml
+///     Логика взаимодействия для OrdersPage.xaml
 /// </summary>
-public partial class Clients : Page
+public partial class OrdersPage : Page
 {
-    public Clients()
+    public OrdersPage()
     {
         InitializeComponent();
     }
 
     private void ButtonMainMenu_Click(object sender, RoutedEventArgs e)
     {
-        NavigationService.Navigate(new MainMenu());
+        NavigationService.GoBack();
     }
 
     private void ButtonEdit_Click(object sender, RoutedEventArgs e)

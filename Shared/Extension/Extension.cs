@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
-namespace SaleCakes.Extension;
+namespace Shared.Extension;
 
 public static class Extension
 {

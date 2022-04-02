@@ -1,42 +1,44 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using SaleCakes.View;
 
-namespace SaleCakes.Pages;
+namespace SaleCakes.View.Pages;
 
 /// <summary>
-///     Логика взаимодействия для MainMenu.xaml
+///     Логика взаимодействия для MainMenuPage.xaml
 /// </summary>
-public partial class MainMenu : Page
+public partial class MainMenuPage : Page
 {
-    public MainMenu()
+    private readonly CakesPage _cakesPagePage;
+
+    public MainMenuPage(CakesPage cakesPagePage)
     {
+        _cakesPagePage = cakesPagePage;
         InitializeComponent();
     }
 
     private void ButtonOrders_Click(object sender, RoutedEventArgs e)
     {
-        NavigationService.Navigate(new Orders());
+        NavigationService.Navigate(new OrdersPage());
     }
 
     private void ButtonClients_Click(object sender, RoutedEventArgs e)
     {
-        NavigationService.Navigate(new Clients());
+        NavigationService.Navigate(new ClientsPage());
     }
 
     private void ButtonDecor_Click(object sender, RoutedEventArgs e)
     {
-        NavigationService.Navigate(new Decor());
+        NavigationService.Navigate(new DecorPage());
     }
 
     private void ButtonEmployee_Click(object sender, RoutedEventArgs e)
     {
-        NavigationService.Navigate(new Employee());
+        NavigationService.Navigate(new EmployeePage());
     }
 
     private void ButtonCakes_Click(object sender, RoutedEventArgs e)
     {
-        NavigationService.Navigate(new Cakes());
+        NavigationService.Navigate(_cakesPagePage);
     }
 
     private void Button_Click(object sender, RoutedEventArgs e)

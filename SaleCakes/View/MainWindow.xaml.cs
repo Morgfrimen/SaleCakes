@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using SaleCakes.View.Pages;
 
 namespace SaleCakes.View;
 
@@ -7,8 +8,12 @@ namespace SaleCakes.View;
 /// </summary>
 public partial class MainWindow : Window
 {
-    public MainWindow()
+    private readonly MainMenuPage _mainMenuPage;
+
+    public MainWindow(MainMenuPage mainMenuPage)
     {
+        _mainMenuPage = mainMenuPage;
         InitializeComponent();
+        FrameMenuPage.Navigate(_mainMenuPage);
     }
 }

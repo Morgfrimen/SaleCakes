@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:components="clr-namespace:SaleCakes.Components"
         xmlns:res="clr-namespace:SaleCakes.Properties"
         xmlns:converters="clr-namespace:SaleCakes.Converters"
         xmlns:vm="clr-namespace:SaleCakes.ViewModel"
+        xmlns:components="clr-namespace:SaleCakes.View.Components"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Кондитер"
@@ -35,8 +35,8 @@
         <components:AuthorizationComponent
             DataContext="{Binding}"
             Visibility="{Binding VisibilityAutorized}" />
-        <Frame Visibility="{Binding VisibilityMenu}" NavigationUIVisibility="Hidden"
-               Source="Pages/MainMenu.xaml" />
+        <Frame x:Name="FrameMenuPage" Visibility="{Binding VisibilityMenu}" 
+               NavigationUIVisibility="Hidden" />
     </Grid>
 
 </Window>

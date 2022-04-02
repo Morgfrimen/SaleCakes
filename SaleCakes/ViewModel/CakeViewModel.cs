@@ -3,8 +3,8 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Data.Legacy.Resositoryes;
 using SaleCakes.Command;
-using SaleCakes.Extension;
 using SaleCakes.Model;
+using Shared.Extension;
 
 namespace SaleCakes.ViewModel;
 

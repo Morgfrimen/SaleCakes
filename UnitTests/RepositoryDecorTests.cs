@@ -3,7 +3,7 @@ using Data.Legacy.Dto;
 using Data.Legacy.Resositoryes;
 using Xunit;
 
-namespace UnitTests;
+namespace UnitTestsLegacy;
 
 public class RepositoryDecorTests
 {

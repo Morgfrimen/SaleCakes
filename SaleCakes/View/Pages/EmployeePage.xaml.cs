@@ -1,21 +1,21 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace SaleCakes.Pages;
+namespace SaleCakes.View.Pages;
 
 /// <summary>
-///     Логика взаимодействия для Decor.xaml
+///     Логика взаимодействия для EmployeePage.xaml
 /// </summary>
-public partial class Decor : Page
+public partial class EmployeePage : Page
 {
-    public Decor()
+    public EmployeePage()
     {
         InitializeComponent();
     }
 
     private void ButtonMainMenu_Click(object sender, RoutedEventArgs e)
     {
-        NavigationService.Navigate(new MainMenu());
+        NavigationService.GoBack();
     }
 
     private void ButtonEdit_Click(object sender, RoutedEventArgs e)

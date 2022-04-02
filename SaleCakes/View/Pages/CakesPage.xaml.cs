@@ -1,19 +1,20 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using SaleCakes.View;
 using SaleCakes.ViewModel;
 
-namespace SaleCakes.Pages;
+namespace SaleCakes.View.Pages;
 
 /// <summary>
-///     Логика взаимодействия для Cakes.xaml
+///     Логика взаимодействия для CakesPage.xaml
 /// </summary>
-public partial class Cakes : Page
+public partial class CakesPage : Page
 {
+    private readonly CakeAddView _cakeAddView;
     private CakeViewModel _cakeViewModel = new();
 
-    public Cakes()
+    public CakesPage(CakeAddView cakeAddView)
     {
+        _cakeAddView = cakeAddView;
         InitializeComponent();
         StartPage();
     }
@@ -26,7 +27,7 @@ public partial class Cakes : Page
 
     private void ButtonMainMenu_Click(object sender, RoutedEventArgs e)
     {
-        NavigationService.Navigate(new MainMenu());
+        NavigationService.GoBack();
     }
 
     private void ButtonEdit_Click(object sender, RoutedEventArgs e)
