@@ -4,7 +4,6 @@ using Data.Repositories.Abstract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SaleCakes;
 using System;
 using System.IO;
 
@@ -17,20 +16,17 @@ public class Startup
 
     public Startup()
     {
-        var builder = new ConfigurationBuilder()
+        IConfigurationBuilder? builder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
         Configuration = builder.Build();
 
-        var serviceCollection = new ServiceCollection();
+        ServiceCollection? serviceCollection = new();
 
-        serviceCollection.AddDbContext<SaleCakesDbContext>(options =>
-        {
-            options.UseSqlServer(Configuration.GetValue<string>("ConnectionStrings")!);
-        });
-        serviceCollection.AddTransient<IDecorRepositories, DecorRepositories>();
-        serviceCollection.AddTransient<IStuffingRepositories, StuffingRepositories>();
-        serviceCollection.AddTransient<IShortcakeRepositories, ShortcakeRepositories>();
+        _ = serviceCollection.AddDbContext<SaleCakesDbContext>(options => options.UseSqlServer(Configuration.GetValue<string>("ConnectionStrings")!));
+        _ = serviceCollection.AddTransient<IDecorRepositories, DecorRepositories>();
+        _ = serviceCollection.AddTransient<IStuffingRepositories, StuffingRepositories>();
+        _ = serviceCollection.AddTransient<IShortcakeRepositories, ShortcakeRepositories>();
 
         ServiceProvider = serviceCollection.BuildServiceProvider();
     }

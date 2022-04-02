@@ -11,7 +11,7 @@ namespace UnitTestNew.TestSettings
             IEnumerable<TTestCase> testCases) where TTestCase : ITestCase
         {
             string assemblyName = typeof(PriorityTestAttribute).AssemblyQualifiedName!;
-            var sortedMethods = new SortedDictionary<int, List<TTestCase>>();
+            SortedDictionary<int, List<TTestCase>>? sortedMethods = new();
             foreach (TTestCase testCase in testCases)
             {
                 int priority = testCase.TestMethod.Method
@@ -34,9 +34,11 @@ namespace UnitTestNew.TestSettings
         private static TValue GetOrCreate<TKey, TValue>(
             IDictionary<TKey, TValue> dictionary, TKey key)
             where TKey : struct
-            where TValue : new() =>
-            dictionary.TryGetValue(key, out TValue? result)
+            where TValue : new()
+        {
+            return dictionary.TryGetValue(key, out TValue? result)
                 ? result
                 : (dictionary[key] = new TValue());
+        }
     }
 }

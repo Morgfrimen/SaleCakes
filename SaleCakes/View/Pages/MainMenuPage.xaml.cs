@@ -18,32 +18,32 @@ public partial class MainMenuPage : Page
 
     private void ButtonOrders_Click(object sender, RoutedEventArgs e)
     {
-        NavigationService.Navigate(new OrdersPage());
+        _ = NavigationService.Navigate(new OrdersPage());
     }
 
     private void ButtonClients_Click(object sender, RoutedEventArgs e)
     {
-        NavigationService.Navigate(new ClientsPage());
+        _ = NavigationService.Navigate(new ClientsPage());
     }
 
     private void ButtonDecor_Click(object sender, RoutedEventArgs e)
     {
-        NavigationService.Navigate(new DecorPage());
+        _ = NavigationService.Navigate(new DecorPage());
     }
 
     private void ButtonEmployee_Click(object sender, RoutedEventArgs e)
     {
-        NavigationService.Navigate(new EmployeePage());
+        _ = NavigationService.Navigate(new EmployeePage());
     }
 
     private void ButtonCakes_Click(object sender, RoutedEventArgs e)
     {
-        NavigationService.Navigate(_cakesPagePage);
+        _ = NavigationService.Navigate(_cakesPagePage);
     }
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
-        var EmployeeAddView = new EmployeeAddView();
+        EmployeeAddView? EmployeeAddView = new();
         EmployeeAddView.Show();
     }
 }

@@ -18,15 +18,15 @@ public class StuffingRepositories : RepositoriesBase, IStuffingRepositories
     {
         try
         {
-            var decorEntry = new StuffingEntry
+            StuffingEntry? decorEntry = new()
             {
                 Id = entity.Id,
                 Name = entity.Name,
                 Price = entity.Price
             };
 
-            var newEntry = await DbContext.StuffingsEntries.AddAsync(decorEntry);
-            await DbContext.SaveChangesAsync();
+            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<StuffingEntry>? newEntry = await DbContext.StuffingsEntries.AddAsync(decorEntry);
+            _ = await DbContext.SaveChangesAsync();
             newEntry.State = EntityState.Detached;
             return new Result<Guid>(newEntry.Entity.Id);
         }
@@ -40,7 +40,7 @@ public class StuffingRepositories : RepositoriesBase, IStuffingRepositories
     {
         try
         {
-            var deletedEntry = await DbContext.StuffingsEntries.AsNoTracking().FirstOrDefaultAsync(item => item.Id == id);
+            StuffingEntry? deletedEntry = await DbContext.StuffingsEntries.AsNoTracking().FirstOrDefaultAsync(item => item.Id == id);
 
             if (deletedEntry is null)
             {
@@ -48,7 +48,7 @@ public class StuffingRepositories : RepositoriesBase, IStuffingRepositories
             }
 
             _ = DbContext.StuffingsEntries.Remove(deletedEntry);
-            await DbContext.SaveChangesAsync();
+            _ = await DbContext.SaveChangesAsync();
             return new Result<bool>(true);
         }
         catch (Exception ex)
@@ -61,14 +61,14 @@ public class StuffingRepositories : RepositoriesBase, IStuffingRepositories
     {
         try
         {
-            var updateModel = new StuffingEntry
+            StuffingEntry? updateModel = new()
             {
                 Id = entity.Id,
                 Name = entity.Name,
                 Price = entity.Price
             };
 
-            var result = DbContext.StuffingsEntries.Update(updateModel);
+            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<StuffingEntry>? result = DbContext.StuffingsEntries.Update(updateModel);
             _ = await DbContext.SaveChangesAsync();
             result.State = EntityState.Detached;
             return new Result<Guid>(result.Entity.Id);
@@ -83,7 +83,7 @@ public class StuffingRepositories : RepositoriesBase, IStuffingRepositories
     {
         try
         {
-            var resultEntry = DbContext.StuffingsEntries.AsNoTracking()
+            StuffingDto? resultEntry = DbContext.StuffingsEntries.AsNoTracking()
                 .Where(item => item.Id == id)
                 .Select(item => new StuffingDto(item.Id, item.Name, item.Price))
                 .FirstOrDefault();
@@ -100,8 +100,8 @@ public class StuffingRepositories : RepositoriesBase, IStuffingRepositories
     {
         try
         {
-            var result = DbContext.StuffingsEntries.AsNoTracking().Select(item => new StuffingDto(item.Id, item.Name, item.Price));
-            await DbContext.SaveChangesAsync();
+            IQueryable<StuffingDto>? result = DbContext.StuffingsEntries.AsNoTracking().Select(item => new StuffingDto(item.Id, item.Name, item.Price));
+            _ = await DbContext.SaveChangesAsync();
             return new Result<IEnumerable<StuffingDto>>(result);
         }
         catch (Exception ex)
@@ -115,7 +115,7 @@ public class StuffingRepositories : RepositoriesBase, IStuffingRepositories
         try
         {
             DbContext.StuffingsEntries.RemoveRange(DbContext.StuffingsEntries);
-            await DbContext.SaveChangesAsync();
+            _ = await DbContext.SaveChangesAsync();
             return new Result<bool>(true);
         }
         catch (Exception ex)
@@ -128,7 +128,7 @@ public class StuffingRepositories : RepositoriesBase, IStuffingRepositories
     {
         try
         {
-            var resultEntry = DbContext.StuffingsEntries.AsNoTracking()
+            StuffingDto? resultEntry = DbContext.StuffingsEntries.AsNoTracking()
                 .Where(item => item.Name == name)
                 .Select(item => new StuffingDto(item.Id, item.Name, item.Price))
                 .FirstOrDefault();

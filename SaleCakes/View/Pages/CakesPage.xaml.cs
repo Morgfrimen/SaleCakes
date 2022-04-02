@@ -1,6 +1,6 @@
-﻿using System.Windows;
+﻿using SaleCakes.ViewModel;
+using System.Windows;
 using System.Windows.Controls;
-using SaleCakes.ViewModel;
 
 namespace SaleCakes.View.Pages;
 
@@ -36,7 +36,7 @@ public partial class CakesPage : Page
 
     private void Button_OpenAddCake_OnClick(object sender, RoutedEventArgs e)
     {
-        var cakeAddView = new CakeAddView { DataContext = new CakeAddViewModel(_cakeViewModel) };
+        CakeAddView? cakeAddView = new() { DataContext = new CakeAddViewModel(_cakeViewModel) };
         cakeAddView.Show();
     }
 }

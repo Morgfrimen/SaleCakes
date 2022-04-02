@@ -8,7 +8,6 @@ public record TiersDto
         Id = id;
     }
 
-
     public TiersDto(StuffingDto stuffingId, DecorDto decorId, ShortcakeDto shortcakeId)
     {
         StuffingId = stuffingId;

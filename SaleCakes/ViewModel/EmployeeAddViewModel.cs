@@ -29,7 +29,6 @@ public class EmployeeAddViewModel : BaseViewModel
         //stuffing.Stuffig = selectStuffing.Id;
     });
 
-
     public override void UpdateAllProperty()
     {
         throw new NotImplementedException();

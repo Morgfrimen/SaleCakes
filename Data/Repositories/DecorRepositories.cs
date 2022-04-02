@@ -18,15 +18,15 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
     {
         try
         {
-            var decorEntry = new DecorEntry
+            DecorEntry? decorEntry = new()
             {
                 Id = entity.Id,
                 Name = entity.Name,
                 Price = entity.Price
             };
 
-            var newEntry = await DbContext.DecorsEntries.AddAsync(decorEntry);
-            await DbContext.SaveChangesAsync();
+            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<DecorEntry>? newEntry = await DbContext.DecorsEntries.AddAsync(decorEntry);
+            _ = await DbContext.SaveChangesAsync();
             newEntry.State = EntityState.Detached;
             return new Result<Guid>(newEntry.Entity.Id);
         }
@@ -40,7 +40,7 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
     {
         try
         {
-            var deletedEntry = await DbContext.DecorsEntries.AsNoTracking().FirstOrDefaultAsync(item => item.Id == id);
+            DecorEntry? deletedEntry = await DbContext.DecorsEntries.AsNoTracking().FirstOrDefaultAsync(item => item.Id == id);
 
             if (deletedEntry is null)
             {
@@ -48,7 +48,7 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
             }
 
             _ = DbContext.DecorsEntries.Remove(deletedEntry);
-            await DbContext.SaveChangesAsync();
+            _ = await DbContext.SaveChangesAsync();
             return new Result<bool>(true);
         }
         catch (Exception ex)
@@ -61,14 +61,14 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
     {
         try
         {
-            var updateModel = new DecorEntry
+            DecorEntry? updateModel = new()
             {
                 Id = entity.Id,
                 Name = entity.Name,
                 Price = entity.Price
             };
 
-            var result = DbContext.DecorsEntries.Update(updateModel);
+            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<DecorEntry>? result = DbContext.DecorsEntries.Update(updateModel);
             _ = await DbContext.SaveChangesAsync();
             result.State = EntityState.Detached;
             return new Result<Guid>(result.Entity.Id);
@@ -83,7 +83,7 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
     {
         try
         {
-            var resultEntry = DbContext.DecorsEntries.AsNoTracking()
+            DecorDto? resultEntry = DbContext.DecorsEntries.AsNoTracking()
                 .Where(item => item.Id == id)
                 .Select(item => new DecorDto(item.Id, item.Name, item.Price))
                 .FirstOrDefault();
@@ -100,8 +100,8 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
     {
         try
         {
-            var result = DbContext.DecorsEntries.AsNoTracking().Select(item => new DecorDto(item.Id, item.Name, item.Price));
-            await DbContext.SaveChangesAsync();
+            IQueryable<DecorDto>? result = DbContext.DecorsEntries.AsNoTracking().Select(item => new DecorDto(item.Id, item.Name, item.Price));
+            _ = await DbContext.SaveChangesAsync();
             return new Result<IEnumerable<DecorDto>>(result);
         }
         catch (Exception ex)
@@ -115,7 +115,7 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
         try
         {
             DbContext.DecorsEntries.RemoveRange(DbContext.DecorsEntries);
-            await DbContext.SaveChangesAsync();
+            _ = await DbContext.SaveChangesAsync();
             return new Result<bool>(true);
         }
         catch (Exception ex)
@@ -128,7 +128,7 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
     {
         try
         {
-            var resultEntry = DbContext.DecorsEntries.AsNoTracking()
+            DecorDto? resultEntry = DbContext.DecorsEntries.AsNoTracking()
                 .Where(item => item.Name == name)
                 .Select(item => new DecorDto(item.Id, item.Name, item.Price))
                 .FirstOrDefault();

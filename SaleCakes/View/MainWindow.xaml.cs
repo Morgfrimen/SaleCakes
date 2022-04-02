@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using SaleCakes.View.Pages;
+﻿using SaleCakes.View.Pages;
+using System.Windows;
 
 namespace SaleCakes.View;
 
@@ -14,6 +14,6 @@ public partial class MainWindow : Window
     {
         _mainMenuPage = mainMenuPage;
         InitializeComponent();
-        FrameMenuPage.Navigate(_mainMenuPage);
+        _ = FrameMenuPage.Navigate(_mainMenuPage);
     }
 }
