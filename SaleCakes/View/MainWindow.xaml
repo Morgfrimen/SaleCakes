@@ -36,7 +36,7 @@
             DataContext="{Binding}"
             Visibility="{Binding VisibilityAutorized}" />
         <Frame Visibility="{Binding VisibilityMenu}" NavigationUIVisibility="Hidden"
-               Source="../Pages/MainMenu.xaml" />
+               Source="Pages/MainMenu.xaml" />
     </Grid>
 
 </Window>
