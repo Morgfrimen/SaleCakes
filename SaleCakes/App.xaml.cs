@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SaleCakes.View;
 using SaleCakes.View.Pages;
 using SaleCakes.ViewModel;
+using SaleCakes.View.Components;
 
 namespace SaleCakes;
 
@@ -45,7 +46,7 @@ public partial class App : Application
         _ = services.AddTransient<ClientsPage>();
         _ = services.AddTransient<DecorPage>();
         _ = services.AddTransient<EmployeePage>();
-        _ = services.AddTransient<MainMenuPage>();
+        _ = services.AddTransient<MainMenuComponent>();
         _ = services.AddTransient<OrdersPage>();
         _ = services.AddTransient<CakeAddView>();
 
