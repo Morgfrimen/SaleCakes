@@ -25,7 +25,7 @@ public class ShortcakeRepositories : RepositoriesBase, IShortcakeRepositories
                 Price = entity.Price
             };
 
-            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<ShortcakeEntry>? newEntry = await DbContext.ShortcakesEntries.AddAsync(decorEntry);
+            var newEntry = await DbContext.ShortcakesEntries.AddAsync(decorEntry);
             _ = await DbContext.SaveChangesAsync();
             newEntry.State = EntityState.Detached;
             return new Result<Guid>(newEntry.Entity.Id);
@@ -40,7 +40,7 @@ public class ShortcakeRepositories : RepositoriesBase, IShortcakeRepositories
     {
         try
         {
-            ShortcakeEntry? deletedEntry = await DbContext.ShortcakesEntries.AsNoTracking().FirstOrDefaultAsync(item => item.Id == id);
+            var deletedEntry = await DbContext.ShortcakesEntries.AsNoTracking().FirstOrDefaultAsync(item => item.Id == id);
 
             if (deletedEntry is null)
             {
@@ -68,7 +68,7 @@ public class ShortcakeRepositories : RepositoriesBase, IShortcakeRepositories
                 Price = entity.Price
             };
 
-            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<ShortcakeEntry>? result = DbContext.ShortcakesEntries.Update(updateModel);
+            var result = DbContext.ShortcakesEntries.Update(updateModel);
             _ = await DbContext.SaveChangesAsync();
             result.State = EntityState.Detached;
             return new Result<Guid>(result.Entity.Id);
@@ -83,7 +83,7 @@ public class ShortcakeRepositories : RepositoriesBase, IShortcakeRepositories
     {
         try
         {
-            ShortcakeDto? resultEntry = DbContext.ShortcakesEntries.AsNoTracking()
+            var resultEntry = DbContext.ShortcakesEntries.AsNoTracking()
                 .Where(item => item.Id == id)
                 .Select(item => new ShortcakeDto(item.Id, item.Name, item.Price))
                 .FirstOrDefault();
@@ -100,7 +100,7 @@ public class ShortcakeRepositories : RepositoriesBase, IShortcakeRepositories
     {
         try
         {
-            IQueryable<ShortcakeDto>? result = DbContext.ShortcakesEntries.AsNoTracking().Select(item => new ShortcakeDto(item.Id, item.Name, item.Price));
+            var result = DbContext.ShortcakesEntries.AsNoTracking().Select(item => new ShortcakeDto(item.Id, item.Name, item.Price));
             _ = await DbContext.SaveChangesAsync();
             return new Result<IEnumerable<ShortcakeDto>>(result);
         }
@@ -128,7 +128,7 @@ public class ShortcakeRepositories : RepositoriesBase, IShortcakeRepositories
     {
         try
         {
-            ShortcakeDto? resultEntry = DbContext.ShortcakesEntries.AsNoTracking()
+            var resultEntry = DbContext.ShortcakesEntries.AsNoTracking()
                 .Where(item => item.Name == name)
                 .Select(item => new ShortcakeDto(item.Id, item.Name, item.Price))
                 .FirstOrDefault();

@@ -1,4 +1,9 @@
-﻿using Data.Context;
+﻿using System;
+using System.ComponentModel;
+using System.IO;
+using System.Windows;
+using System.Windows.Threading;
+using Data.Context;
 using Data.Repositories;
 using Data.Repositories.Abstract;
 using Microsoft.EntityFrameworkCore;
@@ -7,10 +12,6 @@ using Microsoft.Extensions.DependencyInjection;
 using SaleCakes.View;
 using SaleCakes.View.Pages;
 using SaleCakes.ViewModel;
-using System;
-using System.IO;
-using System.Windows;
-using System.Windows.Threading;
 
 namespace SaleCakes;
 
@@ -65,9 +66,9 @@ public partial class App : Application
     {
         DispatcherUnhandledException += GlobalErrorsEvent;
 
-        IConfigurationBuilder? builder = new ConfigurationBuilder()
+        var builder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            .AddJsonFile("appsettings.json", false, true);
         Configuration = builder.Build();
 
         ServiceCollection? serviceCollection = new();
@@ -75,12 +76,12 @@ public partial class App : Application
 
         ServiceProvider = serviceCollection.BuildServiceProvider();
 
-        MainWindow? mainWindow = ServiceProvider.GetService<MainWindow>();
+        var mainWindow = ServiceProvider.GetService<MainWindow>();
         mainWindow.Closing += MainWindow_Closing;
         mainWindow.Show();
     }
 
-    private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
+    private void MainWindow_Closing(object? sender, CancelEventArgs e)
     {
         Shutdown(0);
     }

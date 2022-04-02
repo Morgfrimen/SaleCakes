@@ -25,7 +25,7 @@ public class StuffingRepositories : RepositoriesBase, IStuffingRepositories
                 Price = entity.Price
             };
 
-            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<StuffingEntry>? newEntry = await DbContext.StuffingsEntries.AddAsync(decorEntry);
+            var newEntry = await DbContext.StuffingsEntries.AddAsync(decorEntry);
             _ = await DbContext.SaveChangesAsync();
             newEntry.State = EntityState.Detached;
             return new Result<Guid>(newEntry.Entity.Id);
@@ -40,7 +40,7 @@ public class StuffingRepositories : RepositoriesBase, IStuffingRepositories
     {
         try
         {
-            StuffingEntry? deletedEntry = await DbContext.StuffingsEntries.AsNoTracking().FirstOrDefaultAsync(item => item.Id == id);
+            var deletedEntry = await DbContext.StuffingsEntries.AsNoTracking().FirstOrDefaultAsync(item => item.Id == id);
 
             if (deletedEntry is null)
             {
@@ -68,7 +68,7 @@ public class StuffingRepositories : RepositoriesBase, IStuffingRepositories
                 Price = entity.Price
             };
 
-            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<StuffingEntry>? result = DbContext.StuffingsEntries.Update(updateModel);
+            var result = DbContext.StuffingsEntries.Update(updateModel);
             _ = await DbContext.SaveChangesAsync();
             result.State = EntityState.Detached;
             return new Result<Guid>(result.Entity.Id);
@@ -83,7 +83,7 @@ public class StuffingRepositories : RepositoriesBase, IStuffingRepositories
     {
         try
         {
-            StuffingDto? resultEntry = DbContext.StuffingsEntries.AsNoTracking()
+            var resultEntry = DbContext.StuffingsEntries.AsNoTracking()
                 .Where(item => item.Id == id)
                 .Select(item => new StuffingDto(item.Id, item.Name, item.Price))
                 .FirstOrDefault();
@@ -100,7 +100,7 @@ public class StuffingRepositories : RepositoriesBase, IStuffingRepositories
     {
         try
         {
-            IQueryable<StuffingDto>? result = DbContext.StuffingsEntries.AsNoTracking().Select(item => new StuffingDto(item.Id, item.Name, item.Price));
+            var result = DbContext.StuffingsEntries.AsNoTracking().Select(item => new StuffingDto(item.Id, item.Name, item.Price));
             _ = await DbContext.SaveChangesAsync();
             return new Result<IEnumerable<StuffingDto>>(result);
         }
@@ -128,7 +128,7 @@ public class StuffingRepositories : RepositoriesBase, IStuffingRepositories
     {
         try
         {
-            StuffingDto? resultEntry = DbContext.StuffingsEntries.AsNoTracking()
+            var resultEntry = DbContext.StuffingsEntries.AsNoTracking()
                 .Where(item => item.Name == name)
                 .Select(item => new StuffingDto(item.Id, item.Name, item.Price))
                 .FirstOrDefault();

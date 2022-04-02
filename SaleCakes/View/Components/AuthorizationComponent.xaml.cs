@@ -1,6 +1,6 @@
-﻿using SaleCakes.ViewModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using SaleCakes.ViewModel;
 
 namespace SaleCakes.View.Components;
 

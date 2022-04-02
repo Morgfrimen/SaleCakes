@@ -1,6 +1,6 @@
-﻿using SaleCakes.Command;
-using System;
+﻿using System;
 using System.Windows.Input;
+using SaleCakes.Command;
 
 namespace SaleCakes.ViewModel;
 

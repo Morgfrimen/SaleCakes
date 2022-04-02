@@ -1,24 +1,21 @@
-﻿using Data.Context;
+﻿using System;
+using System.IO;
+using Data.Context;
 using Data.Repositories;
 using Data.Repositories.Abstract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.IO;
 
 namespace UnitTestNew;
 
 public class Startup
 {
-    public IServiceProvider ServiceProvider { get; }
-    public IConfiguration Configuration { get; }
-
     public Startup()
     {
-        IConfigurationBuilder? builder = new ConfigurationBuilder()
+        var builder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            .AddJsonFile("appsettings.json", false, true);
         Configuration = builder.Build();
 
         ServiceCollection? serviceCollection = new();
@@ -30,4 +27,7 @@ public class Startup
 
         ServiceProvider = serviceCollection.BuildServiceProvider();
     }
+
+    public IServiceProvider ServiceProvider { get; }
+    public IConfiguration Configuration { get; }
 }

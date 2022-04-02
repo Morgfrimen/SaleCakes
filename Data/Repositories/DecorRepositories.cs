@@ -25,7 +25,7 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
                 Price = entity.Price
             };
 
-            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<DecorEntry>? newEntry = await DbContext.DecorsEntries.AddAsync(decorEntry);
+            var newEntry = await DbContext.DecorsEntries.AddAsync(decorEntry);
             _ = await DbContext.SaveChangesAsync();
             newEntry.State = EntityState.Detached;
             return new Result<Guid>(newEntry.Entity.Id);
@@ -40,7 +40,7 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
     {
         try
         {
-            DecorEntry? deletedEntry = await DbContext.DecorsEntries.AsNoTracking().FirstOrDefaultAsync(item => item.Id == id);
+            var deletedEntry = await DbContext.DecorsEntries.AsNoTracking().FirstOrDefaultAsync(item => item.Id == id);
 
             if (deletedEntry is null)
             {
@@ -68,7 +68,7 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
                 Price = entity.Price
             };
 
-            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<DecorEntry>? result = DbContext.DecorsEntries.Update(updateModel);
+            var result = DbContext.DecorsEntries.Update(updateModel);
             _ = await DbContext.SaveChangesAsync();
             result.State = EntityState.Detached;
             return new Result<Guid>(result.Entity.Id);
@@ -83,7 +83,7 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
     {
         try
         {
-            DecorDto? resultEntry = DbContext.DecorsEntries.AsNoTracking()
+            var resultEntry = DbContext.DecorsEntries.AsNoTracking()
                 .Where(item => item.Id == id)
                 .Select(item => new DecorDto(item.Id, item.Name, item.Price))
                 .FirstOrDefault();
@@ -100,7 +100,7 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
     {
         try
         {
-            IQueryable<DecorDto>? result = DbContext.DecorsEntries.AsNoTracking().Select(item => new DecorDto(item.Id, item.Name, item.Price));
+            var result = DbContext.DecorsEntries.AsNoTracking().Select(item => new DecorDto(item.Id, item.Name, item.Price));
             _ = await DbContext.SaveChangesAsync();
             return new Result<IEnumerable<DecorDto>>(result);
         }
@@ -128,7 +128,7 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
     {
         try
         {
-            DecorDto? resultEntry = DbContext.DecorsEntries.AsNoTracking()
+            var resultEntry = DbContext.DecorsEntries.AsNoTracking()
                 .Where(item => item.Name == name)
                 .Select(item => new DecorDto(item.Id, item.Name, item.Price))
                 .FirstOrDefault();
