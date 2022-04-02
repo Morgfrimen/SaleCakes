@@ -23,13 +23,13 @@ public class Startup
         Configuration = builder.Build();
 
         var serviceCollection = new ServiceCollection();
-        //serviceCollection.Configure<AppSettings>(Configuration.GetSection("ConnectionString"));
 
         serviceCollection.AddDbContext<SaleCakesDbContext>(options =>
         {
             options.UseSqlServer(Configuration.GetValue<string>("ConnectionStrings")!);
         });
         serviceCollection.AddTransient<IDecorRepositories, DecorRepositories>();
+        serviceCollection.AddTransient<IStuffingRepositories, StuffingRepositories>();
 
         ServiceProvider = serviceCollection.BuildServiceProvider();
     }
