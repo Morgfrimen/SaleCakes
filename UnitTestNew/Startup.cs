@@ -30,6 +30,7 @@ public class Startup
         });
         serviceCollection.AddTransient<IDecorRepositories, DecorRepositories>();
         serviceCollection.AddTransient<IStuffingRepositories, StuffingRepositories>();
+        serviceCollection.AddTransient<IShortcakeRepositories, ShortcakeRepositories>();
 
         ServiceProvider = serviceCollection.BuildServiceProvider();
     }

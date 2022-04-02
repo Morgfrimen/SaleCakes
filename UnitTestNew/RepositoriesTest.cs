@@ -85,6 +85,38 @@ namespace UnitTestNew
             await stuffingRepositories.ClearTableAsync();
         }
 
+        [Fact, PriorityTest(2)]
+        public async void ShortcakeRepositories_Success_Test()
+        {
+            var shortcakeRepositories = _serviceProvider.GetService<IShortcakeRepositories>()!;
+            await shortcakeRepositories.ClearTableAsync();
+
+            var shortcakeDto = new ShortcakeDto("Test2", 500);
+            var entryAsync = await shortcakeRepositories.AddEntryAsync(shortcakeDto);
+            Assert.True(entryAsync.ResultOperation != default);
+
+            var updateDecorDto = new ShortcakeDto(entryAsync.ResultOperation, "Форбс", 300);
+            entryAsync = await shortcakeRepositories.UpdateEntryAsync(updateDecorDto);
+
+            var findDto = await shortcakeRepositories.GetByNameAsync("Форбс");
+            Assert.NotNull(findDto.ResultOperation);
+            Assert.Equal(entryAsync.ResultOperation, findDto.ResultOperation!.Id);
+
+            var getDto = await shortcakeRepositories.GetByIdAsync(findDto.ResultOperation.Id);
+            Assert.Equal(getDto.ResultOperation.Name, findDto.ResultOperation.Name);
+            Assert.Equal(getDto.ResultOperation.Price, findDto.ResultOperation.Price);
+
+            var collection = await shortcakeRepositories.GetAllAsync();
+            Assert.Equal(collection.ResultOperation.First().Id, getDto.ResultOperation.Id);
+
+            var delete = await shortcakeRepositories.DeleteEntryAsync(getDto.ResultOperation.Id);
+            Assert.True(delete.ResultOperation);
+            collection = await shortcakeRepositories.GetAllAsync();
+            Assert.Equal(0, collection.ResultOperation.Count());
+
+            await shortcakeRepositories.ClearTableAsync();
+        }
+
         ~RepositoriesTest()
         {
             _dbContext!.DisposeAsync();
