@@ -16,9 +16,7 @@ public partial class AuthorizationComponent : UserControl
 
     private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
     {
-        var vm = DataContext as MainWindowViewModel;
-
-        if (vm is null)
+        if (DataContext is not MainWindowViewModel vm)
         {
             return;
         }

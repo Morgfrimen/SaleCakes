@@ -1,18 +1,17 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using SaleCakes.View;
-using System;
-using System.Configuration;
+﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Threading;
 using Data.Context;
-using Microsoft.EntityFrameworkCore;
-using SaleCakes.View.Pages;
-using Data.Repositories.Abstract;
 using Data.Repositories;
+using Data.Repositories.Abstract;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using SaleCakes.View;
+using SaleCakes.View.Pages;
 using SaleCakes.ViewModel;
-
 
 namespace SaleCakes;
 
@@ -30,37 +29,33 @@ public partial class App : Application
 
     private void ConfigureServices(IServiceCollection services)
     {
-        services.Configure<AppSettings>(Configuration.GetSection(nameof(ConnectionString)));
+        _ = services.Configure<AppSettings>(Configuration.GetSection(nameof(ConnectionString)));
 
-        services.AddDbContext<SaleCakesDbContext>(options =>
-        {
-            options.UseSqlServer(Configuration.GetValue<string>(nameof(ConnectionString)) ?? DefaultConnectionString);
-            
-        });
+        _ = services.AddDbContext<SaleCakesDbContext>(options => options.UseSqlServer(Configuration.GetValue<string>(nameof(ConnectionString)) ?? DefaultConnectionString));
 
         //ViewModel
-        services.AddTransient<MainWindowViewModel>();
-        services.AddTransient<CakeAddViewModel>();
-        services.AddTransient<CakeViewModel>();
-        services.AddTransient<EmployeeAddViewModel>();
+        _ = services.AddTransient<MainWindowViewModel>();
+        _ = services.AddTransient<CakeAddViewModel>();
+        _ = services.AddTransient<CakeViewModel>();
+        _ = services.AddTransient<EmployeeAddViewModel>();
 
         //Page
-        services.AddTransient<MainWindow>();
-        services.AddTransient<CakesPage>();
-        services.AddTransient<ClientsPage>();
-        services.AddTransient<DecorPage>();
-        services.AddTransient<EmployeePage>();
-        services.AddTransient<MainMenuPage>();
-        services.AddTransient<OrdersPage>();
-        services.AddTransient<CakeAddView>();
+        _ = services.AddTransient<MainWindow>();
+        _ = services.AddTransient<CakesPage>();
+        _ = services.AddTransient<ClientsPage>();
+        _ = services.AddTransient<DecorPage>();
+        _ = services.AddTransient<EmployeePage>();
+        _ = services.AddTransient<MainMenuPage>();
+        _ = services.AddTransient<OrdersPage>();
+        _ = services.AddTransient<CakeAddView>();
 
         //Repositories
-        services.AddTransient<IDecorRepositories, DecorRepositories>();
+        _ = services.AddTransient<IDecorRepositories, DecorRepositories>();
     }
 
     private static void GlobalErrorsEvent(object sender, DispatcherUnhandledExceptionEventArgs e)
     {
-        MessageBox.Show(SaleCakes.Properties.Resources.Message_Global_Error,
+        _ = MessageBox.Show(SaleCakes.Properties.Resources.Message_Global_Error,
             SaleCakes.Properties.Resources.Title_MessageBox_Error,
             MessageBoxButton.OK,
             MessageBoxImage.Error,
@@ -73,10 +68,10 @@ public partial class App : Application
 
         var builder = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            .AddJsonFile("appsettings.json", false, true);
         Configuration = builder.Build();
 
-        var serviceCollection = new ServiceCollection();
+        ServiceCollection? serviceCollection = new();
         ConfigureServices(serviceCollection);
 
         ServiceProvider = serviceCollection.BuildServiceProvider();
@@ -86,8 +81,8 @@ public partial class App : Application
         mainWindow.Show();
     }
 
-    private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
+    private void MainWindow_Closing(object? sender, CancelEventArgs e)
     {
-        this.Shutdown(0);
+        Shutdown(0);
     }
 }

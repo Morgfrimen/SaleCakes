@@ -1,6 +1,6 @@
 ﻿namespace Data.Entries;
 
-internal class AppUserEntry
+internal sealed class AppUserEntry
 {
     internal AppUserEntry()
     {
@@ -8,7 +8,7 @@ internal class AppUserEntry
     }
 
     internal Guid Id { get; set; }
-    internal string UserRole { get; set; }
+    internal string? UserRole { get; set; }
 
-    internal virtual ICollection<AuthorizationUserEntry> AuthorizationUsers { get; set; }
+    internal ICollection<AuthorizationUserEntry> AuthorizationUsers { get; set; }
 }

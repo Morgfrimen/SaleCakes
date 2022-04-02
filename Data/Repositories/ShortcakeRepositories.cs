@@ -8,24 +8,24 @@ using Shared.Dto;
 
 namespace Data.Repositories;
 
-public class DecorRepositories : RepositoriesBase, IDecorRepositories
+public class ShortcakeRepositories : RepositoriesBase, IShortcakeRepositories
 {
-    public DecorRepositories(SaleCakesDbContext context) : base(context)
+    public ShortcakeRepositories(SaleCakesDbContext context) : base(context)
     {
     }
 
-    public async Task<Result<Guid>> AddEntryAsync(DecorDto entity)
+    public async Task<Result<Guid>> AddEntryAsync(ShortcakeDto entity)
     {
         try
         {
-            DecorEntry? decorEntry = new()
+            ShortcakeEntry? decorEntry = new()
             {
                 Id = entity.Id,
                 Name = entity.Name,
                 Price = entity.Price
             };
 
-            var newEntry = await DbContext.DecorsEntries.AddAsync(decorEntry);
+            var newEntry = await DbContext.ShortcakesEntries.AddAsync(decorEntry);
             _ = await DbContext.SaveChangesAsync();
             newEntry.State = EntityState.Detached;
             return new Result<Guid>(newEntry.Entity.Id);
@@ -40,14 +40,14 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
     {
         try
         {
-            var deletedEntry = await DbContext.DecorsEntries.AsNoTracking().FirstOrDefaultAsync(item => item.Id == id);
+            var deletedEntry = await DbContext.ShortcakesEntries.AsNoTracking().FirstOrDefaultAsync(item => item.Id == id);
 
             if (deletedEntry is null)
             {
                 return new Result<bool>(false);
             }
 
-            _ = DbContext.DecorsEntries.Remove(deletedEntry);
+            _ = DbContext.ShortcakesEntries.Remove(deletedEntry);
             _ = await DbContext.SaveChangesAsync();
             return new Result<bool>(true);
         }
@@ -57,18 +57,18 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
         }
     }
 
-    public async Task<Result<Guid>> UpdateEntryAsync(DecorDto entity)
+    public async Task<Result<Guid>> UpdateEntryAsync(ShortcakeDto entity)
     {
         try
         {
-            DecorEntry? updateModel = new()
+            ShortcakeEntry? updateModel = new()
             {
                 Id = entity.Id,
                 Name = entity.Name,
                 Price = entity.Price
             };
 
-            var result = DbContext.DecorsEntries.Update(updateModel);
+            var result = DbContext.ShortcakesEntries.Update(updateModel);
             _ = await DbContext.SaveChangesAsync();
             result.State = EntityState.Detached;
             return new Result<Guid>(result.Entity.Id);
@@ -79,34 +79,34 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
         }
     }
 
-    public Task<Result<DecorDto?>> GetByIdAsync(Guid id)
+    public Task<Result<ShortcakeDto?>> GetByIdAsync(Guid id)
     {
         try
         {
-            var resultEntry = DbContext.DecorsEntries.AsNoTracking()
+            var resultEntry = DbContext.ShortcakesEntries.AsNoTracking()
                 .Where(item => item.Id == id)
-                .Select(item => new DecorDto(item.Id, item.Name, item.Price))
+                .Select(item => new ShortcakeDto(item.Id, item.Name, item.Price))
                 .FirstOrDefault();
 
-            return Task.FromResult(new Result<DecorDto?>(resultEntry));
+            return Task.FromResult(new Result<ShortcakeDto?>(resultEntry));
         }
         catch (Exception ex)
         {
-            return Task.FromResult(new Result<DecorDto?>(new Error(ex.Message)));
+            return Task.FromResult(new Result<ShortcakeDto?>(new Error(ex.Message)));
         }
     }
 
-    public async Task<Result<IEnumerable<DecorDto>>> GetAllAsync()
+    public async Task<Result<IEnumerable<ShortcakeDto>>> GetAllAsync()
     {
         try
         {
-            var result = DbContext.DecorsEntries.AsNoTracking().Select(item => new DecorDto(item.Id, item.Name, item.Price));
+            var result = DbContext.ShortcakesEntries.AsNoTracking().Select(item => new ShortcakeDto(item.Id, item.Name, item.Price));
             _ = await DbContext.SaveChangesAsync();
-            return new Result<IEnumerable<DecorDto>>(result);
+            return new Result<IEnumerable<ShortcakeDto>>(result);
         }
         catch (Exception ex)
         {
-            return new Result<IEnumerable<DecorDto>>(new Error(ex.Message));
+            return new Result<IEnumerable<ShortcakeDto>>(new Error(ex.Message));
         }
     }
 
@@ -114,7 +114,7 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
     {
         try
         {
-            DbContext.DecorsEntries.RemoveRange(DbContext.DecorsEntries);
+            DbContext.ShortcakesEntries.RemoveRange(DbContext.ShortcakesEntries);
             _ = await DbContext.SaveChangesAsync();
             return new Result<bool>(true);
         }
@@ -124,20 +124,20 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
         }
     }
 
-    public Task<Result<DecorDto?>> GetByNameAsync(string name)
+    public Task<Result<ShortcakeDto?>> GetByNameAsync(string name)
     {
         try
         {
-            var resultEntry = DbContext.DecorsEntries.AsNoTracking()
+            var resultEntry = DbContext.ShortcakesEntries.AsNoTracking()
                 .Where(item => item.Name == name)
-                .Select(item => new DecorDto(item.Id, item.Name, item.Price))
+                .Select(item => new ShortcakeDto(item.Id, item.Name, item.Price))
                 .FirstOrDefault();
 
-            return Task.FromResult(new Result<DecorDto?>(resultEntry));
+            return Task.FromResult(new Result<ShortcakeDto?>(resultEntry));
         }
         catch (Exception ex)
         {
-            return Task.FromResult(new Result<DecorDto?>(new Error(ex.Message)));
+            return Task.FromResult(new Result<ShortcakeDto?>(new Error(ex.Message)));
         }
     }
 }

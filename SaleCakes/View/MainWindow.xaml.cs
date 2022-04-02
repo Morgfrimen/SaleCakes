@@ -14,6 +14,6 @@ public partial class MainWindow : Window
     {
         _mainMenuPage = mainMenuPage;
         InitializeComponent();
-        FrameMenuPage.Navigate(_mainMenuPage);
+        _ = FrameMenuPage.Navigate(_mainMenuPage);
     }
 }

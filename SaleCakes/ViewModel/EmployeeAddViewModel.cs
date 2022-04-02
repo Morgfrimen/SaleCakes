@@ -1,6 +1,6 @@
-﻿using SaleCakes.Command;
-using System;
+﻿using System;
 using System.Windows.Input;
+using SaleCakes.Command;
 
 namespace SaleCakes.ViewModel;
 
@@ -28,7 +28,6 @@ public class EmployeeAddViewModel : BaseViewModel
         //var stuffing = obj as CakeAddViewModel.TierContainer;
         //stuffing.Stuffig = selectStuffing.Id;
     });
-
 
     public override void UpdateAllProperty()
     {

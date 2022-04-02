@@ -36,7 +36,7 @@ public partial class CakesPage : Page
 
     private void Button_OpenAddCake_OnClick(object sender, RoutedEventArgs e)
     {
-        var cakeAddView = new CakeAddView { DataContext = new CakeAddViewModel(_cakeViewModel) };
+        CakeAddView? cakeAddView = new() { DataContext = new CakeAddViewModel(_cakeViewModel) };
         cakeAddView.Show();
     }
 }

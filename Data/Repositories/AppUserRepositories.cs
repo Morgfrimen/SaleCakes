@@ -8,24 +8,23 @@ using Shared.Dto;
 
 namespace Data.Repositories;
 
-public class DecorRepositories : RepositoriesBase, IDecorRepositories
+public class AppUserRepositories : RepositoriesBase, IAppUserRepositories
 {
-    public DecorRepositories(SaleCakesDbContext context) : base(context)
+    public AppUserRepositories(SaleCakesDbContext context) : base(context)
     {
     }
 
-    public async Task<Result<Guid>> AddEntryAsync(DecorDto entity)
+    public async Task<Result<Guid>> AddEntryAsync(RoleUserDto entity)
     {
         try
         {
-            DecorEntry? decorEntry = new()
+            var decorEntry = new AppUserEntry
             {
                 Id = entity.Id,
-                Name = entity.Name,
-                Price = entity.Price
+                UserRole = entity.UserRole
             };
 
-            var newEntry = await DbContext.DecorsEntries.AddAsync(decorEntry);
+            var newEntry = await DbContext.AppUsersEntries.AddAsync(decorEntry);
             _ = await DbContext.SaveChangesAsync();
             newEntry.State = EntityState.Detached;
             return new Result<Guid>(newEntry.Entity.Id);
@@ -40,14 +39,14 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
     {
         try
         {
-            var deletedEntry = await DbContext.DecorsEntries.AsNoTracking().FirstOrDefaultAsync(item => item.Id == id);
+            var deletedEntry = await DbContext.AppUsersEntries.AsNoTracking().FirstOrDefaultAsync(item => item.Id == id);
 
             if (deletedEntry is null)
             {
                 return new Result<bool>(false);
             }
 
-            _ = DbContext.DecorsEntries.Remove(deletedEntry);
+            _ = DbContext.AppUsersEntries.Remove(deletedEntry);
             _ = await DbContext.SaveChangesAsync();
             return new Result<bool>(true);
         }
@@ -57,18 +56,17 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
         }
     }
 
-    public async Task<Result<Guid>> UpdateEntryAsync(DecorDto entity)
+    public async Task<Result<Guid>> UpdateEntryAsync(RoleUserDto entity)
     {
         try
         {
-            DecorEntry? updateModel = new()
+            AppUserEntry? updateModel = new()
             {
                 Id = entity.Id,
-                Name = entity.Name,
-                Price = entity.Price
+                UserRole = entity.UserRole
             };
 
-            var result = DbContext.DecorsEntries.Update(updateModel);
+            var result = DbContext.AppUsersEntries.Update(updateModel);
             _ = await DbContext.SaveChangesAsync();
             result.State = EntityState.Detached;
             return new Result<Guid>(result.Entity.Id);
@@ -79,34 +77,34 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
         }
     }
 
-    public Task<Result<DecorDto?>> GetByIdAsync(Guid id)
+    public Task<Result<RoleUserDto?>> GetByIdAsync(Guid id)
     {
         try
         {
-            var resultEntry = DbContext.DecorsEntries.AsNoTracking()
+            var resultEntry = DbContext.AppUsersEntries.AsNoTracking()
                 .Where(item => item.Id == id)
-                .Select(item => new DecorDto(item.Id, item.Name, item.Price))
+                .Select(item => new RoleUserDto(item.Id, item.UserRole))
                 .FirstOrDefault();
 
-            return Task.FromResult(new Result<DecorDto?>(resultEntry));
+            return Task.FromResult(new Result<RoleUserDto?>(resultEntry));
         }
         catch (Exception ex)
         {
-            return Task.FromResult(new Result<DecorDto?>(new Error(ex.Message)));
+            return Task.FromResult(new Result<RoleUserDto?>(new Error(ex.Message)));
         }
     }
 
-    public async Task<Result<IEnumerable<DecorDto>>> GetAllAsync()
+    public async Task<Result<IEnumerable<RoleUserDto>>> GetAllAsync()
     {
         try
         {
-            var result = DbContext.DecorsEntries.AsNoTracking().Select(item => new DecorDto(item.Id, item.Name, item.Price));
+            var result = DbContext.AppUsersEntries.AsNoTracking().Select(item => new RoleUserDto(item.Id, item.UserRole));
             _ = await DbContext.SaveChangesAsync();
-            return new Result<IEnumerable<DecorDto>>(result);
+            return new Result<IEnumerable<RoleUserDto>>(result);
         }
         catch (Exception ex)
         {
-            return new Result<IEnumerable<DecorDto>>(new Error(ex.Message));
+            return new Result<IEnumerable<RoleUserDto>>(new Error(ex.Message));
         }
     }
 
@@ -114,7 +112,7 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
     {
         try
         {
-            DbContext.DecorsEntries.RemoveRange(DbContext.DecorsEntries);
+            DbContext.AppUsersEntries.RemoveRange(DbContext.AppUsersEntries);
             _ = await DbContext.SaveChangesAsync();
             return new Result<bool>(true);
         }
@@ -124,20 +122,20 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
         }
     }
 
-    public Task<Result<DecorDto?>> GetByNameAsync(string name)
+    public Task<Result<RoleUserDto?>> GetByRoleAsync(string role)
     {
         try
         {
-            var resultEntry = DbContext.DecorsEntries.AsNoTracking()
-                .Where(item => item.Name == name)
-                .Select(item => new DecorDto(item.Id, item.Name, item.Price))
+            var resultEntry = DbContext.AppUsersEntries.AsNoTracking()
+                .Where(item => item.UserRole == role)
+                .Select(item => new RoleUserDto(item.Id, item.UserRole))
                 .FirstOrDefault();
 
-            return Task.FromResult(new Result<DecorDto?>(resultEntry));
+            return Task.FromResult(new Result<RoleUserDto?>(resultEntry));
         }
         catch (Exception ex)
         {
-            return Task.FromResult(new Result<DecorDto?>(new Error(ex.Message)));
+            return Task.FromResult(new Result<RoleUserDto?>(new Error(ex.Message)));
         }
     }
 }

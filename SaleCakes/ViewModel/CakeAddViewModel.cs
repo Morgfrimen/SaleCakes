@@ -1,10 +1,7 @@
-﻿using SaleCakes.Command;
-using SaleCakes.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Input;
-using Data.Repositories.Abstract;
+using SaleCakes.Command;
 
 namespace SaleCakes.ViewModel;
 
@@ -17,7 +14,6 @@ public class CakeAddViewModel : BaseViewModel
 
     public StuffingContainer Stuffing { get; set; } = new();
 
-
     public ICommand AddStuffing { get; } = new RelayCommand(async obj =>
     {
         //var reposStuffing = new StuffingRepos(App.ConnectionString);
@@ -28,7 +24,6 @@ public class CakeAddViewModel : BaseViewModel
         //var stuffing = obj as TierContainer;
         //stuffing.Stuffig = selectStuffing.Id;
     });
-
 
     //Stuffing,DecorPage,ShortcakeEntry
     public TierContainer Tier { get; } = new();
@@ -90,7 +85,6 @@ public class CakeAddViewModel : BaseViewModel
     {
         public Guid StuffigAddGuidLast { get; set; }
     }
-
 
     public class TierContainer
     {

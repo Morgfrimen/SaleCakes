@@ -1,7 +1,7 @@
-﻿using SaleCakes.Command;
-using SaleCakes.Model;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using SaleCakes.Command;
+using SaleCakes.Model;
 
 namespace SaleCakes.ViewModel;
 

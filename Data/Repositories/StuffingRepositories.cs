@@ -8,24 +8,24 @@ using Shared.Dto;
 
 namespace Data.Repositories;
 
-public class DecorRepositories : RepositoriesBase, IDecorRepositories
+public class StuffingRepositories : RepositoriesBase, IStuffingRepositories
 {
-    public DecorRepositories(SaleCakesDbContext context) : base(context)
+    public StuffingRepositories(SaleCakesDbContext context) : base(context)
     {
     }
 
-    public async Task<Result<Guid>> AddEntryAsync(DecorDto entity)
+    public async Task<Result<Guid>> AddEntryAsync(StuffingDto entity)
     {
         try
         {
-            DecorEntry? decorEntry = new()
+            StuffingEntry? decorEntry = new()
             {
                 Id = entity.Id,
                 Name = entity.Name,
                 Price = entity.Price
             };
 
-            var newEntry = await DbContext.DecorsEntries.AddAsync(decorEntry);
+            var newEntry = await DbContext.StuffingsEntries.AddAsync(decorEntry);
             _ = await DbContext.SaveChangesAsync();
             newEntry.State = EntityState.Detached;
             return new Result<Guid>(newEntry.Entity.Id);
@@ -40,14 +40,14 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
     {
         try
         {
-            var deletedEntry = await DbContext.DecorsEntries.AsNoTracking().FirstOrDefaultAsync(item => item.Id == id);
+            var deletedEntry = await DbContext.StuffingsEntries.AsNoTracking().FirstOrDefaultAsync(item => item.Id == id);
 
             if (deletedEntry is null)
             {
                 return new Result<bool>(false);
             }
 
-            _ = DbContext.DecorsEntries.Remove(deletedEntry);
+            _ = DbContext.StuffingsEntries.Remove(deletedEntry);
             _ = await DbContext.SaveChangesAsync();
             return new Result<bool>(true);
         }
@@ -57,18 +57,18 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
         }
     }
 
-    public async Task<Result<Guid>> UpdateEntryAsync(DecorDto entity)
+    public async Task<Result<Guid>> UpdateEntryAsync(StuffingDto entity)
     {
         try
         {
-            DecorEntry? updateModel = new()
+            StuffingEntry? updateModel = new()
             {
                 Id = entity.Id,
                 Name = entity.Name,
                 Price = entity.Price
             };
 
-            var result = DbContext.DecorsEntries.Update(updateModel);
+            var result = DbContext.StuffingsEntries.Update(updateModel);
             _ = await DbContext.SaveChangesAsync();
             result.State = EntityState.Detached;
             return new Result<Guid>(result.Entity.Id);
@@ -79,34 +79,34 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
         }
     }
 
-    public Task<Result<DecorDto?>> GetByIdAsync(Guid id)
+    public Task<Result<StuffingDto?>> GetByIdAsync(Guid id)
     {
         try
         {
-            var resultEntry = DbContext.DecorsEntries.AsNoTracking()
+            var resultEntry = DbContext.StuffingsEntries.AsNoTracking()
                 .Where(item => item.Id == id)
-                .Select(item => new DecorDto(item.Id, item.Name, item.Price))
+                .Select(item => new StuffingDto(item.Id, item.Name, item.Price))
                 .FirstOrDefault();
 
-            return Task.FromResult(new Result<DecorDto?>(resultEntry));
+            return Task.FromResult(new Result<StuffingDto?>(resultEntry));
         }
         catch (Exception ex)
         {
-            return Task.FromResult(new Result<DecorDto?>(new Error(ex.Message)));
+            return Task.FromResult(new Result<StuffingDto?>(new Error(ex.Message)));
         }
     }
 
-    public async Task<Result<IEnumerable<DecorDto>>> GetAllAsync()
+    public async Task<Result<IEnumerable<StuffingDto>>> GetAllAsync()
     {
         try
         {
-            var result = DbContext.DecorsEntries.AsNoTracking().Select(item => new DecorDto(item.Id, item.Name, item.Price));
+            var result = DbContext.StuffingsEntries.AsNoTracking().Select(item => new StuffingDto(item.Id, item.Name, item.Price));
             _ = await DbContext.SaveChangesAsync();
-            return new Result<IEnumerable<DecorDto>>(result);
+            return new Result<IEnumerable<StuffingDto>>(result);
         }
         catch (Exception ex)
         {
-            return new Result<IEnumerable<DecorDto>>(new Error(ex.Message));
+            return new Result<IEnumerable<StuffingDto>>(new Error(ex.Message));
         }
     }
 
@@ -114,7 +114,7 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
     {
         try
         {
-            DbContext.DecorsEntries.RemoveRange(DbContext.DecorsEntries);
+            DbContext.StuffingsEntries.RemoveRange(DbContext.StuffingsEntries);
             _ = await DbContext.SaveChangesAsync();
             return new Result<bool>(true);
         }
@@ -124,20 +124,20 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
         }
     }
 
-    public Task<Result<DecorDto?>> GetByNameAsync(string name)
+    public Task<Result<StuffingDto?>> GetByNameAsync(string name)
     {
         try
         {
-            var resultEntry = DbContext.DecorsEntries.AsNoTracking()
+            var resultEntry = DbContext.StuffingsEntries.AsNoTracking()
                 .Where(item => item.Name == name)
-                .Select(item => new DecorDto(item.Id, item.Name, item.Price))
+                .Select(item => new StuffingDto(item.Id, item.Name, item.Price))
                 .FirstOrDefault();
 
-            return Task.FromResult(new Result<DecorDto?>(resultEntry));
+            return Task.FromResult(new Result<StuffingDto?>(resultEntry));
         }
         catch (Exception ex)
         {
-            return Task.FromResult(new Result<DecorDto?>(new Error(ex.Message)));
+            return Task.FromResult(new Result<StuffingDto?>(new Error(ex.Message)));
         }
     }
 }

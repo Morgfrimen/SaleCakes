@@ -10,8 +10,8 @@ public class ByteArrayToImageSourceConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        var bitmapImage = new BitmapImage();
-        using var memoryStream = new MemoryStream((byte[])value);
+        BitmapImage? bitmapImage = new();
+        using MemoryStream? memoryStream = new((byte[])value);
         bitmapImage.BeginInit();
         bitmapImage.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
         bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
