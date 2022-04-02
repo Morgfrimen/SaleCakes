@@ -17,6 +17,7 @@ public class ModelCake
         Weight = Convert.ToDouble(weight);
         Tier = tier;
     }
+
     public uint Number { get; init; }
 
     public Guid Id { get; }

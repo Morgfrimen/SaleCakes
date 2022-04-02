@@ -2,7 +2,7 @@
 
 public record ClientDto
 {
-    public ClientDto(Guid id, string clientName, string clientSurname, string clientPatronymic, string phone, string email, IEnumerable<Guid> ordersId) 
+    public ClientDto(Guid id, string clientName, string clientSurname, string clientPatronymic, string phone, string email, IEnumerable<Guid> ordersId)
         : this(clientName, clientSurname, clientPatronymic, phone, email, ordersId)
     {
         Id = id;

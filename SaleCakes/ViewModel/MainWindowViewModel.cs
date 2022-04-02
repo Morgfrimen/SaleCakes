@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 
 namespace SaleCakes.ViewModel;
 
@@ -20,11 +21,15 @@ public class MainWindowViewModel : BaseViewModel
     public Visibility VisibilityMenu
     {
         get => _visibilityMenu;
-        set { _visibilityMenu = value; OnPropertyChanged(nameof(VisibilityMenu)); }
+        set
+        {
+            _visibilityMenu = value;
+            OnPropertyChanged(nameof(VisibilityMenu));
+        }
     }
 
     public override void UpdateAllProperty()
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 }

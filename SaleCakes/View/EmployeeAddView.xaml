@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SaleCakes.View"
         xmlns:vm="clr-namespace:SaleCakes.ViewModel"
         d:DataContext="{d:DesignInstance vm:EmployeeAddViewModel}"
         mc:Ignorable="d"
@@ -21,7 +20,7 @@
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0"
                     Grid.Row="0">
-            <TextBlock Text="Выберете роль сотрудника"></TextBlock>
+            <TextBlock Text="Выберете роль сотрудника" />
             <ComboBox Width="230" HorizontalAlignment="Left">
                 <TextBlock>Директор</TextBlock>
                 <TextBlock>Продавец</TextBlock>
@@ -30,21 +29,21 @@
         </StackPanel>
         <StackPanel Grid.Column="1"
                     Grid.Row="0">
-            <TextBlock Text="Введите имя сотрудника"></TextBlock>
-            <TextBox x:Name="employeeNameTextBox"></TextBox>
-            <TextBlock Text="Введите фамилию сотрудника"></TextBlock>
-            <TextBox x:Name="employeeSurnameTextBox"></TextBox>
-            <TextBlock Text="Введите отчество сотрудника"></TextBlock>
-            <TextBox x:Name="employeePatronymicTextBox"></TextBox>
+            <TextBlock Text="Введите имя сотрудника" />
+            <TextBox x:Name="employeeNameTextBox" />
+            <TextBlock Text="Введите фамилию сотрудника" />
+            <TextBox x:Name="employeeSurnameTextBox" />
+            <TextBlock Text="Введите отчество сотрудника" />
+            <TextBox x:Name="employeePatronymicTextBox" />
         </StackPanel>
         <StackPanel Grid.Column="2"
                     Grid.Row="0">
-            <TextBlock Text="Введите телефон сотрудника"></TextBlock>
-            <TextBox x:Name="employeePhoneTextBox"></TextBox>
-            <TextBlock Text="Введите email сотрудника"></TextBlock>
-            <TextBox x:Name="employeeEmailTextBox"></TextBox>
+            <TextBlock Text="Введите телефон сотрудника" />
+            <TextBox x:Name="employeePhoneTextBox" />
+            <TextBlock Text="Введите email сотрудника" />
+            <TextBox x:Name="employeeEmailTextBox" />
         </StackPanel>
-        <Button x:Name="addEmployeeButton" Grid.Column="1" Grid.Row="1" Content="Добавить сотрудника"></Button>
+        <Button x:Name="addEmployeeButton" Grid.Column="1" Grid.Row="1" Content="Добавить сотрудника" />
         <Button Grid.Column="2" Grid.Row="2"
                 Content="Вернутся назад" Click="Exit" />
     </Grid>

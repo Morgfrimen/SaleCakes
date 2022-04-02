@@ -43,7 +43,7 @@ public class OrderClientRepos : IRepository<OrderClientDto>
                     var orderEmoloyee = reader.GetValue(5) is Guid ? (Guid)reader.GetValue(5) : default;
                     var orderSeller = reader.GetValue(6) is decimal ? (decimal)reader.GetValue(6) : default;
 
-                    var decorDto = new OrderClientDto(dto, orderCreateAt, orderAdress, orderCake, orderConditess, orderEmoloyee,orderSeller);
+                    var decorDto = new OrderClientDto(dto, orderCreateAt, orderAdress, orderCake, orderConditess, orderEmoloyee, orderSeller);
 
                     return decorDto;
                 }
@@ -130,7 +130,7 @@ public class OrderClientRepos : IRepository<OrderClientDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"Use SaleCakes; INSERT INTO order_client (order_createdAt,order_adress,order_cake," +
+            var sqlExpression = "Use SaleCakes; INSERT INTO order_client (order_createdAt,order_adress,order_cake," +
                                 $"order_condites,order_emoloyee,order_seller) VALUES ({entity.OrderCreateAt},\'{entity.OrderAdress}\'," +
                                 $"\'{entity.CakeId}\',\'{entity.ConditerId}\',\'{entity.EmployeeId}\',{entity.OrderSeller})";
             var command = new SqlCommand(sqlExpression, connection);
@@ -209,7 +209,7 @@ public class OrderClientRepos : IRepository<OrderClientDto>
 
             var sqlExpression = "Use SaleCakes; UPDATE order_client " +
                                 $"SET order_createdAt={entity.OrderCreateAt}, order_adress=\'{entity.OrderAdress}\'," +
-                                $"order_cake=\'{entity.CakeId}\', order_condites=\'{entity.ConditerId}\',"+
+                                $"order_cake=\'{entity.CakeId}\', order_condites=\'{entity.ConditerId}\'," +
                                 $"order_emoloyee=\'{entity.EmployeeId}\', order_seller={entity.OrderAdress}," +
                                 $" WHERE id=\'{entity.Id}\'";
             var command = new SqlCommand(sqlExpression, connection);

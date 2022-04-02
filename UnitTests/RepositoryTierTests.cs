@@ -1,7 +1,5 @@
-﻿using System.Diagnostics;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using Data.Legacy.Dto;
 using Data.Legacy.Resositoryes;
 using Xunit;
@@ -29,6 +27,7 @@ public class RepositoryTierTests
 
         var deletedDro = collection.FirstOrDefault(item => item.DecorId == decor.Id);
         Assert.NotNull(deletedDro);
+
         foreach (var dto in collection)
             Assert.True(await repository.DeleteAsync(dto.Id));
 
@@ -49,8 +48,12 @@ public class RepositoryTierTests
 
 
         collection = await repository.GetAllAsync();
+
         if (collection is null)
+        {
             return;
+        }
+
         foreach (var dto in collection)
             Assert.True(await repository.DeleteAsync(dto.Id));
     }

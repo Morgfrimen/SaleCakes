@@ -12,7 +12,7 @@ public record OrderClientDto
         OrderSeller = orderSeller;
     }
 
-    public OrderClientDto(Guid id, DateTime orderCreateAt, string orderAdress, Guid cakeId, Guid conditer, Guid employee, decimal orderSeller) 
+    public OrderClientDto(Guid id, DateTime orderCreateAt, string orderAdress, Guid cakeId, Guid conditer, Guid employee, decimal orderSeller)
         : this(orderCreateAt, orderAdress, cakeId, conditer, employee, orderSeller)
     {
         Id = id;
@@ -24,5 +24,5 @@ public record OrderClientDto
     public Guid CakeId { get; }
     public Guid ConditerId { get; }
     public Guid EmployeeId { get; }
-    public Decimal OrderSeller { get; }
+    public decimal OrderSeller { get; }
 }

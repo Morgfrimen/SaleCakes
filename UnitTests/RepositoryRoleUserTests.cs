@@ -15,10 +15,11 @@ public class RepositoryRoleUserTests
         var repositoryAuto = new UserAuthorizationRepos(ConnectionString);
 
         var collectionAuto = await repositoryAuto.GetAllAsync();
+
         if (collectionAuto is not null)
         {
             foreach (var dto in collectionAuto)
-                Assert.True(await repositoryAuto.DeleteAsync(dto.Id)); 
+                Assert.True(await repositoryAuto.DeleteAsync(dto.Id));
         }
 
         var role = "Директор";
@@ -52,10 +53,13 @@ public class RepositoryRoleUserTests
         Assert.True(await repository.DeleteAsync(updateRoleDto.Id));
 
         collection = await repository.GetAllAsync();
+
         if (collection is null)
+        {
             return;
+        }
+
         foreach (var dto in collection)
             Assert.True(await repository.DeleteAsync(dto.Id));
-
     }
 }

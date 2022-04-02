@@ -41,7 +41,7 @@ public class StuffingRepos : IRepository<StuffingDto>
 
                     var roleUserDto = new StuffingDto(idDto, nameDto, priceDto);
 
-                    return roleUserDto; 
+                    return roleUserDto;
                 }
             }
 
@@ -87,7 +87,7 @@ public class StuffingRepos : IRepository<StuffingDto>
                     var nameDto = reader.GetValue(1) as string;
                     var priceDto = reader.GetValue(2) is decimal ? (decimal)reader.GetValue(2) : 0;
 
-                    var stuffingDto = new StuffingDto(idDto, nameDto , priceDto);
+                    var stuffingDto = new StuffingDto(idDto, nameDto, priceDto);
                     listEmployees.Add(stuffingDto);
                 }
 

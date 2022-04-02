@@ -2,25 +2,28 @@
 using System.Windows.Controls;
 using SaleCakes.ViewModel;
 
-namespace SaleCakes.Components
+namespace SaleCakes.Components;
+
+/// <summary>
+///     Логика взаимодействия для AuthorizationComponent.xaml
+/// </summary>
+public partial class AuthorizationComponent : UserControl
 {
-    /// <summary>
-    /// Логика взаимодействия для AuthorizationComponent.xaml
-    /// </summary>
-    public partial class AuthorizationComponent : UserControl
+    public AuthorizationComponent()
     {
-        public AuthorizationComponent()
+        InitializeComponent();
+    }
+
+    private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+    {
+        var vm = DataContext as MainWindowViewModel;
+
+        if (vm is null)
         {
-            InitializeComponent();
+            return;
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            var vm = DataContext as MainWindowViewModel;
-            if(vm is null)
-                return;
-            vm.VisibilityAutorized = Visibility.Collapsed;
-            vm.VisibilityMenu = Visibility.Visible;
-        }
+        vm.VisibilityAutorized = Visibility.Collapsed;
+        vm.VisibilityMenu = Visibility.Visible;
     }
 }

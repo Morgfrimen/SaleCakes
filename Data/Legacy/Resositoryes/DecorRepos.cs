@@ -41,7 +41,7 @@ public class DecorRepos : IRepository<DecorDto>
 
                     var roleUserDto = new DecorDto(idDto, nameDto, priceDto);
 
-                    return roleUserDto; 
+                    return roleUserDto;
                 }
             }
 
@@ -87,7 +87,7 @@ public class DecorRepos : IRepository<DecorDto>
                     var nameDto = reader.GetValue(1) as string;
                     var priceDto = reader.GetValue(2) is decimal ? (decimal)reader.GetValue(2) : 0;
 
-                    var DecorDto = new DecorDto(idDto, nameDto , priceDto);
+                    var DecorDto = new DecorDto(idDto, nameDto, priceDto);
                     listEmployees.Add(DecorDto);
                 }
 

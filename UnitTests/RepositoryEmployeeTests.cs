@@ -70,8 +70,12 @@ public class RepositoryEmployeeTests
         Assert.True(await repository.DeleteAsync(updateEmployeeDto.Id));
 
         collection = await repository.GetAllAsync();
+
         if (collection is null)
+        {
             return;
+        }
+
         foreach (var dto in collection)
             Assert.True(await repository.DeleteAsync(dto.Id));
     }

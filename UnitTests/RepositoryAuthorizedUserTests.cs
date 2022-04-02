@@ -46,13 +46,17 @@ public class RepositoryAuthorizedUserTests
 
         var getDto = await repository.GetByIdAsync(updateRoleDto.Id);
 
-        Assert.Equal(getDto.Id,updateRoleDto.Id);
+        Assert.Equal(getDto.Id, updateRoleDto.Id);
 
         Assert.True(await repository.DeleteAsync(updateRoleDto.Id));
 
         collection = await repository.GetAllAsync();
-        if(collection is null)
+
+        if (collection is null)
+        {
             return;
+        }
+
         foreach (var dto in collection)
             Assert.True(await repository.DeleteAsync(dto.Id));
     }

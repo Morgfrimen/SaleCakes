@@ -1,5 +1,6 @@
 ﻿using System.Configuration;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace SaleCakes;
 
@@ -41,9 +42,12 @@ public partial class App : Application
         ConnectionString = settings[SaleCakes.Properties.Resources.Config_Key_ConnectionString].Value;
     }
 
-    private static void GlobalErrorsEvent(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+    private static void GlobalErrorsEvent(object sender, DispatcherUnhandledExceptionEventArgs e)
     {
-        MessageBox.Show(SaleCakes.Properties.Resources.Message_Global_Error, SaleCakes.Properties.Resources.Title_MessageBox_Error,
-            MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK);
+        MessageBox.Show(SaleCakes.Properties.Resources.Message_Global_Error,
+            SaleCakes.Properties.Resources.Title_MessageBox_Error,
+            MessageBoxButton.OK,
+            MessageBoxImage.Error,
+            MessageBoxResult.OK);
     }
 }

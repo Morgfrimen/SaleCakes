@@ -41,7 +41,7 @@ public class ShortcakeRepos : IRepository<ShortcakeDto>
 
                     var roleUserDto = new ShortcakeDto(idDto, nameDto, priceDto);
 
-                    return roleUserDto; 
+                    return roleUserDto;
                 }
             }
 
@@ -87,7 +87,7 @@ public class ShortcakeRepos : IRepository<ShortcakeDto>
                     var nameDto = reader.GetValue(1) as string;
                     var priceDto = reader.GetValue(2) is decimal ? (decimal)reader.GetValue(2) : 0;
 
-                    var ShortcakeDto = new ShortcakeDto(idDto, nameDto , priceDto);
+                    var ShortcakeDto = new ShortcakeDto(idDto, nameDto, priceDto);
                     listEmployees.Add(ShortcakeDto);
                 }
 

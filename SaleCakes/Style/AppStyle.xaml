@@ -9,9 +9,9 @@
         <Setter Property="FontStyle" Value="Normal" />
         <Setter Property="FontWeight" Value="Normal" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
-        <Setter Property="Margin" Value="25,0"></Setter>
-        <Setter Property="Padding" Value="0,10"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Margin" Value="25,0" />
+        <Setter Property="Padding" Value="0,10" />
     </Style>
 
 </ResourceDictionary>

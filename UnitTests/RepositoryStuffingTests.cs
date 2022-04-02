@@ -44,8 +44,11 @@ public class RepositoryStuffingTests
         Assert.True(await repository.DeleteAsync(updateStuffingDtoDto.Id));
 
         collection = await repository.GetAllAsync();
+
         if (collection is null)
+        {
             return;
+        }
 
         foreach (var dto in collection)
             Assert.True(await repository.DeleteAsync(dto.Id));

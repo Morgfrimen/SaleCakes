@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Кондитер"
-        
+
         Height="{Binding RelativeSource={RelativeSource Self}, Path=MinHeight}"
         Width="{Binding RelativeSource={RelativeSource Self}, Path=MinWidth}"
         MinHeight="450" MinWidth="800">
@@ -24,18 +24,19 @@
     </Window.Resources>
 
     <Window.Background>
-        <ImageBrush ImageSource="{Binding 
+        <ImageBrush
+            ImageSource="{Binding 
             Source={x:Static res:Resources.BackgrountMain},
             Converter={StaticResource ImageSourceConverter}}"
-                    Stretch="UniformToFill"/>
+            Stretch="UniformToFill" />
     </Window.Background>
 
     <Grid>
-        <components:AuthorizationComponent 
+        <components:AuthorizationComponent
             DataContext="{Binding}"
             Visibility="{Binding VisibilityAutorized}" />
         <Frame Visibility="{Binding VisibilityMenu}" NavigationUIVisibility="Hidden"
-               Source="../Pages/MainMenu.xaml"></Frame>
+               Source="../Pages/MainMenu.xaml" />
     </Grid>
 
 </Window>

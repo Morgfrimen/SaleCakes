@@ -41,7 +41,7 @@ public class RoleUserRepos : IRepository<RoleUserDto>
 
                     var roleUserDto = new RoleUserDto(idDto, userRoleDto);
 
-                    return roleUserDto; 
+                    return roleUserDto;
                 }
             }
 

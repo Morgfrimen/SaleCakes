@@ -37,7 +37,8 @@ public class UserAuthorizationRepos : IRepository<AuthorizationUserDto>
                 while (await reader.ReadAsync())
                 {
                     var idDto = id;
-                    var userDto = reader.GetValue(1) is Guid 
+
+                    var userDto = reader.GetValue(1) is Guid
                         ? (Guid?)reader.GetValue(1)
                         : default;
                     var userLoginDto = reader.GetValue(2) as string;
@@ -129,7 +130,7 @@ public class UserAuthorizationRepos : IRepository<AuthorizationUserDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"Use SaleCakes; INSERT INTO authorization_user (user_guid,user_login,user_password,createdAt) VALUES (" +
+            var sqlExpression = "Use SaleCakes; INSERT INTO authorization_user (user_guid,user_login,user_password,createdAt) VALUES (" +
                                 $"\'{entity.AppUsers}\',\'{entity.UserLogin}\',\'{entity.UserPassword}\',\'{entity.CreatedAt}\')";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();

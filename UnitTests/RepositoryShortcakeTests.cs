@@ -44,8 +44,12 @@ public class RepositoryShortcakeTests
         Assert.True(await repository.DeleteAsync(updateShortcaketoDto.Id));
 
         collection = await repository.GetAllAsync();
+
         if (collection is null)
+        {
             return;
+        }
+
         foreach (var dto in collection)
             Assert.True(await repository.DeleteAsync(dto.Id));
     }

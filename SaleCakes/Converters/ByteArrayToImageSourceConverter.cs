@@ -2,7 +2,6 @@
 using System.Globalization;
 using System.IO;
 using System.Windows.Data;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace SaleCakes.Converters;
@@ -11,7 +10,7 @@ public class ByteArrayToImageSourceConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        var bitmapImage = new BitmapImage();        
+        var bitmapImage = new BitmapImage();
         using var memoryStream = new MemoryStream((byte[])value);
         bitmapImage.BeginInit();
         bitmapImage.CreateOptions = BitmapCreateOptions.PreservePixelFormat;

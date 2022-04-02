@@ -41,9 +41,9 @@ public class ClientRepos : IRepository<ClientDto>
                     var patronymic = reader.GetValue(3) is string ? (string)reader.GetValue(3) : default;
                     var phone = reader.GetValue(4) is string ? (string)reader.GetValue(4) : default;
                     var email = reader.GetValue(5) is string ? (string)reader.GetValue(5) : default;
-                    var orders = reader.GetValue(6) is Guid[]? (Guid[])reader.GetValue(6) : default;
+                    var orders = reader.GetValue(6) is Guid[] ? (Guid[])reader.GetValue(6) : default;
 
-                    var decorDto = new ClientDto(dto, name,surname,patronymic,phone,email, orders);
+                    var decorDto = new ClientDto(dto, name, surname, patronymic, phone, email, orders);
 
                     return decorDto;
                 }
@@ -87,13 +87,14 @@ public class ClientRepos : IRepository<ClientDto>
 
                 while (await reader.ReadAsync())
                 {
-                    var dto = reader.GetValue(0) is Guid ? (Guid)reader.GetValue(0) : default; ;
+                    var dto = reader.GetValue(0) is Guid ? (Guid)reader.GetValue(0) : default;
+                    ;
                     var name = reader.GetValue(1) is string ? (string)reader.GetValue(1) : default;
                     var surname = reader.GetValue(2) is string ? (string)reader.GetValue(2) : default;
                     var patronymic = reader.GetValue(3) is string ? (string)reader.GetValue(3) : default;
                     var phone = reader.GetValue(4) is string ? (string)reader.GetValue(4) : default;
                     var email = reader.GetValue(5) is string ? (string)reader.GetValue(5) : default;
-                    var orders = reader.GetValue(6) is Guid[]? (Guid[])reader.GetValue(6) : default;
+                    var orders = reader.GetValue(6) is Guid[] ? (Guid[])reader.GetValue(6) : default;
 
                     var clientDto = new ClientDto(dto, name, surname, patronymic, phone, email, orders);
                     listEmployees.Add(clientDto);
@@ -130,7 +131,7 @@ public class ClientRepos : IRepository<ClientDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"Use SaleCakes; INSERT INTO client (client_name,client_surname,client_patronymic,client_phone,client_email,client_orders) " +
+            var sqlExpression = "Use SaleCakes; INSERT INTO client (client_name,client_surname,client_patronymic,client_phone,client_email,client_orders) " +
                                 $"VALUES ({entity.ClientName},\'{entity.ClientSurname}\',\'{entity.ClientPatronymic}\',\'{entity.Phone}\',\'{entity.Email}\',\'{entity.OrdersId}\')";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();

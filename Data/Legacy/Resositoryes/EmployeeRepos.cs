@@ -46,7 +46,7 @@ public class EmployeeRepos : IRepository<EmployeeDto>
 
                     var employeeDto = new EmployeeDto(idDto, autorizedUserDto, firstDto, lastDto, patronymicDto, phoneDto, emailDto);
 
-                    return employeeDto; 
+                    return employeeDto;
                 }
             }
 

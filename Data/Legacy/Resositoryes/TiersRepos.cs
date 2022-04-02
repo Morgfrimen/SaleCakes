@@ -43,7 +43,7 @@ public class TiersRepos : IRepository<TiersDto>
 
                     var tiersDto = new TiersDto(idDto, stuffingId, decorId, shortcakeId);
 
-                    return tiersDto; 
+                    return tiersDto;
                 }
             }
 
@@ -125,7 +125,7 @@ public class TiersRepos : IRepository<TiersDto>
             connection = new SqlConnection(_connectionString);
             await connection.OpenAsync();
 
-            var sqlExpression = $"Use SaleCakes; INSERT INTO tiers (stuffing,decor,shortcake) " +
+            var sqlExpression = "Use SaleCakes; INSERT INTO tiers (stuffing,decor,shortcake) " +
                                 $"VALUES (\'{entity.StuffingId}\',\'{entity.DecorId}\',\'{entity.ShortcakeId}\')";
             var command = new SqlCommand(sqlExpression, connection);
             var reader = await command.ExecuteNonQueryAsync();
