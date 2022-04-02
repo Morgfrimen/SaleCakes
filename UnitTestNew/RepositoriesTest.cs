@@ -48,7 +48,7 @@ namespace UnitTestNew
             var delete = await decorRepos.DeleteEntryAsync(getDto.ResultOperation.Id);
             Assert.True(delete.ResultOperation);
             collection = await decorRepos.GetAllAsync();
-            Assert.Equal(0,collection.ResultOperation.Count());
+            Assert.Empty(collection.ResultOperation);
 
             await decorRepos.ClearTableAsync();
         }
@@ -80,7 +80,7 @@ namespace UnitTestNew
             var delete = await stuffingRepositories.DeleteEntryAsync(getDto.ResultOperation.Id);
             Assert.True(delete.ResultOperation);
             collection = await stuffingRepositories.GetAllAsync();
-            Assert.Equal(0, collection.ResultOperation.Count());
+            Assert.Empty(collection.ResultOperation);
 
             await stuffingRepositories.ClearTableAsync();
         }
@@ -112,7 +112,7 @@ namespace UnitTestNew
             var delete = await shortcakeRepositories.DeleteEntryAsync(getDto.ResultOperation.Id);
             Assert.True(delete.ResultOperation);
             collection = await shortcakeRepositories.GetAllAsync();
-            Assert.Equal(0, collection.ResultOperation.Count());
+            Assert.Empty(collection.ResultOperation);
 
             await shortcakeRepositories.ClearTableAsync();
         }

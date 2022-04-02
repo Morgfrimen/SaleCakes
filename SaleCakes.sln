@@ -9,7 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{E9150308-9DCF-4B08-800A-92594D662C56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestNew", "UnitTestNew\UnitTestNew.csproj", "{15271789-4C5B-4F38-A511-9C614CE9F281}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTestNew", "UnitTestNew\UnitTestNew.csproj", "{15271789-4C5B-4F38-A511-9C614CE9F281}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4CB0255A-B94B-4953-B77C-A28D06BFC1A9}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
