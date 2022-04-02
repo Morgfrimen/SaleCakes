@@ -8,4 +8,5 @@ public interface IBaseCrud<T>
     Result<bool> DeleteEntry(Guid id);
     Result<TR> UpdateEntry<TR>(T entity);
     Result<T> GetById(Guid id);
+    Result<IEnumerable<T>> GetAll();
 }

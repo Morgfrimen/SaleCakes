@@ -1,5 +1,9 @@
-﻿namespace Data.Repositories.Abstract;
+﻿using Data.Dto;
+using Shared.Dto;
 
-public interface IDecorRepositories
+namespace Data.Repositories.Abstract;
+
+public interface IDecorRepositories : IBaseCrud<DecorDto>
 {
+    Result<DecorDto> GetByName(string name);
 }
