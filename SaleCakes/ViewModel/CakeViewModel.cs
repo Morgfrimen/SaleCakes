@@ -8,7 +8,7 @@ namespace SaleCakes.ViewModel;
 public class CakeViewModel : BaseViewModel
 {
     private ObservableCollection<CakeModel> _modelCakes = new();
-    private ObservableCollection<StuffingModel> _stuffings;
+    private ObservableCollection<StuffingModel> _stuffings = null!;
 
     public ObservableCollection<CakeModel> ModelCakes
     {

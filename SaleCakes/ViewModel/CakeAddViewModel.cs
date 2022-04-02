@@ -4,12 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
+using Data.Repositories.Abstract;
 
 namespace SaleCakes.ViewModel;
 
 public class CakeAddViewModel : BaseViewModel
 {
-    public CakeAddViewModel(CakeViewModel parentCakeViewModel)
+    public CakeAddViewModel(CakeViewModel? parentCakeViewModel)
     {
         Tier.ParentCakeViewModel = parentCakeViewModel;
     }
@@ -98,7 +99,7 @@ public class CakeAddViewModel : BaseViewModel
         public Guid Decor { get; set; }
         public Guid Shortcake { get; set; }
 
-        public CakeViewModel ParentCakeViewModel { get; set; }
+        public CakeViewModel? ParentCakeViewModel { get; set; }
 
         public uint Count { get; set; }
     }

@@ -10,7 +10,7 @@ namespace SaleCakes.View.Pages;
 public partial class CakesPage : Page
 {
     private readonly CakeAddView _cakeAddView;
-    private CakeViewModel _cakeViewModel = new();
+    private CakeViewModel? _cakeViewModel = new();
 
     public CakesPage(CakeAddView cakeAddView)
     {
@@ -22,7 +22,7 @@ public partial class CakesPage : Page
     private void StartPage()
     {
         _cakeViewModel = DataContext as CakeViewModel;
-        _cakeViewModel.LoadModes.Execute(_cakeViewModel.ModelCakes);
+        _cakeViewModel!.LoadModes.Execute(_cakeViewModel.ModelCakes);
     }
 
     private void ButtonMainMenu_Click(object sender, RoutedEventArgs e)

@@ -2,11 +2,11 @@
 
 namespace Data.Repositories.Abstract;
 
-public interface IBaseCrud<T>
+public interface IBaseCrud<T,OutT>
 {
-    Result<TR> AddEntry<TR>(T entity);
-    Result<bool> DeleteEntry(Guid id);
-    Result<TR> UpdateEntry<TR>(T entity);
-    Result<T> GetById(Guid id);
-    Result<IEnumerable<T>> GetAll();
+    Task<Result<OutT>> AddEntryAsync(T entity);
+    Task<Result<bool>> DeleteEntryAsync(Guid id);
+    Task<Result<OutT>> UpdateEntryAsync(T entity);
+    Task<Result<T>> GetByIdAsync(Guid id);
+    Task<Result<IEnumerable<T>>> GetAllAsync();
 }

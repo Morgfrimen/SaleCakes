@@ -9,6 +9,9 @@ using System.Windows.Threading;
 using Data.Context;
 using Microsoft.EntityFrameworkCore;
 using SaleCakes.View.Pages;
+using Data.Repositories.Abstract;
+using Data.Repositories;
+using SaleCakes.ViewModel;
 
 namespace SaleCakes;
 
@@ -34,6 +37,13 @@ public partial class App : Application
             
         });
 
+        //ViewModel
+        services.AddTransient<MainWindowViewModel>();
+        services.AddTransient<CakeAddViewModel>();
+        services.AddTransient<CakeViewModel>();
+        services.AddTransient<EmployeeAddViewModel>();
+
+        //Page
         services.AddTransient<MainWindow>();
         services.AddTransient<CakesPage>();
         services.AddTransient<ClientsPage>();
@@ -42,6 +52,9 @@ public partial class App : Application
         services.AddTransient<MainMenuPage>();
         services.AddTransient<OrdersPage>();
         services.AddTransient<CakeAddView>();
+
+        //Repositories
+        services.AddTransient<IDecorRepositories, DecorRepositories>();
     }
 
     private static void GlobalErrorsEvent(object sender, DispatcherUnhandledExceptionEventArgs e)

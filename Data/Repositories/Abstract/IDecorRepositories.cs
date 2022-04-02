@@ -3,7 +3,7 @@ using Shared.Dto;
 
 namespace Data.Repositories.Abstract;
 
-public interface IDecorRepositories : IBaseCrud<DecorDto>
+public interface IDecorRepositories : IBaseCrud<DecorDto,Guid>
 {
-    Result<DecorDto> GetByName(string name);
+    Task<Result<DecorDto>> GetByNameAsync(string name);
 }
