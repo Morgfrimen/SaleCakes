@@ -29,9 +29,25 @@ namespace UnitTestNew
             var expectedDecorDto = new DecorDto("Test2",500);
             var decorDto = await decorRepos.AddEntryAsync(expectedDecorDto);
             Assert.True(decorDto.ResultOperation != default);
-            
 
+            var updateDecorDto = new DecorDto(decorDto.ResultOperation, "Форбс", 300);
+            decorDto = await decorRepos.UpdateEntryAsync(updateDecorDto);
 
+            var findDto = await decorRepos.GetByNameAsync("Форбс");
+            Assert.NotNull(findDto.ResultOperation);
+            Assert.Equal(decorDto.ResultOperation,findDto.ResultOperation!.Id);
+
+            var getDto = await decorRepos.GetByIdAsync(findDto.ResultOperation.Id);
+            Assert.Equal(getDto.ResultOperation.Name, findDto.ResultOperation.Name);
+            Assert.Equal(getDto.ResultOperation.Price, findDto.ResultOperation.Price);
+
+            var collection = await decorRepos.GetAllAsync();
+            Assert.Equal(collection.ResultOperation.First().Id,getDto.ResultOperation.Id);
+
+            var delete = await decorRepos.DeleteEntryAsync(getDto.ResultOperation.Id);
+            Assert.True(delete.ResultOperation);
+            collection = await decorRepos.GetAllAsync();
+            Assert.Equal(0,collection.ResultOperation.Count());
 
             await decorRepos.ClearTableAsync();
         }
