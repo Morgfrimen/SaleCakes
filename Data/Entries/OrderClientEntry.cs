@@ -1,22 +1,28 @@
-﻿namespace Data.Entries;
+﻿using System;
+using System.Collections.Generic;
 
-public class OrderClientEntry
+namespace Data.Entries
 {
-    public OrderClientEntry()
+    public partial class OrderClientEntry
     {
-        Clients = new HashSet<ClientEntry>();
+        public OrderClientEntry()
+        {
+            ClientDesigns = new HashSet<ClientDesign>();
+            Clients = new HashSet<ClientEntry>();
+        }
+
+        public Guid Id { get; set; }
+        public DateTime OrderCreatedAt { get; set; }
+        public string OrderAdress { get; set; } = null!;
+        public Guid? OrderCake { get; set; }
+        public Guid? OrderCondites { get; set; }
+        public Guid? OrderEmoloyee { get; set; }
+        public decimal OrderSeller { get; set; }
+
+        public virtual CakeEntry? OrderCakeNavigation { get; set; }
+        public virtual AuthorizationUserEntry? OrderConditesNavigation { get; set; }
+        public virtual AuthorizationUserEntry? OrderEmoloyeeNavigation { get; set; }
+        public virtual ICollection<ClientDesign> ClientDesigns { get; set; }
+        public virtual ICollection<ClientEntry> Clients { get; set; }
     }
-
-    public Guid Id { get; set; }
-    public DateTime OrderCreatedAt { get; set; }
-    public string OrderAdress { get; set; } = null!;
-    public Guid? OrderCake { get; set; }
-    public Guid? OrderCondites { get; set; }
-    public Guid? OrderEmoloyee { get; set; }
-    public decimal OrderSeller { get; set; }
-
-    public virtual CakeEntry? OrderCakeNavigation { get; set; }
-    public virtual AuthorizationUserEntry? OrderConditesNavigation { get; set; }
-    public virtual AuthorizationUserEntry? OrderEmoloyeeNavigation { get; set; }
-    public virtual ICollection<ClientEntry> Clients { get; set; }
 }

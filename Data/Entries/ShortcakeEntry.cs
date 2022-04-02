@@ -1,15 +1,19 @@
-﻿namespace Data.Entries;
+﻿using System;
+using System.Collections.Generic;
 
-public class ShortcakeEntry
+namespace Data.Entries
 {
-    public ShortcakeEntry()
+    public partial class ShortcakeEntry
     {
-        Tiers = new HashSet<TierEntry>();
+        public ShortcakeEntry()
+        {
+            Tiers = new HashSet<TierEntry>();
+        }
+
+        public Guid Id { get; set; }
+        public string Name { get; set; } = null!;
+        public decimal Price { get; set; }
+
+        public virtual ICollection<TierEntry> Tiers { get; set; }
     }
-
-    public Guid Id { get; set; }
-    public string Name { get; set; } = null!;
-    public decimal Price { get; set; }
-
-    public virtual ICollection<TierEntry> Tiers { get; set; }
 }

@@ -1,14 +1,18 @@
-﻿namespace Data.Entries;
+﻿using System;
+using System.Collections.Generic;
 
-public class AppUserEntry
+namespace Data.Entries
 {
-    public AppUserEntry()
+    public partial class AppUserEntry
     {
-        AuthorizationUsers = new HashSet<AuthorizationUserEntry>();
+        public AppUserEntry()
+        {
+            AuthorizationUsers = new HashSet<AuthorizationUserEntry>();
+        }
+
+        public Guid Id { get; set; }
+        public string? UserRole { get; set; }
+
+        public virtual ICollection<AuthorizationUserEntry> AuthorizationUsers { get; set; }
     }
-
-    public Guid Id { get; set; }
-    public string? UserRole { get; set; }
-
-    public virtual ICollection<AuthorizationUserEntry> AuthorizationUsers { get; set; }
 }

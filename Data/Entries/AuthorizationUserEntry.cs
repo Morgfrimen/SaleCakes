@@ -1,21 +1,25 @@
-﻿namespace Data.Entries;
+﻿using System;
+using System.Collections.Generic;
 
-public class AuthorizationUserEntry
+namespace Data.Entries
 {
-    public AuthorizationUserEntry()
+    public partial class AuthorizationUserEntry
     {
-        OrderClientOrderConditesNavigations = new HashSet<OrderClientEntry>();
-        OrderClientOrderEmoloyeeNavigations = new HashSet<OrderClientEntry>();
+        public AuthorizationUserEntry()
+        {
+            OrderClientOrderConditesNavigations = new HashSet<OrderClientEntry>();
+            OrderClientOrderEmoloyeeNavigations = new HashSet<OrderClientEntry>();
+        }
+
+        public Guid Id { get; set; }
+        public Guid? UserGuid { get; set; }
+        public string UserLogin { get; set; } = null!;
+        public string UserPassword { get; set; } = null!;
+        public DateTime? CreatedAt { get; set; }
+
+        public virtual AppUserEntry? UserGu { get; set; }
+        public virtual EmployeeEntry? Employee { get; set; }
+        public virtual ICollection<OrderClientEntry> OrderClientOrderConditesNavigations { get; set; }
+        public virtual ICollection<OrderClientEntry> OrderClientOrderEmoloyeeNavigations { get; set; }
     }
-
-    public Guid Id { get; set; }
-    public Guid? UserGuid { get; set; }
-    public string? UserLogin { get; set; }
-    public string? UserPassword { get; set; }
-    public DateTime? CreatedAt { get; set; }
-
-    public virtual AppUserEntry? UserGu { get; set; }
-    public virtual EmployeeEntry? Employee { get; set; }
-    public virtual ICollection<OrderClientEntry> OrderClientOrderConditesNavigations { get; set; }
-    public virtual ICollection<OrderClientEntry> OrderClientOrderEmoloyeeNavigations { get; set; }
 }

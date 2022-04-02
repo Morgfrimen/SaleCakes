@@ -28,7 +28,7 @@ public partial class App : Application
     {
         services.Configure<AppSettings>(Configuration.GetSection(nameof(ConnectionString)));
 
-        services.AddDbContext<SaleCakesContext>(options =>
+        services.AddDbContext<SaleCakesDbContext>(options =>
         {
             options.UseSqlServer(Configuration.GetValue<string>(nameof(ConnectionString)) ?? DefaultConnectionString);
             
@@ -66,9 +66,14 @@ public partial class App : Application
         ConfigureServices(serviceCollection);
 
         ServiceProvider = serviceCollection.BuildServiceProvider();
-        builder.Build();
 
         var mainWindow = ServiceProvider.GetService<MainWindow>();
+        mainWindow.Closing += MainWindow_Closing;
         mainWindow.Show();
+    }
+
+    private void MainWindow_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
+    {
+        this.Shutdown(0);
     }
 }

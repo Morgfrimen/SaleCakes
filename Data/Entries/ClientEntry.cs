@@ -1,14 +1,24 @@
-﻿namespace Data.Entries;
+﻿using System;
+using System.Collections.Generic;
 
-public class ClientEntry
+namespace Data.Entries
 {
-    public Guid Id { get; set; }
-    public string ClientName { get; set; } = null!;
-    public string ClientSurname { get; set; } = null!;
-    public string? ClientPatronymic { get; set; }
-    public string? ClientPhone { get; set; }
-    public string? ClientEmail { get; set; }
-    public Guid? ClientOrders { get; set; }
+    public partial class ClientEntry
+    {
+        public ClientEntry()
+        {
+            ClientDesigns = new HashSet<ClientDesign>();
+        }
 
-    public virtual OrderClientEntry? ClientOrdersNavigation { get; set; }
+        public Guid Id { get; set; }
+        public string ClientName { get; set; } = null!;
+        public string ClientSurname { get; set; } = null!;
+        public string? ClientPatronymic { get; set; }
+        public string? ClientPhone { get; set; }
+        public string? ClientEmail { get; set; }
+        public Guid? ClientOrders { get; set; }
+
+        public virtual OrderClientEntry? ClientOrdersNavigation { get; set; }
+        public virtual ICollection<ClientDesign> ClientDesigns { get; set; }
+    }
 }

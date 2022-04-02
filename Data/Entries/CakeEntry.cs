@@ -1,16 +1,21 @@
-﻿namespace Data.Entries;
+﻿using System;
+using System.Collections.Generic;
 
-public class CakeEntry
+namespace Data.Entries
 {
-    public CakeEntry()
+    public partial class CakeEntry
     {
-        OrderClients = new HashSet<OrderClientEntry>();
+        public CakeEntry()
+        {
+            CakeDesigns = new HashSet<CakeDesign>();
+            OrderClients = new HashSet<OrderClientEntry>();
+        }
+
+        public Guid Id { get; set; }
+        public decimal Weight { get; set; }
+        public string Name { get; set; } = null!;
+
+        public virtual ICollection<CakeDesign> CakeDesigns { get; set; }
+        public virtual ICollection<OrderClientEntry> OrderClients { get; set; }
     }
-
-    public Guid Id { get; set; }
-    public decimal Weight { get; set; }
-    public Guid Tiers { get; set; }
-
-    public virtual TierEntry TiersEntryNavigation { get; set; } = null!;
-    public virtual ICollection<OrderClientEntry> OrderClients { get; set; }
 }

@@ -43,20 +43,11 @@ CREATE TABLE tiers
 	shortcake uniqueidentifier foreign key references shortcake(id)
 );
 
-create table cakeDesign
-(
-	id uniqueidentifier DEFAULT NEWID() PRIMARY KEY,
-	cakeId uniqueidentifier foreign key references cake(id),
-	tierId uniqueidentifier foreign key references tiers(id),
-);
-
-
 CREATE TABLE cake
 (
 	id uniqueidentifier DEFAULT NEWID() PRIMARY KEY,
 	weight DECIMAL(18,2) not null,
 	name varchar(500) unique not null,
-	cakeDesignId uniqueidentifier not null foreign key references cakeDesign(id)
 );
 
 create table order_client
@@ -81,14 +72,6 @@ create table client
 	client_orders uniqueidentifier foreign key references order_client(id)
 );
 
-create table clientDesign
-(
-	id uniqueidentifier DEFAULT NEWID() PRIMARY KEY (id),
-	clientId uniqueidentifier foreign key references client(id),
-	orderId uniqueidentifier foreign key references order_client(id),
-
-);
-
 create table employee
 (
 	id uniqueidentifier DEFAULT NEWID() PRIMARY KEY (id),
@@ -98,5 +81,5 @@ create table employee
 	employee_patronymic VARCHAR(500),
 	employee_phone varchar(30) unique not null,
 	employee_email varchar(500) unique not null,
-	isWork boolean not null 
+	isWork bit not null
 );

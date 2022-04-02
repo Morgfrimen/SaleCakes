@@ -1,19 +1,23 @@
-﻿namespace Data.Entries;
+﻿using System;
+using System.Collections.Generic;
 
-public class TierEntry
+namespace Data.Entries
 {
-    public TierEntry()
+    public partial class TierEntry
     {
-        Cakes = new HashSet<CakeEntry>();
+        public TierEntry()
+        {
+            CakeDesigns = new HashSet<CakeDesign>();
+        }
+
+        public Guid Id { get; set; }
+        public Guid? Stuffing { get; set; }
+        public Guid? Decor { get; set; }
+        public Guid? Shortcake { get; set; }
+
+        public virtual DecorEntry? DecorNavigation { get; set; }
+        public virtual ShortcakeEntry? ShortcakeNavigation { get; set; }
+        public virtual StuffingEntry? StuffingNavigation { get; set; }
+        public virtual ICollection<CakeDesign> CakeDesigns { get; set; }
     }
-
-    public Guid Id { get; set; }
-    public Guid? Stuffing { get; set; }
-    public Guid? Decor { get; set; }
-    public Guid? Shortcake { get; set; }
-
-    public virtual DecorEntry? DecorNavigation { get; set; }
-    public virtual ShortcakeEntry? ShortcakeNavigation { get; set; }
-    public virtual StuffingEntry? StuffingNavigation { get; set; }
-    public virtual ICollection<CakeEntry> Cakes { get; set; }
 }
