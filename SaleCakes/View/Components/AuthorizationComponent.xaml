@@ -4,67 +4,33 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:SaleCakes.ViewModel"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+            TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+            Background="{DynamicResource MaterialDesignPaper}"
+            TextElement.FontWeight="Medium"
+            TextElement.FontSize="14"
+            FontFamily="{materialDesign:MaterialDesignFont}"
              mc:Ignorable="d"
-             Background="{x:Null}"
-             d:Background="White"
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <UserControl.Resources>
-        <Style TargetType="Control">
-            <Setter Property="FontFamily" Value="Sitka Banner" />
-            <Setter Property="Background" Value="{x:Null}" />
-            <Setter Property="BorderBrush" Value="Black" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-        </Style>
-        <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="Sitka Banner" />
-        </Style>
-
-    </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30*" />
-            <ColumnDefinition Width="60*" />
-            <ColumnDefinition Width="30*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="10*" />
-            <RowDefinition Height="30*" />
-            <RowDefinition Height="25*" />
-            <RowDefinition Height="25*" />
-            <RowDefinition Height="10*" />
-        </Grid.RowDefinitions>
-        <TextBlock Grid.Column="1" Grid.Row="1"
-                   Text="Авторизация"
+    <Grid  Background="#ffdadada">
+        <Border Background="White" MinWidth="500" Padding="30" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="30">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="30" Color="Black" ShadowDepth="5"/>
+                </Border.Effect>
+                <StackPanel>
+                    <TextBlock Text="Авторизация"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    FontSize="48"
-                   Foreground="Black"
-                   FontWeight="ExtraBold" />
-
-        <Grid Grid.Row="2" Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Grid.Resources>
-                <Style TargetType="TextBox"
-                       BasedOn="{StaticResource {x:Type Control}}">
-                    <Setter Property="HorizontalAlignment" Value="Stretch" />
-                    <Setter Property="FontSize" Value="20" />
-                </Style>
-            </Grid.Resources>
-            <TextBox Grid.Row="0" Text="Логин" />
-
-            <TextBox Text="Пароль" Grid.Row="1" />
-        </Grid>
-
-        <Button Grid.Row="3"
-                Grid.Column="1"
-                Padding="50,2.5"
+                   FontWeight="ExtraBold"/>
+                    <TextBox materialDesign:HintAssist.Hint ="Логин" Style = "{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                    <PasswordBox materialDesign:HintAssist.Hint ="Пароль" Style = "{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+                    <Button
                 Content="Войти"
                 Click="ButtonBase_OnClick"
-                HorizontalAlignment="Center" />
-
-    </Grid>
+                Margin="0,20,0,0" />
+                </StackPanel>
+            </Border>
+        </Grid>
 </UserControl>

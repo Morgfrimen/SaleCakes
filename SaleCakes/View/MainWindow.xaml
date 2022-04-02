@@ -12,14 +12,9 @@
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
-        FontFamily="{materialDesign:MaterialDesignFont}">
-        <!--mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen"
-        Title="Кондитер"
-
-        Height="{Binding RelativeSource={RelativeSource Self}, Path=MinHeight}"
-        Width="{Binding RelativeSource={RelativeSource Self}, Path=MinWidth}"
-        MinHeight="450" MinWidth="800">-->
+        FontFamily="{materialDesign:MaterialDesignFont}"
+        MinWidth="550"
+        MinHeight="400">
 
     <Window.DataContext>
         <vm:MainWindowViewModel />
@@ -29,25 +24,17 @@
         <converters:ByteArrayToImageSourceConverter x:Key="ImageSourceConverter" />
     </Window.Resources>
 
-    <!--<Window.Background>
-        <ImageBrush
-            ImageSource="{Binding 
-            Source={x:Static res:Resources.BackgrountMain},
-            Converter={StaticResource ImageSourceConverter}}"
-            Stretch="UniformToFill" />
-    </Window.Background>-->
-
     <Grid>
-        <Grid.ColumnDefinitions>
+        <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*"></ColumnDefinition>
             <ColumnDefinition Width="100*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-
-
-            <components:AuthorizationComponent
+        </Grid.ColumnDefinitions>-->
+        
+        <components:AuthorizationComponent
             Grid.Column="1"
             DataContext="{Binding}"
             Visibility="{Binding VisibilityAutorized}" />
+        
         <Frame x:Name="FrameMenuPage" Grid.Column="1" Visibility="{Binding VisibilityMenu}" 
                NavigationUIVisibility="Hidden" />
     </Grid>
