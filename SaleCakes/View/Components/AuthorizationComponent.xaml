@@ -30,14 +30,26 @@
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <PasswordBox materialDesign:HintAssist.Hint="Пароль"
                                  Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+
+                    <Button FontSize="12"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Padding="0"
+                            Height="15"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Foreground="DodgerBlue"
+                            FontWeight="Light"
+                            Content="Зарегистрироваться" />
+
                     <Button
                         Content="Войти"
                         Click="ButtonBase_OnClick"
-                        Margin="0,20,0,0" />
+                        Margin="0,5,0,0" />
                     <Button
                         Content="Выход"
                         Click="Exit"
-                        Margin="0,20,0,0" />
+                        Margin="0,15,0,0" />
                 </StackPanel>
             </Border>
         </Grid>

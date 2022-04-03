@@ -41,11 +41,11 @@
                     VerticalAlignment="Center"
                     Height="40"
                     Width="120" FontSize="14" FontWeight="Normal" Click="ButtonEdit_Click" />
-            <Button Grid.Row="6" Content="Главное меню"
+            <!--<Button Grid.Row="6" Content="Главное меню"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Height="40"
-                    Width="120" FontSize="14" FontWeight="Normal" Click="ButtonMainMenu_Click" />
+                    Width="120" FontSize="14" FontWeight="Normal" Click="ButtonMainMenu_Click" />-->
             <TextBlock Grid.Row="0" x:Name="orderId" HorizontalAlignment="Center" TextWrapping="Wrap"
                        Text="Новая начинка" VerticalAlignment="Center" Width="150" Height="25" FontSize="16"
                        Background="{x:Null}" TextAlignment="Center" />

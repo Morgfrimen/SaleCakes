@@ -13,34 +13,41 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}"
-        MinWidth="250"
+        MinWidth="750"
+        ResizeMode="CanResizeWithGrip"
         AllowsTransparency="True"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         MaxWidth="1500"
-        MinHeight="300"
+        MouseLeftButtonDown="MainWindow_OnMouseLeftButtonUp"
+        MinHeight="750"
         d:Width="550">
 
     <Window.Style>
         <Style TargetType="Window">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=AuthorizationComponent, 
-                    Path=Visibility,UpdateSourceTrigger=PropertyChanged}" 
-                             Value="Visibly">
-                    <Setter Property="ResizeMode" Value="NoResize"></Setter>
-                    <Setter Property="MinHeight" Value="300"></Setter>
-                    <Setter Property="Height" Value="300"></Setter>
-                    <Setter Property="MinWidth" Value="250"></Setter>
-                    <Setter Property="Width" Value="250"></Setter>
-                    <Setter Property="WindowStyle" Value="None"></Setter>
-                    <Setter Property="Background" Value="Transparent"></Setter>
+                <DataTrigger
+                    Binding="{Binding ElementName=AuthorizationComponent, 
+                    Path=Visibility,UpdateSourceTrigger=PropertyChanged}"
+                    Value="Visibly">
+                    <Setter Property="ResizeMode" Value="NoResize" />
+                    <Setter Property="MinHeight" Value="300" />
+                    <Setter Property="Height" Value="300" />
+                    <Setter Property="MinWidth" Value="250" />
+                    <Setter Property="Width" Value="250" />
+                    <Setter Property="WindowStyle" Value="None" />
+                    <Setter Property="Background" Value="Transparent" />
                 </DataTrigger>
-                <DataTrigger Binding="{Binding  ElementName=AuthorizationComponent, 
-                    Path=Visibility,UpdateSourceTrigger=PropertyChanged}" 
-                             Value="Hidden">
-                    <Setter Property="ResizeMode" Value="CanResizeWithGrip"></Setter>
-                    <Setter Property="WindowStyle" Value="ToolWindow"></Setter>
-                    <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}"></Setter>
+                <DataTrigger
+                    Binding="{Binding  ElementName=AuthorizationComponent, 
+                    Path=Visibility,UpdateSourceTrigger=PropertyChanged}"
+                    Value="Hidden">
+                    <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
+                    <Setter Property="WindowStyle" Value="ToolWindow" />
+                    <Setter Property="MinHeight" Value="750" />
+                    <Setter Property="MinWidth" Value="750" />
+                    <Setter Property="WindowStyle" Value="None" />
+                    <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -76,8 +83,8 @@
                 <Grid>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="95*" />
-                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="85*" />
+                        <ColumnDefinition Width="15*" />
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
@@ -91,29 +98,31 @@
                            Visibility="{Binding VisibilityMenu}"
                            NavigationUIVisibility="Hidden" />
 
-                    <Button Grid.Row="0" Grid.Column="1" Click="Exit" Cursor="Hand">X</Button>
+                    <components:AppButtonTopComponents
+                        Grid.Row="0" Grid.Column="1" />
 
                     <materialDesign:DrawerHost
-                    OpenMode="Modal"
-                    Grid.ColumnSpan="2"
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
-                    x:Name="DrawerHost"
-                    Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type showMeTheXaml:XamlDisplay}},Path=ActualWidth}"
-                    Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type showMeTheXaml:XamlDisplay}}, Path=ActualHeight}"
-                    BorderBrush="{DynamicResource MaterialDesignDivider}"
-                    BottomDrawerCornerRadius="20 20 0 0"
-                    BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}"
-                    IsLeftDrawerOpen="False">
+                        OpenMode="Modal"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        x:Name="DrawerHost"
+                        Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type showMeTheXaml:XamlDisplay}},Path=ActualWidth}"
+                        Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type showMeTheXaml:XamlDisplay}}, Path=ActualHeight}"
+                        BorderBrush="{DynamicResource MaterialDesignDivider}"
+                        BottomDrawerCornerRadius="20 20 0 0"
+                        BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}"
+                        IsLeftDrawerOpen="False">
 
                         <materialDesign:DrawerHost.Style>
                             <Style TargetType="materialDesign:DrawerHost"
-                               BasedOn="{StaticResource {x:Type materialDesign:DrawerHost}}">
+                                   BasedOn="{StaticResource {x:Type materialDesign:DrawerHost}}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding IsChecked, ElementName=BackgroundToggle}"
-                                             Value="True">
+                                                 Value="True">
                                         <Setter Property="OverlayBackground"
-                                            Value="{DynamicResource PrimaryHueMidBrush}" />
+                                                Value="{DynamicResource PrimaryHueMidBrush}" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -122,81 +131,79 @@
                         <materialDesign:DrawerHost.LeftDrawerContent>
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="90*"></RowDefinition>
-                                    <RowDefinition Height="Auto"></RowDefinition>
+                                    <RowDefinition Height="90*" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
+
                                 <StackPanel>
                                     <Button
-                                    Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                                    CommandParameter="{x:Static Dock.Left}"
-                                    Margin="4"
-                                    Style="{StaticResource MaterialDesignFlatButton}"
-                                    Content="Тортики"
-                                    Click="NavigateToCakesPageOnClick"/>
-
-                                    <Button
-                                    Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                                    CommandParameter="{x:Static Dock.Left}"
-                                    Margin="4"
-                                    Style="{StaticResource MaterialDesignFlatButton}"
-                                    Content="Сотрудники" 
-                                    Click="NavigateToEmployeesPageOnClick"/>
-
-                                    <Button
-                                    Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                                    CommandParameter="{x:Static Dock.Left}"
-                                    Margin="4"
-                                    Style="{StaticResource MaterialDesignFlatButton}"
-                                    Content="Заказы" 
-                                    Click="NavigateToOrdersPageOnClick"/>
-
-                                    <Button
-                                    Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                                    CommandParameter="{x:Static Dock.Left}"
-                                    Margin="4"
-                                    Style="{StaticResource MaterialDesignFlatButton}"
-                                    Content="Клиенты" 
-                                    Click="NavigateToClientsPageOnClick"/>
-
-                                    <Button
-                                    Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                                    CommandParameter="{x:Static Dock.Left}"
-                                    Margin="4"
-                                    Style="{StaticResource MaterialDesignFlatButton}"
-                                    Content="Декор" 
-                                    Click="NavigateToDecorsPageOnClick"/>
-                                </StackPanel>
-
-                                <StackPanel Grid.Row ="1">
-                                    <Button
-                                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                                            Margin="4"
-                                            Style="{StaticResource MaterialDesignFlatButton}"
-                                            MinHeight="55"
-                                    >
-                                        <materialDesign:PackIcon Kind="Backburger" 
-                                                                 Width="50" 
-                                                                 Height="50" VerticalAlignment="Center"/>
+                                        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                        Margin="4"
+                                        Foreground="Black"
+                                        Style="{StaticResource MaterialDesignFlatButton}"
+                                        MinHeight="55">
+                                        <Viewbox MaxHeight="40">
+                                            <materialDesign:PackIcon Kind="Backburger"
+                                                                     Width="30"
+                                                                     Height="30" VerticalAlignment="Center" />
+                                        </Viewbox>
                                     </Button>
+                                    <Button
+                                        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                        CommandParameter="{x:Static Dock.Left}"
+                                        Margin="4"
+                                        Style="{StaticResource MaterialDesignFlatButton}"
+                                        Content="Тортики"
+                                        Click="NavigateToCakesPageOnClick" />
+
+                                    <Button
+                                        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                        CommandParameter="{x:Static Dock.Left}"
+                                        Margin="4"
+                                        Style="{StaticResource MaterialDesignFlatButton}"
+                                        Content="Сотрудники"
+                                        Click="NavigateToEmployeesPageOnClick" />
+
+                                    <Button
+                                        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                        CommandParameter="{x:Static Dock.Left}"
+                                        Margin="4"
+                                        Style="{StaticResource MaterialDesignFlatButton}"
+                                        Content="Заказы"
+                                        Click="NavigateToOrdersPageOnClick" />
+
+                                    <Button
+                                        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                        CommandParameter="{x:Static Dock.Left}"
+                                        Margin="4"
+                                        Style="{StaticResource MaterialDesignFlatButton}"
+                                        Content="Клиенты"
+                                        Click="NavigateToClientsPageOnClick" />
+
+                                    <Button
+                                        Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                        CommandParameter="{x:Static Dock.Left}"
+                                        Margin="4"
+                                        Style="{StaticResource MaterialDesignFlatButton}"
+                                        Content="Декор"
+                                        Click="NavigateToDecorsPageOnClick" />
                                 </StackPanel>
                             </Grid>
                         </materialDesign:DrawerHost.LeftDrawerContent>
 
                         <ToggleButton Foreground="Black"
-                                  Margin="20,20,0,0"
-                                  VerticalAlignment="Top"
-                                  IsChecked="{Binding ElementName=DrawerHost,Path=IsLeftDrawerOpen}"
-                                  HorizontalAlignment="Left"
-                                  Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-                                  CommandParameter="{x:Static Dock.Left}"
-                                  Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
+                                      Margin="20,20,0,0"
+                                      VerticalAlignment="Top"
+                                      IsChecked="{Binding ElementName=DrawerHost,Path=IsLeftDrawerOpen}"
+                                      HorizontalAlignment="Left"
+                                      Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                                      CommandParameter="{x:Static Dock.Left}"
+                                      Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
 
                     </materialDesign:DrawerHost>
                 </Grid>
 
-                
 
-                
             </materialDesign:ColorZone>
         </showMeTheXaml:XamlDisplay>
 

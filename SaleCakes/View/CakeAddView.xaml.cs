@@ -16,4 +16,15 @@ public partial class CakeAddView : Window
     {
         Close();
     }
+
+    private void CakeAddView_OnFocusableChanged(object sender, DependencyPropertyChangedEventArgs e)
+    {
+        if(e.NewValue is false)
+            this.Close();
+    }
+
+    private void CakeAddView_OnLostFocus(object sender, RoutedEventArgs e)
+    {
+        this.Close();
+    }
 }

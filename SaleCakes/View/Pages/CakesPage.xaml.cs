@@ -9,41 +9,29 @@ namespace SaleCakes.View.Pages;
 /// </summary>
 public partial class CakesPage : Page
 {
-    private readonly CakeAddView _cakeAddView;
     private CakeViewModel? _cakeViewModel = new();
+    private CakeAddView? _cakeAddView;
 
-    public CakesPage(CakeAddView cakeAddView)
+    public CakesPage()
     {
-        _cakeAddView = cakeAddView;
         InitializeComponent();
-        StartPage();
-    }
-
-    private void StartPage()
-    {
         _cakeViewModel = DataContext as CakeViewModel;
         _cakeViewModel!.LoadModes.Execute(_cakeViewModel.ModelCakes);
     }
 
-    private void ButtonMainMenu_Click(object sender, RoutedEventArgs e)
-    {
-        NavigationService.GoBack();
-    }
-
-    private void ButtonEdit_Click(object sender, RoutedEventArgs e)
-    {
-    }
-
     private void Button_OpenAddCake_OnClick(object sender, RoutedEventArgs e)
     {
-        CakeAddView? cakeAddView = new() { DataContext = new CakeAddViewModel(_cakeViewModel) };
-        cakeAddView.Show();
+        _cakeAddView ??= new() { DataContext = new CakeAddViewModel(_cakeViewModel) };
+        if(!_cakeAddView.IsActive)
+            _cakeAddView.Show();
     }
     
     private void ListViewItem_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
-        CakeAddView? cakeAddView = new() { DataContext = new CakeAddViewModel(_cakeViewModel) };
-        cakeAddView.Show();
+        this.Focus();
+        _cakeAddView ??= new() { DataContext = new CakeAddViewModel(_cakeViewModel) };
+        if (!_cakeAddView.IsActive)
+            _cakeAddView.Show();
     }
 
 }

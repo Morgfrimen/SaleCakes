@@ -42,11 +42,11 @@
                     VerticalAlignment="Bottom"
                     Height="40"
                     Width="120" FontSize="14" FontWeight="Normal" Click="ButtonEdit_Click" />
-            <Button Grid.Row="7" Content="Главное меню"
+            <!--<Button Grid.Row="7" Content="Главное меню"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Height="40"
-                    Width="120" FontSize="14" FontWeight="Normal" Click="ButtonMainMenu_Click" />
+                    Width="120" FontSize="14" FontWeight="Normal" Click="ButtonMainMenu_Click" />-->
             <TextBox Grid.Row="0" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Выбран заказ №"
                      VerticalAlignment="Center" Width="115" Height="25" FontSize="14" Background="{x:Null}"
                      BorderBrush="{x:Null}" Margin="10,0,0,0" />

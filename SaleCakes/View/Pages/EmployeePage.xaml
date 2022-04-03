@@ -43,11 +43,11 @@
                     VerticalAlignment="Center"
                     Height="40"
                     Width="120" FontSize="14" FontWeight="Normal" Click="ButtonEdit_Click" />
-            <Button Grid.Row="7" Content="Главное меню"
+            <!--<Button Grid.Row="7" Content="Главное меню"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Height="40"
-                    Width="120" FontSize="14" FontWeight="Normal" Click="ButtonMainMenu_Click" />
+                    Width="120" FontSize="14" FontWeight="Normal" Click="ButtonMainMenu_Click" />-->
             <TextBox Grid.Row="1" x:Name="firstNameTextBox" HorizontalAlignment="Center" TextWrapping="Wrap"
                      VerticalAlignment="Center" Height="30" Width="165" FontSize="16" />
             <TextBox Grid.Row="3" x:Name="lastNameTextBox" HorizontalAlignment="Center" TextWrapping="Wrap"

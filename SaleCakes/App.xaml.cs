@@ -48,7 +48,9 @@ public partial class App : Application
         _ = services.AddTransient<EmployeePage>();
         _ = services.AddTransient<MainMenuComponent>();
         _ = services.AddTransient<OrdersPage>();
-        _ = services.AddTransient<CakeAddView>();
+
+        //View
+        //_ = services.AddTransient<CakeAddView>();
 
         //Repositories
         _ = services.AddTransient<IDecorRepositories, DecorRepositories>();

@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Navigation;
 using SaleCakes.View.Components;
 using SaleCakes.View.Pages;
@@ -28,46 +31,42 @@ public partial class MainWindow : Window
 
     private void NavigateToCakesPageOnClick(object sender, RoutedEventArgs e)
     {
-        while (FrameMenuPage.NavigationService.CanGoBack) 
-            FrameMenuPage.NavigationService.GoBack();
+        while (FrameMenuPage.NavigationService.CanGoBack) FrameMenuPage.NavigationService.GoBack();
         _ = FrameMenuPage.Navigate(_cakesPage);
-
     }
 
     private void NavigateToClientsPageOnClick(object sender, RoutedEventArgs e)
     {
-        while (FrameMenuPage.NavigationService.CanGoBack)
-            FrameMenuPage.NavigationService.GoBack();
+        while (FrameMenuPage.NavigationService.CanGoBack) FrameMenuPage.NavigationService.GoBack();
         _ = FrameMenuPage.Navigate(_clientsPage);
-
     }
 
     private void NavigateToDecorsPageOnClick(object sender, RoutedEventArgs e)
     {
-        while (FrameMenuPage.NavigationService.CanGoBack)
-            FrameMenuPage.NavigationService.GoBack();
+        while (FrameMenuPage.NavigationService.CanGoBack) FrameMenuPage.NavigationService.GoBack();
         _ = FrameMenuPage.Navigate(_decorPage);
-
     }
 
     private void NavigateToOrdersPageOnClick(object sender, RoutedEventArgs e)
     {
-        while (FrameMenuPage.NavigationService.CanGoBack)
-            FrameMenuPage.NavigationService.GoBack();
+        while (FrameMenuPage.NavigationService.CanGoBack) FrameMenuPage.NavigationService.GoBack();
         _ = FrameMenuPage.Navigate(_ordersPage);
-
     }
 
     private void NavigateToEmployeesPageOnClick(object sender, RoutedEventArgs e)
     {
-        while (FrameMenuPage.NavigationService.CanGoBack)
-            FrameMenuPage.NavigationService.GoBack();
+        while (FrameMenuPage.NavigationService.CanGoBack) FrameMenuPage.NavigationService.GoBack();
         _ = FrameMenuPage.Navigate(_employeePage);
-
     }
 
     private void Exit(object sender, RoutedEventArgs e)
     {
         App.Current.Shutdown(0);
+    }
+
+    private void MainWindow_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+    {
+        base.OnMouseLeftButtonDown(e);
+        DragMove();
     }
 }
