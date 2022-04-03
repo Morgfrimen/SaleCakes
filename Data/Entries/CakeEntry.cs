@@ -10,7 +10,7 @@ internal class CakeEntry
 
     internal Guid Id { get; set; }
     internal decimal Weight { get; set; }
-    internal string Name { get; set; } = null!;
+    internal string Name { get; set; }
 
     internal virtual ICollection<CakeDesign> CakeDesigns { get; set; }
     internal virtual ICollection<OrderClientEntry> OrderClients { get; set; }
