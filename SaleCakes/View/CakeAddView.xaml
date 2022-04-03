@@ -4,59 +4,57 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:SaleCakes.ViewModel"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         d:DataContext="{d:DesignInstance vm:CakeAddViewModel}"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="CakeAddView" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+        Title="CakeAddView" Width="450"
+        Height="450" Visibility="Visible" WindowStyle="None" Background="{x:Null}" Foreground="{x:Null}" MinWidth="450" MinHeight="450" MaxWidth="450" MaxHeight="450">
+    <Border CornerRadius="5">
+        <Grid Background="Transparent">
+            <Border Background="White" MinWidth="100"
+                    Padding="30"
+                    VerticalAlignment="Stretch"
+                    CornerRadius="30">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="30" Color="Black" ShadowDepth="5" />
+                </Border.Effect>
 
-        <StackPanel Grid.Column="0"
-                    Grid.Row="0">
-            <TextBox Text="Введите название" />
-            <TextBox Text="Введите цену" />
 
-        </StackPanel>
-
-        <Button Grid.Column="0"
-                Grid.Row="1"
-                Command="{Binding AddStuffing}"
-                CommandParameter="{Binding Tier}"
-                Content="Добавить начинку" />
-
-        <Button Grid.Column="1"
-                Grid.Row="1"
-                Command="{Binding AddDecor}"
-                CommandParameter="{Binding Tier}"
-                Content="Добавить декор" />
-
-        <Button Grid.Column="2"
-                Grid.Row="1"
-                Command="{Binding AddShortcake}"
-                CommandParameter="{Binding Tier}"
-                Content="Добавить корж" />
-
-        <Button Grid.Column="1"
-                Grid.Row="2" Content="Добавить торт"
-                Command="{Binding AddCake}"
-                CommandParameter="{Binding Tier}" />
-
-        <Button Grid.Column="2" Grid.Row="2"
+                <StackPanel>
+                    <TextBox materialDesign:HintAssist.Hint="Введите название"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" Foreground="Black" />
+                    <TextBox materialDesign:HintAssist.Hint="Введите цену"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" Foreground="Black" />
+                    <materialDesign:PackIcon Kind="ArrowDownBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <Button 
+                    Command="{Binding AddStuffing}"
+                    CommandParameter="{Binding Tier}"
+                    Content="Добавить начинку" />
+                    <materialDesign:PackIcon Kind="ArrowDownBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <Button 
+                    Command="{Binding AddDecor}"
+                    CommandParameter="{Binding Tier}"
+                    Content="Добавить декор" />
+                    <materialDesign:PackIcon Kind="ArrowDownBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <Button 
+                    Command="{Binding AddShortcake}"
+                    CommandParameter="{Binding Tier}"
+                    Content="Добавить корж" />
+                    <materialDesign:PackIcon Kind="ArrowDownBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <Button  Content="Добавить торт"
+                     Command="{Binding AddCake}"
+                     CommandParameter="{Binding Tier}" />
+                    <materialDesign:PackIcon Kind="ArrowDownBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <Button 
+                    Content="Добавить слой" Command="{Binding AddTier}"
+                    CommandParameter="{Binding Tier}" />
+                    <materialDesign:PackIcon Kind="ArrowDownBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    <Button 
                 Content="Вернутся назад" Click="Exit" />
+                </StackPanel>
 
-
-        <Button Grid.Column="0" Grid.Row="2"
-                Content="Добавить слой" Command="{Binding AddTier}"
-                CommandParameter="{Binding Tier}" />
-
-    </Grid>
+            </Border>
+        </Grid>
+    </Border>
 </Window>
