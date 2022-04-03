@@ -120,23 +120,66 @@
                         </materialDesign:DrawerHost.Style>
 
                         <materialDesign:DrawerHost.LeftDrawerContent>
-                            <StackPanel>
-                                <Button
-                                Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                                CommandParameter="{x:Static Dock.Left}"
-                                Margin="4"
-                                HorizontalAlignment="Center"
-                                Style="{StaticResource MaterialDesignFlatButton}"
-                                Content="Тортики" 
-                                Click="NavigateToCakesPageOnClick"/>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="90*"></RowDefinition>
+                                    <RowDefinition Height="Auto"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <StackPanel>
+                                    <Button
+                                    Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                    CommandParameter="{x:Static Dock.Left}"
+                                    Margin="4"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Content="Тортики"
+                                    Click="NavigateToCakesPageOnClick"/>
 
-                                <Button
-                                Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
-                                Margin="4"
-                                HorizontalAlignment="Center"
-                                Style="{StaticResource MaterialDesignFlatButton}"
-                                Content="CLOSE ALL" />
-                            </StackPanel>
+                                    <Button
+                                    Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                    CommandParameter="{x:Static Dock.Left}"
+                                    Margin="4"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Content="Сотрудники" 
+                                    Click="NavigateToEmployeesPageOnClick"/>
+
+                                    <Button
+                                    Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                    CommandParameter="{x:Static Dock.Left}"
+                                    Margin="4"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Content="Заказы" 
+                                    Click="NavigateToOrdersPageOnClick"/>
+
+                                    <Button
+                                    Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                    CommandParameter="{x:Static Dock.Left}"
+                                    Margin="4"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Content="Клиенты" 
+                                    Click="NavigateToClientsPageOnClick"/>
+
+                                    <Button
+                                    Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                    CommandParameter="{x:Static Dock.Left}"
+                                    Margin="4"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Content="Декор" 
+                                    Click="NavigateToDecorsPageOnClick"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Row ="1">
+                                    <Button
+                                            Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                                            Margin="4"
+                                            Style="{StaticResource MaterialDesignFlatButton}"
+                                            MinHeight="55"
+                                    >
+                                        <materialDesign:PackIcon Kind="Backburger" 
+                                                                 Width="50" 
+                                                                 Height="50" VerticalAlignment="Center"/>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
                         </materialDesign:DrawerHost.LeftDrawerContent>
 
                         <ToggleButton Foreground="Black"

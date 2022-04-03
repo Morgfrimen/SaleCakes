@@ -39,4 +39,11 @@ public partial class CakesPage : Page
         CakeAddView? cakeAddView = new() { DataContext = new CakeAddViewModel(_cakeViewModel) };
         cakeAddView.Show();
     }
+    
+    private void ListViewItem_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        CakeAddView? cakeAddView = new() { DataContext = new CakeAddViewModel(_cakeViewModel) };
+        cakeAddView.Show();
+    }
+
 }
