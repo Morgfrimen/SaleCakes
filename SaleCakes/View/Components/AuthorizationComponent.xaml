@@ -3,34 +3,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vm="clr-namespace:SaleCakes.ViewModel"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-            TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-            Background="{DynamicResource MaterialDesignPaper}"
-            TextElement.FontWeight="Medium"
-            TextElement.FontSize="14"
-            FontFamily="{materialDesign:MaterialDesignFont}"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             TextElement.FontWeight="Medium"
+             TextElement.FontSize="14"
+             FontFamily="{materialDesign:MaterialDesignFont}"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
-
-    <Grid  Background="Transparent">
-        <Border Background="White" MinWidth="500" Padding="30" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="30">
+             Width="450"
+             Height="300">
+    <Border CornerRadius="5">
+        <Grid Background="Transparent">
+            <Border Background="White" MinWidth="100"
+                    Padding="30"
+                    VerticalAlignment="Stretch"
+                    CornerRadius="30">
                 <Border.Effect>
-                    <DropShadowEffect BlurRadius="30" Color="Black" ShadowDepth="5"/>
+                    <DropShadowEffect BlurRadius="30" Color="Black" ShadowDepth="5" />
                 </Border.Effect>
                 <StackPanel>
                     <TextBlock Text="Авторизация"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="48"
-                   FontWeight="ExtraBold"/>
-                    <TextBox materialDesign:HintAssist.Hint ="Логин" Style = "{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                    <PasswordBox materialDesign:HintAssist.Hint ="Пароль" Style = "{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="48"
+                               FontWeight="ExtraBold" />
+                    <TextBox materialDesign:HintAssist.Hint="Логин"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <PasswordBox materialDesign:HintAssist.Hint="Пароль"
+                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
                     <Button
-                Content="Войти"
-                Click="ButtonBase_OnClick"
-                Margin="0,20,0,0" />
+                        Content="Войти"
+                        Click="ButtonBase_OnClick"
+                        Margin="0,20,0,0" />
+                    <Button
+                        Content="Выход"
+                        Click="Exit"
+                        Margin="0,20,0,0" />
                 </StackPanel>
             </Border>
         </Grid>
+    </Border>
 </UserControl>

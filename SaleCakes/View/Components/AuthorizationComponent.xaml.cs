@@ -24,4 +24,6 @@ public partial class AuthorizationComponent : UserControl
         vm.VisibilityAutorized = Visibility.Collapsed;
         vm.VisibilityMenu = Visibility.Visible;
     }
+
+    private void Exit(object sender, RoutedEventArgs e) => App.Current.Shutdown(0);
 }

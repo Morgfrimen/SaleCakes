@@ -26,4 +26,9 @@ public partial class MainWindow : Window
         _ = FrameMenuPage.Navigate(_cakesPage);
 
     }
+
+    private void Exit(object sender, RoutedEventArgs e)
+    {
+        App.Current.Shutdown(0);
+    }
 }
