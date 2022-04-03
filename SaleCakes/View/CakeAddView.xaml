@@ -14,12 +14,11 @@
         Title="CakeAddView" Width="450"
         Height="450" 
         WindowStyle="None"
-        Background="Transparent" Foreground="{x:Null}" 
         MinWidth="450" MinHeight="450" 
         MaxWidth="450" MaxHeight="450">
     <Window.Template>
         <ControlTemplate TargetType="Window">
-            <Border CornerRadius="30">
+            <Border CornerRadius="300" Background="Transparent">
                 <ContentControl Content="{TemplateBinding Content}"></ContentControl>
             </Border>
         </ControlTemplate>
