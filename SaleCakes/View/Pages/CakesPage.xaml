@@ -17,13 +17,13 @@
         <convertes:InverseBooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Page.Resources>
 
-    <Grid>
+    <Grid ZIndex="-100">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
             <ColumnDefinition Width="300" />
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
+        <Grid Grid.Column="0" ZIndex="-10">
             <ListView x:Name="listDecorView"
                       ItemsSource="{Binding ModelCakes, UpdateSourceTrigger=PropertyChanged}"
                       d:ItemsSource="{d:SampleData ItemCount=5}">
@@ -46,11 +46,20 @@
                 </ListView.View>
             </ListView>
 
-            <Border Grid.Column="0" BorderThickness="1" BorderBrush="#FFFFFF" Background="#FFFFFF"
+            <Border Grid.Column="0" BorderThickness="1"
                     Visibility="{Binding ElementName=listDecorView, Path=HasItems, 
                 UpdateSourceTrigger=PropertyChanged,
                 Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Button Content="Добавить торт" Click="Button_OpenAddCake_OnClick" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*" />
+                        <ColumnDefinition Width="80*"/>
+                        <ColumnDefinition Width="10*" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" 
+                        Content="Добавить торт" 
+                            Click="Button_OpenAddCake_OnClick" />
+                </Grid>
             </Border>
 
         </Grid>

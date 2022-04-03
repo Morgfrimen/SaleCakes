@@ -1,5 +1,7 @@
 ﻿using System.Windows;
+using System.Windows.Navigation;
 using SaleCakes.View.Components;
+using SaleCakes.View.Pages;
 
 namespace SaleCakes.View;
 
@@ -8,12 +10,20 @@ namespace SaleCakes.View;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private readonly MainMenuComponent _mainMenuComponent;
+    private readonly CakesPage _cakesPage;
 
-    public MainWindow(MainMenuComponent mainMenuComponent)
+    public MainWindow(CakesPage cakesPage)
     {
-        _mainMenuComponent = mainMenuComponent;
+        _cakesPage = cakesPage;
         InitializeComponent();
-        _ = FrameMenuPage.Navigate(_mainMenuComponent);
+        
+    }
+
+    private void NavigateToCakesPageOnClick(object sender, RoutedEventArgs e)
+    {
+        while (FrameMenuPage.NavigationService.CanGoBack) 
+            FrameMenuPage.NavigationService.GoBack();
+        _ = FrameMenuPage.Navigate(_cakesPage);
+
     }
 }

@@ -24,8 +24,8 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="MenuColumn" Width="10*" />
-            <ColumnDefinition Width="90*" />
+            <ColumnDefinition x:Name="MenuColumn" Width="15*" />
+            <ColumnDefinition Width="85*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition x:Name="RowMenu" Height="10*" />
@@ -45,8 +45,22 @@
                 Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type showMeTheXaml:XamlDisplay}}, Path=ActualHeight}"
                 Mode="Light">
 
-                <materialDesign:DrawerHost
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*" MinHeight="50" />
+                        <RowDefinition Height="90*" />
+                    </Grid.RowDefinitions>
+
+                    <Frame Grid.Row="1"
+                           x:Name="FrameMenuPage"
+                           Visibility="{Binding VisibilityMenu}"
+                           NavigationUIVisibility="Hidden" />
+
+                    <materialDesign:DrawerHost
                     OpenMode="Modal"
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
                     x:Name="DrawerHost"
                     Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type showMeTheXaml:XamlDisplay}},Path=ActualWidth}"
                     Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type showMeTheXaml:XamlDisplay}}, Path=ActualHeight}"
@@ -55,44 +69,40 @@
                     BottomDrawerBackground="{DynamicResource SecondaryHueLightBrush}"
                     IsLeftDrawerOpen="False">
 
-                    <materialDesign:DrawerHost.Style>
-                        <Style TargetType="materialDesign:DrawerHost"
+                        <materialDesign:DrawerHost.Style>
+                            <Style TargetType="materialDesign:DrawerHost"
                                BasedOn="{StaticResource {x:Type materialDesign:DrawerHost}}">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsChecked, ElementName=BackgroundToggle}"
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsChecked, ElementName=BackgroundToggle}"
                                              Value="True">
-                                    <Setter Property="OverlayBackground"
+                                        <Setter Property="OverlayBackground"
                                             Value="{DynamicResource PrimaryHueMidBrush}" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </materialDesign:DrawerHost.Style>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </materialDesign:DrawerHost.Style>
 
-                    <materialDesign:DrawerHost.LeftDrawerContent>
-                        <StackPanel Width="200">
-                            <TextBlock
-                                Margin="4"
-                                HorizontalAlignment="Center"
-                                Text="LEFT FIELD" />
-
-                            <Button
+                        <materialDesign:DrawerHost.LeftDrawerContent>
+                            <StackPanel>
+                                <Button
                                 Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                                 CommandParameter="{x:Static Dock.Left}"
                                 Margin="4"
                                 HorizontalAlignment="Center"
                                 Style="{StaticResource MaterialDesignFlatButton}"
-                                Content="CLOSE THIS" />
+                                Content="Тортики" 
+                                Click="NavigateToCakesPageOnClick"/>
 
-                            <Button
+                                <Button
                                 Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                                 Margin="4"
                                 HorizontalAlignment="Center"
                                 Style="{StaticResource MaterialDesignFlatButton}"
                                 Content="CLOSE ALL" />
-                        </StackPanel>
-                    </materialDesign:DrawerHost.LeftDrawerContent>
+                            </StackPanel>
+                        </materialDesign:DrawerHost.LeftDrawerContent>
 
-                    <ToggleButton Foreground="Black"
+                        <ToggleButton Foreground="Black"
                                   Margin="20,20,0,0"
                                   VerticalAlignment="Top"
                                   IsChecked="{Binding ElementName=DrawerHost,Path=IsLeftDrawerOpen}"
@@ -101,7 +111,12 @@
                                   CommandParameter="{x:Static Dock.Left}"
                                   Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
 
-                </materialDesign:DrawerHost>
+                    </materialDesign:DrawerHost>
+                </Grid>
+
+                
+
+                
             </materialDesign:ColorZone>
         </showMeTheXaml:XamlDisplay>
 
@@ -112,10 +127,7 @@
             DataContext="{Binding}"
             Visibility="{Binding VisibilityAutorized}" />
 
-        <Frame x:Name="FrameMenuPage"
 
-               Grid.Column="1" Visibility="{Binding VisibilityMenu}"
-               NavigationUIVisibility="Hidden" />
     </Grid>
 
 </Window>
