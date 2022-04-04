@@ -39,6 +39,7 @@ public partial class App : Application
         _ = services.AddTransient<CakeAddViewModel>();
         _ = services.AddTransient<CakeViewModel>();
         _ = services.AddTransient<EmployeeAddViewModel>();
+        _ = services.AddTransient<RegistrationViewModel>();
 
         //Page
         _ = services.AddTransient<MainWindow>();

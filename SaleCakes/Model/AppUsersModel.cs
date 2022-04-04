@@ -2,12 +2,16 @@
 
 namespace SaleCakes.Model;
 
-internal class AppUsersModel
+public class AppUsersModel
 {
     public AppUsersModel(Guid id, string userRole)
     {
         Id = id;
         UserRole = userRole;
+    }
+
+    public AppUsersModel()
+    {
     }
 
     public Guid Id { get; }

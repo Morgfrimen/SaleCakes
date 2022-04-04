@@ -7,6 +7,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:showMeTheXaml="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
         xmlns:components="clr-namespace:SaleCakes.View.Components"
+        xmlns:sysWin="clr-namespace:System.Windows;assembly=PresentationCore"
         mc:Ignorable="d"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="Transparent"
@@ -14,7 +15,7 @@
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}"
         MinWidth="750"
-        ResizeMode="CanResizeWithGrip"
+        ResizeMode="{Binding ResizeModeMainWindow}"
         AllowsTransparency="True"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
@@ -22,37 +23,7 @@
         MouseLeftButtonDown="MainWindow_OnMouseLeftButtonUp"
         MinHeight="750"
         d:Width="550">
-
-    <Window.Style>
-        <Style TargetType="Window">
-            <Style.Triggers>
-                <DataTrigger
-                    Binding="{Binding ElementName=AuthorizationComponent, 
-                    Path=Visibility,UpdateSourceTrigger=PropertyChanged}"
-                    Value="Visibly">
-                    <Setter Property="ResizeMode" Value="NoResize" />
-                    <Setter Property="MinHeight" Value="300" />
-                    <Setter Property="Height" Value="300" />
-                    <Setter Property="MinWidth" Value="250" />
-                    <Setter Property="Width" Value="250" />
-                    <Setter Property="WindowStyle" Value="None" />
-                    <Setter Property="Background" Value="Transparent" />
-                </DataTrigger>
-                <DataTrigger
-                    Binding="{Binding  ElementName=AuthorizationComponent, 
-                    Path=Visibility,UpdateSourceTrigger=PropertyChanged}"
-                    Value="Hidden">
-                    <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
-                    <Setter Property="WindowStyle" Value="ToolWindow" />
-                    <Setter Property="MinHeight" Value="750" />
-                    <Setter Property="MinWidth" Value="750" />
-                    <Setter Property="WindowStyle" Value="None" />
-                    <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Style>
-
+    
     <Window.DataContext>
         <vm:MainWindowViewModel />
     </Window.DataContext>
@@ -96,7 +67,9 @@
                            Grid.ColumnSpan="2"
                            x:Name="FrameMenuPage"
                            Visibility="{Binding VisibilityMenu}"
-                           NavigationUIVisibility="Hidden" />
+                           NavigationUIVisibility="Hidden">
+                       
+                    </Frame>
 
                     <components:AppButtonTopComponents
                         Grid.Row="0" Grid.Column="1" />

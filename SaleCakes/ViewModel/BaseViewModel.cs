@@ -12,5 +12,8 @@ public abstract class BaseViewModel : INotifyPropertyChanged
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
-    public abstract void UpdateAllProperty();
+    public virtual void UpdateAllProperty()
+    {
+
+    }
 }
