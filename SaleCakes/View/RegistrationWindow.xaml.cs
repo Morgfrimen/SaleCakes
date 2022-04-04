@@ -23,5 +23,11 @@ namespace SaleCakes.View
         {
             InitializeComponent();
         }
+
+        private void Close_OnClick(object sender, RoutedEventArgs e)
+        {
+            App.Current.MainWindow.WindowState = WindowState.Normal;
+            this.Close();
+        }
     }
 }

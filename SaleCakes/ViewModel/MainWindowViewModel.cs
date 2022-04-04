@@ -7,6 +7,7 @@ public class MainWindowViewModel : BaseViewModel
 {
     private Visibility _visibilityAutorized = Visibility.Visible;
     private Visibility _visibilityMenu = Visibility.Hidden;
+    private ResizeMode _resizeModeMainWindow;
 
     public Visibility VisibilityAutorized
     {
@@ -16,6 +17,13 @@ public class MainWindowViewModel : BaseViewModel
             _visibilityAutorized = value;
             OnPropertyChanged(nameof(VisibilityAutorized));
         }
+    }
+
+    public ResizeMode ResizeModeMainWindow
+    {
+        get => _resizeModeMainWindow;
+        set { _resizeModeMainWindow = value;
+            OnPropertyChanged(nameof(ResizeModeMainWindow)); }
     }
 
     public Visibility VisibilityMenu

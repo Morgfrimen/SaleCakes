@@ -13,8 +13,7 @@
         Title="Регистрация пользователя" Height="300" Width="350">
     <Window.Template>
         <ControlTemplate TargetType="Window">
-            <Border CornerRadius="30" d:Background="White" 
-                    Background="Transparent">
+            <Border CornerRadius="30" Background="White">
                 <ContentControl Content="{TemplateBinding Content}"></ContentControl>
             </Border>
         </ControlTemplate>
@@ -145,6 +144,7 @@
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                     materialDesign:ButtonAssist.CornerRadius="15"
                     ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
+                    Click="Close_OnClick"
                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
                 <TextBlock
                     Text="Закрыть окно" />
