@@ -4,13 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:viewModel="clr-namespace:SaleCakes.ViewModel"
         mc:Ignorable="d"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         WindowStyle="None"
-        
+        d:DataContext="{d:DesignInstance viewModel:RegistrationViewModel}"
         Title="Регистрация пользователя" Height="300" Width="350">
+
     <Window.Template>
         <ControlTemplate TargetType="Window">
             <Border CornerRadius="30" Background="White">
@@ -88,7 +90,7 @@
                 materialDesign:HintAssist.HelperText="Введите логин пользователя">
                 <TextBox.Text>
                     <Binding
-                        Path="Имя"
+                        Path="User.UserLogin"
                         UpdateSourceTrigger="PropertyChanged">
                     </Binding>
                 </TextBox.Text>
@@ -117,7 +119,7 @@
                      materialDesign:HintAssist.HelperText="Введите пароль пользователя">
                 <TextBox.Text>
                     <Binding
-                        Path="Имя"
+                        Path="User.UserPassword"
                         UpdateSourceTrigger="PropertyChanged">
                     </Binding>
                 </TextBox.Text>
