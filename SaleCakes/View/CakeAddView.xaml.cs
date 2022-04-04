@@ -22,9 +22,4 @@ public partial class CakeAddView : Window
         if(e.NewValue is false)
             this.Close();
     }
-
-    private void CakeAddView_OnLostFocus(object sender, RoutedEventArgs e)
-    {
-        this.Close();
-    }
 }

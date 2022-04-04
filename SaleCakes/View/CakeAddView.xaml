@@ -9,7 +9,6 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         AllowsTransparency="True"
-        LostFocus="CakeAddView_OnLostFocus"
         WindowStartupLocation="CenterScreen"
         Title="CakeAddView" Width="450"
         Height="450" 
