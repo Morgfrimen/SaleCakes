@@ -3,10 +3,153 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SaleCakes.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="RegistrationWindow" Height="450" Width="800">
-    <Grid>
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowStyle="None"
         
+        Title="Регистрация пользователя" Height="300" Width="350">
+    <Window.Template>
+        <ControlTemplate TargetType="Window">
+            <Border CornerRadius="30" d:Background="White" 
+                    Background="Transparent">
+                <ContentControl Content="{TemplateBinding Content}"></ContentControl>
+            </Border>
+        </ControlTemplate>
+    </Window.Template>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="2.5*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="22.5*" />
+            <ColumnDefinition Width="22.5*" />
+            <ColumnDefinition Width="5*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Row="1"
+              Column="1"
+              ColumnSpan="2">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0"
+                       Text="Роль:"
+
+                       Padding="0,5,10,5"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center" />
+
+            <ComboBox Grid.Column="1" 
+                      VerticalAlignment="Center"
+                      materialDesign:ComboBoxAssist.ShowSelectedItem="False">
+                <ComboBoxItem
+                    IsSelected="True"
+                    Content="Директор" />
+                <ComboBoxItem
+                    Content="Администратор" />
+                <ComboBoxItem
+                    Content="Продавец" />
+            </ComboBox>
+
+        </Grid>
+
+        <Grid Row="2"
+              Margin="0,15,0,15"
+              Column="1"
+              ColumnSpan="2">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0"
+                       Text="Логин:"
+                       Padding="0,5,10,5"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center" />
+
+            <TextBox Grid.Column="1"
+                materialDesign:HintAssist.Hint="Логин"
+                materialDesign:HintAssist.HelperText="Введите логин пользователя">
+                <TextBox.Text>
+                    <Binding
+                        Path="Имя"
+                        UpdateSourceTrigger="PropertyChanged">
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+        </Grid>
+
+        <Grid Row="3"
+              Margin="0,15,0,15"
+              Column="1"
+              ColumnSpan="2">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0"
+                       Text="Пароль:"
+                       Padding="0,5,10,5"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center" />
+
+            <TextBox Grid.Column="1"
+                     materialDesign:HintAssist.Hint="Пароль"
+                     materialDesign:HintAssist.HelperText="Введите пароль пользователя">
+                <TextBox.Text>
+                    <Binding
+                        Path="Имя"
+                        UpdateSourceTrigger="PropertyChanged">
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+        </Grid>
+
+        <StackPanel Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2">
+            <Button Margin="0,0,0,10"
+                    VerticalAlignment="Top"
+                    Padding="0,0"
+                    HorizontalAlignment="Stretch"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    materialDesign:ButtonAssist.CornerRadius="15"
+                    ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                <TextBlock
+                    Text="Зарегистрироваться" />
+            </Button>
+
+            <Button Margin="0,0,0,10"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Stretch"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    materialDesign:ButtonAssist.CornerRadius="15"
+                    ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                <TextBlock
+                    Text="Закрыть окно" />
+            </Button>
+
+        </StackPanel>
     </Grid>
 </Window>
