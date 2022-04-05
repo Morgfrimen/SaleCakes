@@ -91,7 +91,7 @@ public class CakeRepositories : RepositoriesBase, ICakeRepositories
         }
     }
 
-    public Task<Result<Guid>> UpdateEntryAsync(CakeDto entity)
+    public Task<Result<Guid>> UpdateEntryAsync(CakeDto entityDto)
     {
         throw new NotImplementedException();
     }

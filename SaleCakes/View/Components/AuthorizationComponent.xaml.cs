@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Extensions.DependencyInjection;
 using SaleCakes.ViewModel;
 
 namespace SaleCakes.View.Components;
@@ -10,9 +11,12 @@ namespace SaleCakes.View.Components;
 public partial class AuthorizationComponent : UserControl
 {
     private RegistrationWindow _registrationWindow;
+    private RegistrationViewModel _vm;
 
     public AuthorizationComponent()
     {
+        _registrationWindow = (App.Current as App).ServiceProvider.GetService<RegistrationWindow>()!;
+        _vm = _registrationWindow.DataContext as RegistrationViewModel;
         InitializeComponent();
     }
 
@@ -35,7 +39,7 @@ public partial class AuthorizationComponent : UserControl
 
     private void Registration_OnClick(object sender, RoutedEventArgs e)
     {
-        _registrationWindow = new RegistrationWindow();
+        _registrationWindow = new RegistrationWindow(_vm);
         _registrationWindow.Show();
         Application.Current.MainWindow.WindowState = WindowState.Minimized;
     }

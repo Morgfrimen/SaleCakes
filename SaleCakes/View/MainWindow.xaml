@@ -182,7 +182,6 @@
 
         <components:AuthorizationComponent
             Grid.Column="0"
-            x:Name="AuthorizationComponent"
             Grid.ColumnSpan="2"
             Grid.Row="0" Grid.RowSpan="2"
             DataContext="{Binding}"

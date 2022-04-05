@@ -79,34 +79,34 @@ public class TierRepositories : RepositoriesBase, ITierRepositories
         }
     }
 
-    public async Task<Result<Guid>> UpdateEntryAsync(TiersDto entity)
+    public async Task<Result<Guid>> UpdateEntryAsync(TiersDto entityDto)
     {
         try
         {
             StuffingEntry? stuffingEntry = new()
             {
-                Id = entity.Id,
-                Name = entity.StuffingDto.Name,
-                Price = entity.StuffingDto.Price
+                Id = entityDto.Id,
+                Name = entityDto.StuffingDto.Name,
+                Price = entityDto.StuffingDto.Price
             };
 
             ShortcakeEntry? shortcakeEntry = new()
             {
-                Id = entity.Id,
-                Name = entity.ShortcakeDto.Name,
-                Price = entity.ShortcakeDto.Price
+                Id = entityDto.Id,
+                Name = entityDto.ShortcakeDto.Name,
+                Price = entityDto.ShortcakeDto.Price
             };
 
             DecorEntry? decorEntry = new()
             {
-                Id = entity.Id,
-                Name = entity.DecorDto.Name,
-                Price = entity.DecorDto.Price
+                Id = entityDto.Id,
+                Name = entityDto.DecorDto.Name,
+                Price = entityDto.DecorDto.Price
             };
 
             TierEntry? updateModel = new()
             {
-                Id = entity.Id,
+                Id = entityDto.Id,
                 StuffingEntry = stuffingEntry,
                 ShortcakeEntry = shortcakeEntry,
                 DecorEntry = decorEntry

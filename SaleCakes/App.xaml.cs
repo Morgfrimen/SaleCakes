@@ -51,10 +51,16 @@ public partial class App : Application
         _ = services.AddTransient<OrdersPage>();
 
         //View
-        //_ = services.AddTransient<CakeAddView>();
+        _ = services.AddTransient<RegistrationWindow>();
 
         //Repositories
         _ = services.AddTransient<IDecorRepositories, DecorRepositories>();
+        _ = services.AddTransient<IDecorRepositories, DecorRepositories>();
+        _ = services.AddTransient<IStuffingRepositories, StuffingRepositories>();
+        _ = services.AddTransient<IShortcakeRepositories, ShortcakeRepositories>();
+        _ = services.AddTransient<IAppUserRepositories, AppUserRepositories>();
+        _ = services.AddTransient<ITierRepositories, TierRepositories>();
+        _ = services.AddTransient<IAuthorizationUserRepositories, AuthorizationUserRepositories>();
     }
 
     private static void GlobalErrorsEvent(object sender, DispatcherUnhandledExceptionEventArgs e)

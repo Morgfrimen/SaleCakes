@@ -18,13 +18,12 @@ public class AppUserRepositories : RepositoriesBase, IAppUserRepositories
     {
         try
         {
-            var decorEntry = new AppUserEntry
+            var appUserEntry = new AppUserEntry
             {
-                Id = entity.Id,
                 UserRole = entity.UserRole
             };
 
-            var newEntry = await DbContext.AppUsersEntries.AddAsync(decorEntry);
+            var newEntry = await DbContext.AppUsersEntries.AddAsync(appUserEntry);
             _ = await DbContext.SaveChangesAsync();
             newEntry.State = EntityState.Detached;
             return new Result<Guid>(newEntry.Entity.Id);
@@ -56,14 +55,14 @@ public class AppUserRepositories : RepositoriesBase, IAppUserRepositories
         }
     }
 
-    public async Task<Result<Guid>> UpdateEntryAsync(RoleUserDto entity)
+    public async Task<Result<Guid>> UpdateEntryAsync(RoleUserDto entityDto)
     {
         try
         {
             AppUserEntry? updateModel = new()
             {
-                Id = entity.Id,
-                UserRole = entity.UserRole
+                Id = entityDto.Id,
+                UserRole = entityDto.UserRole
             };
 
             var result = DbContext.AppUsersEntries.Update(updateModel);

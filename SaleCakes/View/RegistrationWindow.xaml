@@ -56,15 +56,11 @@
                        VerticalAlignment="Center" />
 
             <ComboBox Grid.Column="1" 
+                      SelectedIndex="{Binding SelectedRoleIndex}"
+                      ItemsSource="{Binding RoleValue}"
                       VerticalAlignment="Center"
                       materialDesign:ComboBoxAssist.ShowSelectedItem="False">
-                <ComboBoxItem
-                    IsSelected="True"
-                    Content="Директор" />
-                <ComboBoxItem
-                    Content="Администратор" />
-                <ComboBoxItem
-                    Content="Продавец" />
+                
             </ComboBox>
 
         </Grid>
@@ -132,6 +128,8 @@
                     VerticalAlignment="Top"
                     Padding="0,0"
                     HorizontalAlignment="Stretch"
+                    Command="{Binding RegistrationCommand}"
+                    CommandParameter="{Binding ContainerCommand}"
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                     materialDesign:ButtonAssist.CornerRadius="15"
                     ToolTip="MaterialDesignRaisedDarkButton with Round Corners"

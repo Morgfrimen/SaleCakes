@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 using Data.Dto;
 using Data.Repositories;
@@ -11,18 +12,30 @@ namespace SaleCakes.ViewModel;
 public class RegistrationViewModel : BaseViewModel
 {
     private readonly IAppUserRepositories _appUserRepositories;
+    private readonly IAuthorizationUserRepositories _authorizationUserRepositories;
     private readonly AuthorizationUserModel _user = new AuthorizationUserModel(){AppUsers = new AppUsersModel()};
+    private int _selectedRoleIndex;
+    private readonly IEnumerable<string> _roleValue = new[] {"Директор", "Администратор", "Продавец" };
 
-    public RegistrationViewModel(IAppUserRepositories appUserRepositories)
+    public RegistrationViewModel(IAppUserRepositories appUserRepositories, IAuthorizationUserRepositories authorizationUserRepositories)
     {
         _appUserRepositories = appUserRepositories;
-        ContainerCommand = new RegistrationContainer(_user, _appUserRepositories);
+        _authorizationUserRepositories = authorizationUserRepositories;
+        ContainerCommand = new RegistrationContainer(_user, _appUserRepositories,_authorizationUserRepositories);
     }
 
     public AuthorizationUserModel User
     {
         get => _user;
         set => OnPropertyChanged(nameof(User));
+    }
+
+    public IEnumerable<string> RoleValue => _roleValue;
+
+    public int SelectedRoleIndex
+    {
+        get => _selectedRoleIndex;
+        set { _selectedRoleIndex = value; OnPropertyChanged(nameof(SelectedRoleIndex)); }
     }
 
     public RegistrationContainer ContainerCommand { get; }
@@ -34,18 +47,27 @@ public class RegistrationViewModel : BaseViewModel
         var roleDto = new RoleUserDto(model!.User.AppUsers.UserRole);
         var userDto = new AuthorizationUserDto(roleDto, model.User.UserLogin, model.User.UserPassword, DateTime.Now);
 
-        await model.Repos.AddEntryAsync(roleDto); //TODO: UserRepos
+        var roleCreated = await model.AppUserRepositories.GetByRoleAsync(roleDto.UserRole);
+
+        if (roleCreated.ResultOperation is null)
+        {
+            await model.AppUserRepositories.AddEntryAsync(roleDto);
+        }
+
+        var newUserId = await model.AuthorizationUserRepositories.AddEntryAsync(userDto);
     });
 
     public class RegistrationContainer
     {
-        public RegistrationContainer(AuthorizationUserModel user, IAppUserRepositories repos)
+        public RegistrationContainer(AuthorizationUserModel user, IAppUserRepositories appUserRepositories, IAuthorizationUserRepositories authorizationUserRepositories)
         {
             User = user;
-            Repos = repos;
+            AppUserRepositories = appUserRepositories;
+            AuthorizationUserRepositories = authorizationUserRepositories;
         }
 
         public AuthorizationUserModel User { get; }
-        public IAppUserRepositories Repos { get; }
+        public IAppUserRepositories AppUserRepositories { get; }
+        public IAuthorizationUserRepositories AuthorizationUserRepositories { get; }
     }
 }

@@ -57,15 +57,15 @@ public class ShortcakeRepositories : RepositoriesBase, IShortcakeRepositories
         }
     }
 
-    public async Task<Result<Guid>> UpdateEntryAsync(ShortcakeDto entity)
+    public async Task<Result<Guid>> UpdateEntryAsync(ShortcakeDto entityDto)
     {
         try
         {
             ShortcakeEntry? updateModel = new()
             {
-                Id = entity.Id,
-                Name = entity.Name,
-                Price = entity.Price
+                Id = entityDto.Id,
+                Name = entityDto.Name,
+                Price = entityDto.Price
             };
 
             var result = DbContext.ShortcakesEntries.Update(updateModel);

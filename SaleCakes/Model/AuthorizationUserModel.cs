@@ -17,9 +17,9 @@ public class AuthorizationUserModel
     {
     }
 
-    public Guid Id { get; }
-    public AppUsersModel AppUsers { get; init; }
-    public string UserLogin { get; }
-    public string UserPassword { get; }
-    public DateTime CreatedAt { get; }
+    public Guid Id { get; set; }
+    public AppUsersModel AppUsers { get; set; }
+    public string UserLogin { get; set; }
+    public string UserPassword { get; set; }
+    public DateTime CreatedAt { get; set; }
 }

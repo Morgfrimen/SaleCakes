@@ -57,15 +57,15 @@ public class StuffingRepositories : RepositoriesBase, IStuffingRepositories
         }
     }
 
-    public async Task<Result<Guid>> UpdateEntryAsync(StuffingDto entity)
+    public async Task<Result<Guid>> UpdateEntryAsync(StuffingDto entityDto)
     {
         try
         {
             StuffingEntry? updateModel = new()
             {
-                Id = entity.Id,
-                Name = entity.Name,
-                Price = entity.Price
+                Id = entityDto.Id,
+                Name = entityDto.Name,
+                Price = entityDto.Price
             };
 
             var result = DbContext.StuffingsEntries.Update(updateModel);

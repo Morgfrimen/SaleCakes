@@ -57,15 +57,15 @@ public class DecorRepositories : RepositoriesBase, IDecorRepositories
         }
     }
 
-    public async Task<Result<Guid>> UpdateEntryAsync(DecorDto entity)
+    public async Task<Result<Guid>> UpdateEntryAsync(DecorDto entityDto)
     {
         try
         {
             DecorEntry? updateModel = new()
             {
-                Id = entity.Id,
-                Name = entity.Name,
-                Price = entity.Price
+                Id = entityDto.Id,
+                Name = entityDto.Name,
+                Price = entityDto.Price
             };
 
             var result = DbContext.DecorsEntries.Update(updateModel);
