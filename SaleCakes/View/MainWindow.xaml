@@ -149,13 +149,13 @@
                                         Content="Клиенты"
                                         Click="NavigateToClientsPageOnClick" />
 
-                                    <Button
+                                    <!--<Button
                                         Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                                         CommandParameter="{x:Static Dock.Left}"
                                         Margin="4"
                                         Style="{StaticResource MaterialDesignFlatButton}"
                                         Content="Декор"
-                                        Click="NavigateToDecorsPageOnClick" />
+                                        Click="NavigateToDecorsPageOnClick" />-->
                                 </StackPanel>
                             </Grid>
                         </materialDesign:DrawerHost.LeftDrawerContent>

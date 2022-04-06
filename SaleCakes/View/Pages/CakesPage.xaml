@@ -12,16 +12,14 @@
       d:Background="Gray"
       d:DesignHeight="450" d:DesignWidth="800">
 
-    <Page.DataContext>
-        <vm:CakeViewModel />
-    </Page.DataContext>
     <Page.Resources>
         <convertes:InverseBooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Page.Resources>
 
     <Grid>
         <Grid ZIndex="-10">
-            <ListView x:Name="listDecorView" Style="{StaticResource MaterialDesignListView}">
+            <ListView x:Name="listDecorView" Style="{StaticResource MaterialDesignListView}"
+                      ItemsSource="{Binding ModelCakes}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <EventSetter Event="MouseLeftButtonUp" Handler="ListViewItem_MouseLeftButtonUp"/>
@@ -45,9 +43,9 @@
                         </GridViewColumn>-->
                     </GridView>
                 </ListView.View>
-                <ListViewItem Content="Hello"></ListViewItem>
+                <!--<ListViewItem Content="Hello"></ListViewItem>
                 <ListViewItem Content="Hello2"></ListViewItem>
-                <ListViewItem Content="Hello3"></ListViewItem>
+                <ListViewItem Content="Hello3"></ListViewItem>-->
             </ListView>
 
             <Border BorderThickness="1"

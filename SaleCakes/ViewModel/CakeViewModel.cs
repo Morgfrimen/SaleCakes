@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using SaleCakes.Command;
 using SaleCakes.Model;
@@ -7,7 +8,12 @@ namespace SaleCakes.ViewModel;
 
 public class CakeViewModel : BaseViewModel
 {
-    private ObservableCollection<CakeModel> _modelCakes = new();
+    private ObservableCollection<CakeModel> _modelCakes = new()
+    {
+        new CakeModel(Guid.NewGuid(), 500m, Guid.NewGuid()){Number = 1},
+        new CakeModel(Guid.NewGuid(), 500m, Guid.NewGuid()){Number = 2},
+        new CakeModel(Guid.NewGuid(), 500m, Guid.NewGuid()){Number = 3}
+    };
     private ObservableCollection<StuffingModel> _stuffings = null!;
 
     public ObservableCollection<CakeModel> ModelCakes

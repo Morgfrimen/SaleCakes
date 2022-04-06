@@ -12,11 +12,12 @@ public partial class CakesPage : Page
     private CakeViewModel? _cakeViewModel = new();
     private CakeAddView? _cakeAddView;
 
-    public CakesPage()
+    public CakesPage(CakeViewModel cakeViewModel)
     {
         InitializeComponent();
-        _cakeViewModel = DataContext as CakeViewModel;
+        _cakeViewModel = cakeViewModel;
         _cakeViewModel!.LoadModes.Execute(_cakeViewModel.ModelCakes);
+        DataContext = _cakeViewModel;
     }
 
     private void Button_OpenAddCake_OnClick(object sender, RoutedEventArgs e)
