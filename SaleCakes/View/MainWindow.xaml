@@ -15,19 +15,15 @@
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}"
         MinWidth="750"
-        ResizeMode="{Binding ResizeModeMainWindow}"
+        ResizeMode="{Binding ResizeModeMainWindow,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
         AllowsTransparency="True"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         MaxWidth="1500"
         MouseLeftButtonDown="MainWindow_OnMouseLeftButtonUp"
         MinHeight="750"
+        d:DataContext="{d:DesignInstance vm:MainWindowViewModel}"
         d:Width="550">
-    
-    <Window.DataContext>
-        <vm:MainWindowViewModel />
-    </Window.DataContext>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="MenuColumn" Width="15*" />
@@ -42,7 +38,7 @@
             Grid.Row="0"
             Background="Transparent"
             Grid.RowSpan="2"
-            Visibility="{Binding VisibilityMenu}"
+            Visibility="{Binding VisibilityMenu,UpdateSourceTrigger=PropertyChanged}"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             UniqueKey="color_zones_inverted">
@@ -66,7 +62,7 @@
                     <Frame Grid.Row="1"
                            Grid.ColumnSpan="2"
                            x:Name="FrameMenuPage"
-                           Visibility="{Binding VisibilityMenu}"
+                           Visibility="{Binding VisibilityMenu,UpdateSourceTrigger=PropertyChanged}"
                            NavigationUIVisibility="Hidden">
                        
                     </Frame>

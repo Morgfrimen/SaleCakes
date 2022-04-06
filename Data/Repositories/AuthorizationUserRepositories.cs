@@ -130,4 +130,21 @@ public class AuthorizationUserRepositories : RepositoriesBase,IAuthorizationUser
             return new Result<bool>(new Error(ex.Message));
         }
     }
+
+    public async Task<Result<AuthorizationUserDto?>> GetAuthorizationUserDtoByLoginAsync(string login)
+    {
+        try
+        {
+            var result = await DbContext.AuthorizationUsersEntries.FirstOrDefaultAsync(item => item.UserLogin == login);
+            var role = await DbContext.AppUsersEntries.FirstOrDefaultAsync(item => item.Id == result.UserGuid.Value);
+            if (result is null)
+                return new Result<AuthorizationUserDto?>(default(AuthorizationUserDto));
+            var dto = new AuthorizationUserDto(new RoleUserDto(role.Id, role.UserRole), result.UserLogin, result.UserPassword, result.CreatedAt ?? default);
+            return new Result<AuthorizationUserDto?>(dto);
+        }
+        catch (Exception e)
+        {
+            return new Result<AuthorizationUserDto?>(new Error(e.Message));
+        }
+    }
 }

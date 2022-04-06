@@ -4,11 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:viewModel="clr-namespace:SaleCakes.ViewModel"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              TextElement.FontWeight="Medium"
              TextElement.FontSize="14"
              FontFamily="{materialDesign:MaterialDesignFont}"
              mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance viewModel:MainWindowViewModel}"
              Width="450"
              Height="300">
     <Border CornerRadius="5">
@@ -27,8 +29,10 @@
                                FontSize="48"
                                FontWeight="ExtraBold" />
                     <TextBox materialDesign:HintAssist.Hint="Логин"
+                             Text="{Binding AuthorizedViewModel.Login,UpdateSourceTrigger=PropertyChanged}"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <PasswordBox materialDesign:HintAssist.Hint="Пароль"
+                                 PasswordChanged="PasswordBox_OnPasswordChanged"
                                  Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
 
                     <Button FontSize="12"
@@ -45,7 +49,8 @@
 
                     <Button
                         Content="Войти"
-                        Click="ButtonBase_OnClick"
+                        Command="{Binding AuthorizedViewModel.LogInCommand}"
+                        CommandParameter="{Binding AuthorizedViewModel.Containers}"
                         Margin="0,5,0,0" />
                     <Button
                         Content="Выход"

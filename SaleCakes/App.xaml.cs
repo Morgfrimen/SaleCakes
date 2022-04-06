@@ -35,11 +35,12 @@ public partial class App : Application
         _ = services.AddDbContext<SaleCakesDbContext>(options => options.UseSqlServer(Configuration.GetValue<string>(nameof(ConnectionString)) ?? DefaultConnectionString));
 
         //ViewModel
-        _ = services.AddTransient<MainWindowViewModel>();
-        _ = services.AddTransient<CakeAddViewModel>();
-        _ = services.AddTransient<CakeViewModel>();
-        _ = services.AddTransient<EmployeeAddViewModel>();
-        _ = services.AddTransient<RegistrationViewModel>();
+        _ = services.AddSingleton<MainWindowViewModel>();
+        _ = services.AddSingleton<CakeAddViewModel>();
+        _ = services.AddSingleton<CakeViewModel>();
+        _ = services.AddSingleton<EmployeeAddViewModel>();
+        _ = services.AddSingleton<RegistrationViewModel>();
+        _ = services.AddSingleton<AuthorizedViewModel>();
 
         //Page
         _ = services.AddTransient<MainWindow>();

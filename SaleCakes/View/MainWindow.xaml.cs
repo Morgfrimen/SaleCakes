@@ -5,6 +5,7 @@ using System.Windows.Input;
 using System.Windows.Navigation;
 using SaleCakes.View.Components;
 using SaleCakes.View.Pages;
+using SaleCakes.ViewModel;
 
 namespace SaleCakes.View;
 
@@ -18,14 +19,17 @@ public partial class MainWindow : Window
     private readonly ClientsPage _clientsPage;
     private readonly DecorPage _decorPage;
     private readonly OrdersPage _ordersPage;
+    private readonly MainWindowViewModel _mainWindow;
 
-    public MainWindow(CakesPage cakesPage, EmployeePage employeePage, ClientsPage clientsPage, DecorPage decorPage, OrdersPage ordersPage)
+    public MainWindow(CakesPage cakesPage, EmployeePage employeePage, ClientsPage clientsPage, DecorPage decorPage, OrdersPage ordersPage,MainWindowViewModel mainWindow)
     {
         _cakesPage = cakesPage;
         _employeePage = employeePage;
         _clientsPage = clientsPage;
         _decorPage = decorPage;
         _ordersPage = ordersPage;
+        _mainWindow = mainWindow;
+        DataContext = _mainWindow;
         InitializeComponent();
     }
 

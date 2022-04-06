@@ -17,19 +17,8 @@ public partial class AuthorizationComponent : UserControl
     {
         _registrationWindow = (App.Current as App).ServiceProvider.GetService<RegistrationWindow>()!;
         _vm = _registrationWindow.DataContext as RegistrationViewModel;
+        DataContext = (App.Current as App).ServiceProvider.GetService<MainWindowViewModel>();
         InitializeComponent();
-    }
-
-    private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-    {
-        if (DataContext is not MainWindowViewModel vm)
-        {
-            return;
-        }
-
-        vm.VisibilityAutorized = Visibility.Collapsed;
-        vm.VisibilityMenu = Visibility.Visible;
-        vm.ResizeModeMainWindow = ResizeMode.CanResizeWithGrip;
     }
 
     private void Exit(object sender, RoutedEventArgs e)
@@ -42,5 +31,13 @@ public partial class AuthorizationComponent : UserControl
         _registrationWindow = new RegistrationWindow(_vm);
         _registrationWindow.Show();
         Application.Current.MainWindow.WindowState = WindowState.Minimized;
+    }
+
+    private void PasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
+    {
+        if (this.DataContext != null)
+        {
+            ((MainWindowViewModel)DataContext).AuthorizedViewModel.Password = ((PasswordBox)sender).Password;
+        }
     }
 }

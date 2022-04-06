@@ -5,9 +5,15 @@ namespace SaleCakes.ViewModel;
 
 public class MainWindowViewModel : BaseViewModel
 {
+    public AuthorizedViewModel AuthorizedViewModel { get; }
     private Visibility _visibilityAutorized = Visibility.Visible;
     private Visibility _visibilityMenu = Visibility.Hidden;
-    private ResizeMode _resizeModeMainWindow;
+    private ResizeMode _resizeModeMainWindow = ResizeMode.NoResize;
+
+    public MainWindowViewModel()
+    {
+        AuthorizedViewModel = ((App.Current as App).ServiceProvider.GetService(typeof(AuthorizedViewModel)) as AuthorizedViewModel)!;
+    }
 
     public Visibility VisibilityAutorized
     {
