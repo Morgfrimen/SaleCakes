@@ -2,7 +2,7 @@
 
 namespace SaleCakes.Model;
 
-internal class OrderClientModel
+public class OrderClientModel
 {
     public OrderClientModel(Guid id, DateTime orderCreatedAt, string orderAdress, Guid orderCake, Guid orderCondites, Guid orderEmployee, string orderSeller)
     {
@@ -22,4 +22,5 @@ internal class OrderClientModel
     public Guid OrderCondites { get; }
     public Guid OrderEmployee { get; }
     public string OrderSeller { get; }
+    public string OrderCakeTitle { get; set; }
 }
