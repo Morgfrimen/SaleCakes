@@ -21,7 +21,7 @@ namespace SaleCakes.View.Components
             {
                 currentWindow.WindowState = WindowState.Minimized;
             }
-            App.Current.MainWindow.Hide();
+            //App.Current.MainWindow.Hide();
         }
     }
 }
