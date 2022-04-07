@@ -42,6 +42,7 @@ public partial class App : Application
         _ = services.AddSingleton<RegistrationViewModel>();
         _ = services.AddSingleton<AuthorizedViewModel>();
         _ = services.AddSingleton<ClientsViewModel>();
+        _ = services.AddSingleton<OrderViewModel>();
 
         //Page
         _ = services.AddTransient<MainWindow>();

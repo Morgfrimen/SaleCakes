@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using SaleCakes.ViewModel;
 
 namespace SaleCakes.View.Pages;
 
@@ -8,17 +9,17 @@ namespace SaleCakes.View.Pages;
 /// </summary>
 public partial class OrdersPage : Page
 {
-    public OrdersPage()
+    private readonly OrderViewModel _orderViewModel;
+
+    public OrdersPage(OrderViewModel orderViewModel)
     {
+        _orderViewModel = orderViewModel;
         InitializeComponent();
+        DataContext = _orderViewModel;
     }
 
     private void ButtonMainMenu_Click(object sender, RoutedEventArgs e)
     {
         NavigationService.GoBack();
-    }
-
-    private void ButtonEdit_Click(object sender, RoutedEventArgs e)
-    {
     }
 }
