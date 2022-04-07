@@ -14,7 +14,6 @@ public partial class ClientsPage : Page
     {
         InitializeComponent();
         _clientsViewModel = clientsViewModel;
-        _clientsViewModel!.LoadModes.Execute(clientsViewModel.ModelClients);
         DataContext = _clientsViewModel;
     }
 

@@ -12,48 +12,80 @@ namespace SaleCakes.ViewModel
 {
     public class ClientsViewModel : BaseViewModel
     {
-        private ObservableCollection<ClientModel> _clientViewModels = new()
+        private ObservableCollection<ClientModel> _client = new()
         {
             new ClientModel(Guid.NewGuid(), "Name1", "Surname1", "Patr1",
-                "79999999999", "mail1", Guid.NewGuid()),
+                "79999999999", "mail1Client@mail.com", Guid.NewGuid()),
             new ClientModel(Guid.NewGuid(), "Name2", "Surname2", "Patr2",
-                "79999999992", "mail2", Guid.NewGuid())
+                "79999999992", "mail2Client@mail.com", Guid.NewGuid()),
+            new ClientModel(Guid.NewGuid(), "Name3", "Surname3", "Patr3",
+            "79999999993", "mail3Client@mail.com", Guid.NewGuid()),
+            new ClientModel(Guid.NewGuid(), "Name4", "Surname4", "Patr4",
+            "79999999994", "mail4Client@mail.com", Guid.NewGuid())
         };
 
-        public ObservableCollection<ClientModel> ModelClients
+        private ClientModel _clientModelNew;
+        private Container _containers;
+
+        public ClientsViewModel()
         {
-            get => _clientViewModels;
-            set
-            {
-                _clientViewModels = value;
-                OnPropertyChanged(nameof(ModelClients));
-            }
+            _clientModelNew = new ClientModel();
+            Containers = new Container() { ClientModel = _clientModelNew, Collection = _client, ViewModel = this };
         }
 
-        internal ICommand LoadModes { get; } = new RelayCommand(async clients =>
+        public ICommand AddClient { get; } = new RelayCommand(async obj =>
         {
-            //var cakeRepos = new CakeRepos(App.ConnectionString);
-            //var cakeDtos = await cakeRepos.GetAllAsync();
+            var container = obj as Container;
 
-            //if (cakeDtos is null)
-            //{
-            //    return;
-            //}
+            container.Collection.Add(container.ClientModel);
+            container.ViewModel.ClientModelNew = new ClientModel();
+            container.ViewModel.UpdateAllProperty();
 
-            //var cak = cakes as ObservableCollection<CakeModel>;
+            container.ViewModel.Containers = new Container()
+            {
+                Collection = container.ViewModel.Client,
+                ClientModel = container.ViewModel.ClientModelNew,
+                ViewModel = container.ViewModel
+            };
 
-            //cak.Clear();
-            //var listCakeModel = new List<CakeModel>();
-            //var count = default(uint);
-
-            //foreach (var cakeDto in cakeDtos)
-            //{
-            //    count++;
-            //    var modes = new CakeModel(cakeDto.Id, cakeDto.Weight, cakeDto.TiersId) { Number = count };
-            //    listCakeModel.Add(modes);
-            //}
-
-            //cak = cak.AddRange(listCakeModel);
         });
+
+        public ClientModel ClientModelNew
+        {
+            get
+            {
+                _clientModelNew ??= new ClientModel();
+                return _clientModelNew;
+            }
+            set { _clientModelNew = value; OnPropertyChanged(nameof(ClientModelNew)); }
+        }
+
+        public ObservableCollection<ClientModel> Client
+        {
+            get => _client;
+            set { _client = value; OnPropertyChanged(nameof(Client)); }
+        }
+
+        public override void UpdateAllProperty()
+        {
+            OnPropertyChanged(nameof(Client));
+            OnPropertyChanged(nameof(Containers));
+            OnPropertyChanged(nameof(ClientModelNew));
+        }
+
+        public Container Containers
+        {
+            get => _containers;
+            set { _containers = value; OnPropertyChanged(nameof(Containers)); }
+        }
+
+
+        public class Container
+        {
+            public ClientModel ClientModel { get; set; }
+            public ObservableCollection<ClientModel> Collection { get; set; }
+            public ClientsViewModel ViewModel { get; set; }
+        }
+
     }
 }

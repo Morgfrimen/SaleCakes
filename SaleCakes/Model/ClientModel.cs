@@ -15,11 +15,16 @@ public class ClientModel
         ClientOrders = clientOrders;
     }
 
-    public Guid Id { get; }
-    public string ClientName { get; }
-    public string ClientSurname { get; }
-    public string ClientPatronymic { get; }
-    public string ClientPhone { get; }
-    public string ClientEmail { get; }
-    public Guid ClientOrders { get; }
+    public ClientModel()
+    {
+
+    }
+
+    public Guid Id { get; set; }
+    public string ClientName { get; set; }
+    public string ClientSurname { get; set; }
+    public string ClientPatronymic { get; set; }
+    public string ClientPhone { get; set; }
+    public string ClientEmail { get; set; }
+    public Guid ClientOrders { get; set; }
 }
