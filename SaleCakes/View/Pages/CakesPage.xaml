@@ -8,6 +8,7 @@
       xmlns:style="SaleCakes.Style.AppStyle"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d"
+      d:DataContext="{d:DesignInstance vm:CakeViewModel}"
       Background="{x:Null}"
       d:Background="Gray"
       d:DesignHeight="450" d:DesignWidth="800">
@@ -27,9 +28,9 @@
                 </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="№" DisplayMemberBinding="{Binding Number}"/>
-                        <GridViewColumn Header="Вес" DisplayMemberBinding="{Binding Weight}"/>
-                        <GridViewColumn Header="Высота" DisplayMemberBinding="{Binding Tier}"/>
+                        <GridViewColumn Header="Название" DisplayMemberBinding="{Binding Title}" Width="Auto"/>
+                        <GridViewColumn Header="Вес" DisplayMemberBinding="{Binding Weight}" Width="Auto"/>
+                        <GridViewColumn Header="Количество слоёв" DisplayMemberBinding="{Binding Number   }" Width="Auto"/>
                         <!--Кнопка убрана в саму строку с объектом
                             <GridViewColumn Header="" Width="200">
                             <GridViewColumn.CellTemplate>

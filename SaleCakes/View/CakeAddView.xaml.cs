@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using SaleCakes.Model;
+using SaleCakes.ViewModel;
 
 namespace SaleCakes.View;
 
@@ -7,8 +10,11 @@ namespace SaleCakes.View;
 /// </summary>
 public partial class CakeAddView : Window
 {
-    public CakeAddView()
+    private readonly CakeViewModel _cakeViewModel;
+
+    public CakeAddView(CakeViewModel cakeViewModel)
     {
+        _cakeViewModel = cakeViewModel;
         InitializeComponent();
     }
 
@@ -21,5 +27,12 @@ public partial class CakeAddView : Window
     {
         if(e.NewValue is false)
             this.Close();
+    }
+
+    private void AddCakeOnClick(object sender, RoutedEventArgs e)
+    {
+        var random = new Random().Next(1, 4);
+        _cakeViewModel.ModelCakes.Add(new CakeModel(){Number = (uint)random, Title = $"Новый торт {random}",Weight = 100 * random});
+        _cakeViewModel.UpdateAllProperty();
     }
 }

@@ -18,9 +18,14 @@ public class CakeModel
         Tier = tier;
     }
 
+    public CakeModel()
+    {
+    }
+
     public uint Number { get; init; }
 
-    public Guid Id { get; }
-    public double Weight { get; }
-    public Guid Tier { get; }
+    public Guid Id { get; set; }
+    public double Weight { get; set; }
+    public string Title { get; set; }
+    public Guid Tier { get; set; }
 }

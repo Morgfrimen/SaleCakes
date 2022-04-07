@@ -10,9 +10,9 @@ public class CakeViewModel : BaseViewModel
 {
     private ObservableCollection<CakeModel> _modelCakes = new()
     {
-        new CakeModel(Guid.NewGuid(), 500m, Guid.NewGuid()){Number = 1},
-        new CakeModel(Guid.NewGuid(), 500m, Guid.NewGuid()){Number = 2},
-        new CakeModel(Guid.NewGuid(), 500m, Guid.NewGuid()){Number = 3}
+        new CakeModel(Guid.NewGuid(), 500m, Guid.NewGuid()){Number = 1,Title = "Блинный"},
+        new CakeModel(Guid.NewGuid(), 500m, Guid.NewGuid()){Number = 2,Title = "Шоколадный"},
+        new CakeModel(Guid.NewGuid(), 500m, Guid.NewGuid()){Number = 3,Title = "Панчо"}
     };
     private ObservableCollection<StuffingModel> _stuffings = null!;
 

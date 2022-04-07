@@ -22,7 +22,7 @@ public partial class CakesPage : Page
 
     private void Button_OpenAddCake_OnClick(object sender, RoutedEventArgs e)
     {
-        _cakeAddView ??= new() { DataContext = new CakeAddViewModel(_cakeViewModel) };
+        _cakeAddView ??= new(_cakeViewModel) { DataContext = new CakeAddViewModel(_cakeViewModel) };
         if(!_cakeAddView.IsActive)
             _cakeAddView.Show();
     }
@@ -30,7 +30,7 @@ public partial class CakesPage : Page
     private void ListViewItem_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
         this.Focus();
-        _cakeAddView = new() { DataContext = new CakeAddViewModel(_cakeViewModel) };
+        _cakeAddView = new(_cakeViewModel) { DataContext = new CakeAddViewModel(_cakeViewModel) };
         if (!_cakeAddView.IsActive)
             _cakeAddView.Show();
     }

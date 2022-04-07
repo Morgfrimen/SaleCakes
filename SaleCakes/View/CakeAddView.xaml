@@ -63,8 +63,7 @@
                                              HorizontalAlignment="Center" />
 
                     <Button Content="Добавить торт"
-                            Command="{Binding AddCake}"
-                            CommandParameter="{Binding Tier}" />
+                            Click="AddCakeOnClick"/>
                     <materialDesign:PackIcon Kind="ArrowDownBold" VerticalAlignment="Center"
                                              HorizontalAlignment="Center" />
                     <Button
