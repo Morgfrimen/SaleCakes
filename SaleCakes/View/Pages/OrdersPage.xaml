@@ -4,15 +4,17 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:viewModel="clr-namespace:SaleCakes.ViewModel"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d"
       Background="{x:Null}"
+      d:Background="Gray"
       d:DataContext="{d:DesignInstance viewModel:OrderViewModel}"
       d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="75*" />
-            <ColumnDefinition Width="25*" />
+            <ColumnDefinition Width="70*" />
+            <ColumnDefinition Width="30*" />
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0">
@@ -33,60 +35,22 @@
             </ListView>
         </Grid>
         <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="40*" />
-                <ColumnDefinition Width="60*" />
-            </Grid.ColumnDefinitions>
-            <Button Grid.Row="6" Content="Добавить"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Stretch"
-                    Grid.ColumnSpan="2"
-                    MinHeight="30"
-                    Command="{Binding AddOrder }"
-                    CommandParameter="{Binding ContainerCommand}"
-                    Padding="110,5"
-                    FontSize="14" FontWeight="Normal" />
-            <!--<Button Grid.Row="7" Content="Главное меню"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Height="40"
-                    Width="120" FontSize="14" FontWeight="Normal" Click="ButtonMainMenu_Click" />-->
-            <!--<TextBox Grid.Row="0" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Выбран заказ №"
-                     VerticalAlignment="Center" Width="115" Height="25" FontSize="14" Background="{x:Null}"
-                     BorderBrush="{x:Null}" Margin="10,0,0,0" />-->
-            <!--<TextBox Grid.Row="0" x:Name="orderId" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Номер заказа"
-                     VerticalAlignment="Center" Width="60" Height="25" FontSize="14" Background="{x:Null}"
-                     BorderBrush="{x:Null}" RenderTransformOrigin="-0.368,0.695" />-->
-            <TextBox Grid.Row="1" Grid.Column="1" x:Name="weightTextBox" HorizontalAlignment="Stretch"
-                     TextWrapping="Wrap"
-                     Text="{Binding OrderNew.OrderCakeTitle}"
-                     VerticalAlignment="Center" FontSize="16" />
-            <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" TextWrapping="Wrap"
-                       Text="Название торта:"
-                       VerticalAlignment="Center" Height="30" FontSize="16" />
-            <TextBlock Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Адрес:"
-                       VerticalAlignment="Center" Height="30" FontSize="16" />
-            <TextBox Grid.Row="2" Grid.Column="1" x:Name="floorTextBox" HorizontalAlignment="Stretch"
-                     TextWrapping="Wrap"
-                     Text="{Binding OrderNew.OrderAdress}"
-                     VerticalAlignment="Center" FontSize="16" />
-
-            <!--<TextBox Grid.Row="4" x:Name="toppingTextBox" HorizontalAlignment="Center" TextWrapping="Wrap"
-                     VerticalAlignment="Top" Height="80" Width="170" FontSize="16" />-->
-            <!--<TextBlock Grid.Row="5" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Новая дата продажи:"
-                       VerticalAlignment="Top" Height="30" FontSize="16" Margin="10,0,0,0" />-->
-            <!--<TextBox Grid.Row="5" x:Name="dateTextBox" HorizontalAlignment="Center" TextWrapping="Wrap"
-                     VerticalAlignment="Top" Height="30" Width="105" FontSize="16" Margin="145,0,0,0" />-->
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                <TextBox materialDesign:HintAssist.Hint="Название торта"
+                         Text="{Binding OrderNew.OrderCakeTitle}"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" />
+                <TextBox materialDesign:HintAssist.Hint="Адрес"
+                         Text="{Binding OrderNew.OrderAdress}"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" />
+                <Button Content="Добавить"
+                        VerticalAlignment="Center"
+                        Height="40"
+                        FontSize="14" 
+                        FontWeight="Normal" 
+                        Margin="10,20,10,0" 
+                        Command="{Binding AddOrder }"
+                        CommandParameter="{Binding ContainerCommand}"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

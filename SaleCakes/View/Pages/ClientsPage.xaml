@@ -46,7 +46,7 @@
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" />
                 <TextBox materialDesign:HintAssist.Hint="Телефон"
                          Text="{Binding ClientModelNew.ClientPhone,UpdateSourceTrigger=PropertyChanged}"
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" />
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" Cursor="Arrow" />
                 <TextBox materialDesign:HintAssist.Hint="e-mail"
                          Text="{Binding ClientModelNew.ClientEmail,UpdateSourceTrigger=PropertyChanged}"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" />
