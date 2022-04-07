@@ -2,7 +2,7 @@
 
 namespace SaleCakes.Model;
 
-internal class ClientModel
+public class ClientModel
 {
     public ClientModel(Guid id, string clientName, string clientSurname, string clientPatronymic, string clientPhone, string clientEmail, Guid clientOrders)
     {
