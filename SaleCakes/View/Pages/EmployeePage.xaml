@@ -3,15 +3,17 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d"
       Background="{x:Null}"
+      d:Background="Gray"
       d:DesignHeight="450" d:DesignWidth="800">
 
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="70*" />
+            <ColumnDefinition Width="30*" />
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0">
@@ -20,46 +22,48 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Имя"
-                                        DisplayMemberBinding="{Binding FirstName}" Width="150" />
-                        <GridViewColumn Header="Фамилия" DisplayMemberBinding="{Binding LastName}" Width="150" />
-                        <GridViewColumn Header="Должность" DisplayMemberBinding="{Binding Position}" Width="150" />
+                                        DisplayMemberBinding="{Binding FirstName}" Width="Auto"/>
+                        <GridViewColumn Header="Фамилия" DisplayMemberBinding="{Binding LastName}" Width="Auto"/>
+                        <GridViewColumn Header="Отчество" DisplayMemberBinding="{Binding Patroninic}" Width="Auto"/>
+                        <GridViewColumn Header="Телефон" DisplayMemberBinding="{Binding Phone}" Width="Auto" />
+                        <GridViewColumn Header="e-mail" DisplayMemberBinding="{Binding Email}" Width="Auto"/>
+                        <!--<GridViewColumn Header="Должность" DisplayMemberBinding="{Binding Position}" Width="Auto"/>-->
                     </GridView>
                 </ListView.View>
             </ListView>
         </Grid>
         <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition Height="100" />
-                <RowDefinition Height="100" />
-            </Grid.RowDefinitions>
-            <Button Grid.Row="6" Content="Добавить"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Height="40"
-                    Width="120" FontSize="14" FontWeight="Normal" Click="ButtonEdit_Click" />
-            <!--<Button Grid.Row="7" Content="Главное меню"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Height="40"
-                    Width="120" FontSize="14" FontWeight="Normal" Click="ButtonMainMenu_Click" />-->
-            <TextBox Grid.Row="1" x:Name="firstNameTextBox" HorizontalAlignment="Center" TextWrapping="Wrap"
-                     VerticalAlignment="Center" Height="30" Width="165" FontSize="16" />
-            <TextBox Grid.Row="3" x:Name="lastNameTextBox" HorizontalAlignment="Center" TextWrapping="Wrap"
-                     VerticalAlignment="Center" Height="30" Width="165" FontSize="16" />
-            <TextBox Grid.Row="5" x:Name="positionTextBox" HorizontalAlignment="Center" TextWrapping="Wrap"
-                     VerticalAlignment="Center" Height="30" Width="165" FontSize="16" />
-            <TextBlock Grid.Row="0" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Введите имя:"
-                       VerticalAlignment="Center" Height="30" FontSize="16" />
-            <TextBlock Grid.Row="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Введите фамилию:"
-                       VerticalAlignment="Center" Height="30" FontSize="16" />
-            <TextBlock Grid.Row="4" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Введите должность:"
-                       VerticalAlignment="Center" Height="30" FontSize="16" />
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                <TextBox materialDesign:HintAssist.Hint="Имя"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" />
+                <TextBox materialDesign:HintAssist.Hint="Фамилия"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" />
+                <TextBox materialDesign:HintAssist.Hint="Отчество"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" />
+                <TextBox materialDesign:HintAssist.Hint="Телефон"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" />
+                <TextBox materialDesign:HintAssist.Hint="e-mail"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" />
+
+                <ComboBox materialDesign:HintAssist.Hint="Должность"
+                          SelectedIndex="{Binding SelectedRoleIndex}"
+                          materialDesign:ComboBoxAssist.ShowSelectedItem="False"
+                          Margin="10,10,10,0">
+                    <ComboBoxItem>
+                        <TextBlock Text="Администратор" ></TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Text="Продавец" ></TextBlock>
+                    </ComboBoxItem>
+                </ComboBox>
+                <Button Content="Добавить"
+                        VerticalAlignment="Center"
+                        Height="40"
+                        FontSize="14" 
+                        FontWeight="Normal" 
+                        Click="ButtonEdit_Click" Margin="10,20,10,0" />
+            </StackPanel>
+            
         </Grid>
 
     </Grid>

@@ -133,7 +133,7 @@
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                     materialDesign:ButtonAssist.CornerRadius="15"
                     ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
-                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand">
                 <TextBlock
                     Text="Зарегистрироваться" />
             </Button>
