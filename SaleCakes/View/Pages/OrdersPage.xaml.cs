@@ -22,8 +22,4 @@ public partial class OrdersPage : Page
     {
         NavigationService.GoBack();
     }
-
-    private void ButtonEdit_Click(object sender, RoutedEventArgs e)
-    {
-    }
 }

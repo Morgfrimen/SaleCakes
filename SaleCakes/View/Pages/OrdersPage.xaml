@@ -52,8 +52,10 @@
                     VerticalAlignment="Stretch"
                     Grid.ColumnSpan="2"
                     MinHeight="30"
+                    Command="{Binding AddOrder }"
+                    CommandParameter="{Binding ContainerCommand}"
                     Padding="110,5"
-                    FontSize="14" FontWeight="Normal" Click="ButtonEdit_Click" />
+                    FontSize="14" FontWeight="Normal" />
             <!--<Button Grid.Row="7" Content="Главное меню"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -67,6 +69,7 @@
                      BorderBrush="{x:Null}" RenderTransformOrigin="-0.368,0.695" />-->
             <TextBox Grid.Row="1" Grid.Column="1" x:Name="weightTextBox" HorizontalAlignment="Stretch"
                      TextWrapping="Wrap"
+                     Text="{Binding OrderNew.OrderCakeTitle}"
                      VerticalAlignment="Center" FontSize="16" />
             <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" TextWrapping="Wrap"
                        Text="Название торта:"
@@ -75,6 +78,7 @@
                        VerticalAlignment="Center" Height="30" FontSize="16" />
             <TextBox Grid.Row="2" Grid.Column="1" x:Name="floorTextBox" HorizontalAlignment="Stretch"
                      TextWrapping="Wrap"
+                     Text="{Binding OrderNew.OrderAdress}"
                      VerticalAlignment="Center" FontSize="16" />
 
             <!--<TextBox Grid.Row="4" x:Name="toppingTextBox" HorizontalAlignment="Center" TextWrapping="Wrap"
