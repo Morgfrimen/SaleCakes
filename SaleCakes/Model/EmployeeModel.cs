@@ -2,7 +2,7 @@
 
 namespace SaleCakes.Model;
 
-internal class EmployeeModel
+public class EmployeeModel
 {
     public EmployeeModel(Guid id, Guid autorizedDataId, string employeeName, string employeeSurname, string employeePatronymic, string employeePhone, string employeeEmail)
     {
@@ -15,11 +15,15 @@ internal class EmployeeModel
         EmployeeEmail = employeeEmail;
     }
 
-    public Guid Id { get; }
-    public Guid AutorizedDataId { get; }
-    public string EmployeeName { get; }
-    public string EmployeeSurname { get; }
-    public string EmployeePatronymic { get; }
-    public string EmployeePhone { get; }
-    public string EmployeeEmail { get; }
+    public EmployeeModel()
+    {
+    }
+
+    public Guid Id { get; set; }
+    public Guid AutorizedDataId { get; set; }
+    public string EmployeeName { get; set; }
+    public string EmployeeSurname { get; set; }
+    public string EmployeePatronymic { get; set; }
+    public string EmployeePhone { get; set; }
+    public string EmployeeEmail { get; set; }
 }

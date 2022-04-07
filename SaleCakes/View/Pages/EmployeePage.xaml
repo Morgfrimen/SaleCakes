@@ -4,9 +4,11 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:viewModel="clr-namespace:SaleCakes.ViewModel"
       mc:Ignorable="d"
       Background="{x:Null}"
       d:Background="Gray"
+      d:DataContext="{d:DesignInstance viewModel:EmployeeViewModel}"
       d:DesignHeight="450" d:DesignWidth="800">
 
 
@@ -18,15 +20,16 @@
 
         <Grid Grid.Column="0">
             <ListView x:Name="listEmployeeView"
-                      d:ItemsSource="{d:SampleData ItemCount=5}">
+                      d:ItemsSource="{d:SampleData ItemCount=5}"
+                      ItemsSource="{Binding Employee,UpdateSourceTrigger=PropertyChanged}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Имя"
-                                        DisplayMemberBinding="{Binding FirstName}" Width="Auto"/>
-                        <GridViewColumn Header="Фамилия" DisplayMemberBinding="{Binding LastName}" Width="Auto"/>
-                        <GridViewColumn Header="Отчество" DisplayMemberBinding="{Binding Patroninic}" Width="Auto"/>
-                        <GridViewColumn Header="Телефон" DisplayMemberBinding="{Binding Phone}" Width="Auto" />
-                        <GridViewColumn Header="e-mail" DisplayMemberBinding="{Binding Email}" Width="Auto"/>
+                                        DisplayMemberBinding="{Binding  EmployeeName}" Width="Auto"/>
+                        <GridViewColumn Header="Фамилия" DisplayMemberBinding="{Binding  EmployeeSurname}" Width="Auto"/>
+                        <GridViewColumn Header="Отчество" DisplayMemberBinding="{Binding EmployeePatronymic}" Width="Auto"/>
+                        <GridViewColumn Header="Телефон" DisplayMemberBinding="{Binding EmployeePhone}" Width="Auto" />
+                        <GridViewColumn Header="e-mail" DisplayMemberBinding="{Binding EmployeeEmail}" Width="Auto"/>
                         <!--<GridViewColumn Header="Должность" DisplayMemberBinding="{Binding Position}" Width="Auto"/>-->
                     </GridView>
                 </ListView.View>
@@ -35,14 +38,19 @@
         <Grid Grid.Column="1">
             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
                 <TextBox materialDesign:HintAssist.Hint="Имя"
+                         Text="{Binding EmployeeModelNew.EmployeeName,UpdateSourceTrigger=PropertyChanged}"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" />
                 <TextBox materialDesign:HintAssist.Hint="Фамилия"
+                         Text="{Binding EmployeeModelNew.EmployeeSurname,UpdateSourceTrigger=PropertyChanged}"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" />
                 <TextBox materialDesign:HintAssist.Hint="Отчество"
+                         Text="{Binding EmployeeModelNew.EmployeePatronymic,UpdateSourceTrigger=PropertyChanged}"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" />
                 <TextBox materialDesign:HintAssist.Hint="Телефон"
+                         Text="{Binding EmployeeModelNew.EmployeePhone,UpdateSourceTrigger=PropertyChanged}"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" />
                 <TextBox materialDesign:HintAssist.Hint="e-mail"
+                         Text="{Binding EmployeeModelNew.EmployeeEmail,UpdateSourceTrigger=PropertyChanged}"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" />
 
                 <ComboBox materialDesign:HintAssist.Hint="Должность"
@@ -57,6 +65,8 @@
                     </ComboBoxItem>
                 </ComboBox>
                 <Button Content="Добавить"
+                        Command="{Binding AddEmployee}"
+                        CommandParameter="{Binding Containers}"
                         VerticalAlignment="Center"
                         Height="40"
                         FontSize="14" 

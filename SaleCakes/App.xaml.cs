@@ -38,7 +38,7 @@ public partial class App : Application
         _ = services.AddSingleton<MainWindowViewModel>();
         _ = services.AddSingleton<CakeAddViewModel>();
         _ = services.AddSingleton<CakeViewModel>();
-        _ = services.AddSingleton<EmployeeAddViewModel>();
+        _ = services.AddSingleton<EmployeeViewModel>();
         _ = services.AddSingleton<RegistrationViewModel>();
         _ = services.AddSingleton<AuthorizedViewModel>();
         _ = services.AddSingleton<ClientsViewModel>();

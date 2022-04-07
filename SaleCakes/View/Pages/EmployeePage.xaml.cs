@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using SaleCakes.ViewModel;
 
 namespace SaleCakes.View.Pages;
 
@@ -8,9 +9,13 @@ namespace SaleCakes.View.Pages;
 /// </summary>
 public partial class EmployeePage : Page
 {
-    public EmployeePage()
+    private readonly EmployeeViewModel _employeeViewModel;
+
+    public EmployeePage(EmployeeViewModel employeeViewModel)
     {
+        _employeeViewModel = employeeViewModel;
         InitializeComponent();
+        DataContext = _employeeViewModel;
     }
 
     private void ButtonMainMenu_Click(object sender, RoutedEventArgs e)
