@@ -48,7 +48,7 @@ public class AuthorizedViewModel : BaseViewModel
 
         if(resultDto.ResultOperation is null || resultDto.ResultOperation.UserPassword != container.Password)
         {
-            MessageBox.Show("Не верный пароль");
+            MessageBox.Show("Неверный пароль");
             return;
         }
 
