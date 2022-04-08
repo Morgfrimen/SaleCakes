@@ -58,6 +58,8 @@ public class AuthorizedViewModel : BaseViewModel
         mainVM.VisibilityMenu = Visibility.Visible;
         mainVM.ResizeModeMainWindow = ResizeMode.CanResizeWithGrip;
 
+        (App.Current as App).RoleUser = resultDto.ResultOperation.AppUsers.UserRole;
+
 
     });
 

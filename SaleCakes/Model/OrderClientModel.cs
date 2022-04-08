@@ -27,4 +27,5 @@ public class OrderClientModel
     public Guid OrderEmployee { get; set; }
     public string OrderSeller { get; set; }
     public string OrderCakeTitle { get; set; }
+    public decimal Price { get; set; }
 }

@@ -20,15 +20,20 @@
         <Grid Grid.Column="0">
             <ListView x:Name="listOrdersView"
                       d:ItemsSource="{d:SampleData ItemCount=5}"
-                      ItemsSource="{Binding Orders}">
+                      ItemsSource="{Binding Orders}"
+                      >
                 <ListView.View>
-                    <GridView>
+                    <GridView x:Name="GridView2">
                         <GridViewColumn Header="№" DisplayMemberBinding="{Binding OrderAdress  }"
                                         Width="Auto" />
                         <GridViewColumn Header="Торт" DisplayMemberBinding="{Binding OrderCakeTitle  }"
                                         Width="Auto" />
                         <GridViewColumn Header="Дата продажи"
+
                                         DisplayMemberBinding="{Binding OrderCreatedAt,StringFormat=dd.MM.HH}"
+                                        Width="Auto" />
+                        <GridViewColumn Header="Цена"
+                                        DisplayMemberBinding="{Binding Price}"
                                         Width="Auto" />
                     </GridView>
                 </ListView.View>
@@ -42,6 +47,11 @@
                 <TextBox materialDesign:HintAssist.Hint="Адрес"
                          Text="{Binding OrderNew.OrderAdress}"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" />
+                <TextBox materialDesign:HintAssist.Hint="Цена"
+                         Visibility="{Binding PriceVisible}"
+                         Text="{Binding OrderNew.Price}"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" />
+
                 <Button Content="Добавить"
                         VerticalAlignment="Center"
                         Height="40"

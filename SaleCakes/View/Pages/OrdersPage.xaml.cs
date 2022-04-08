@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using SaleCakes.ViewModel;
 
@@ -16,6 +17,14 @@ public partial class OrdersPage : Page
         _orderViewModel = orderViewModel;
         InitializeComponent();
         DataContext = _orderViewModel;
+        _orderViewModel.HiddenColumnsEvent += _orderViewModel_HiddenColumnsEvent;
+    }
+
+    private void _orderViewModel_HiddenColumnsEvent()
+    {
+        var boolean = (App.Current as App).RoleUser is "Продавец";
+        if(boolean is false)
+            GridView2.Columns.Remove(GridView2.Columns.Last());
     }
 
     private void ButtonMainMenu_Click(object sender, RoutedEventArgs e)

@@ -21,12 +21,23 @@ namespace SaleCakes;
 /// </summary>
 public partial class App : Application
 {
+    private static string _roleUser;
     private const string DefaultConnectionString = "Server=.\\SQLEXPRESS;Database=SaleCakes;Trusted_Connection=true;";
 
     public IServiceProvider ServiceProvider { get; private set; }
     public IConfiguration Configuration { get; private set; }
 
     internal static string ConnectionString { get; private set; } = "";
+
+    public string RoleUser
+    {
+        get => _roleUser;
+        set
+        {
+            _roleUser = value;
+            ServiceProvider.GetService<OrderViewModel>().PriceVisible = Visibility.Visible;
+        }
+    }
 
     private void ConfigureServices(IServiceCollection services)
     {
