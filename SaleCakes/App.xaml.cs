@@ -68,7 +68,7 @@ public partial class App : Application
 
     private static void GlobalErrorsEvent(object sender, DispatcherUnhandledExceptionEventArgs e)
     {
-        _ = MessageBox.Show(SaleCakes.Properties.Resources.Message_Global_Error,
+        _ = MessageBox.Show(SaleCakes.Properties.Resources.Message_Global_Error + e.Exception.Message,
             SaleCakes.Properties.Resources.Title_MessageBox_Error,
             MessageBoxButton.OK,
             MessageBoxImage.Error,
