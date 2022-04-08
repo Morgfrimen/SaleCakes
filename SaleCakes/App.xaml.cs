@@ -89,9 +89,20 @@ public partial class App : Application
 
         ServiceProvider = serviceCollection.BuildServiceProvider();
 
+        CheckConnection();
         var mainWindow = ServiceProvider.GetService<MainWindow>();
         mainWindow.Closing += MainWindow_Closing;
         mainWindow.Show();
+    }
+
+    private void CheckConnection()
+    {
+        var dbContext = ServiceProvider.GetService<SaleCakesDbContext>();
+
+        if (dbContext!.Database.CanConnect() is false)
+        {
+            MessageBox.Show("Ошибка подключения к базе данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
+        }
     }
 
     private void MainWindow_Closing(object? sender, CancelEventArgs e)
