@@ -122,6 +122,7 @@
                                         CommandParameter="{x:Static Dock.Left}"
                                         Margin="4"
                                         Style="{StaticResource MaterialDesignFlatButton}"
+                                        Visibility="{Binding VisibilityConditer}"
                                         Content="Тортики"
                                         Click="NavigateToCakesPageOnClick" />
 
@@ -129,6 +130,7 @@
                                         Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
                                         CommandParameter="{x:Static Dock.Left}"
                                         Margin="4"
+                                        Visibility="{Binding VisibilityEmployer}"
                                         Style="{StaticResource MaterialDesignFlatButton}"
                                         Content="Сотрудники"
                                         Click="NavigateToEmployeesPageOnClick" />

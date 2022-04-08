@@ -9,6 +9,8 @@ public class MainWindowViewModel : BaseViewModel
     private Visibility _visibilityAutorized = Visibility.Visible;
     private Visibility _visibilityMenu = Visibility.Hidden;
     private ResizeMode _resizeModeMainWindow = ResizeMode.NoResize;
+    private Visibility _visibilityConditer;
+    private Visibility _visibilityEmployer;
 
     public MainWindowViewModel()
     {
@@ -22,6 +24,35 @@ public class MainWindowViewModel : BaseViewModel
         {
             _visibilityAutorized = value;
             OnPropertyChanged(nameof(VisibilityAutorized));
+        }
+    }
+
+    public Visibility VisibilityEmployer
+    {
+        get => _visibilityEmployer;
+        set { _visibilityEmployer = value; OnPropertyChanged(nameof(VisibilityEmployer)); }
+    }
+
+
+    public Visibility VisibilityConditer
+    {
+        get
+        {
+            var role = (App.Current as App).RoleUser;
+
+            if (role is "Кондитер")
+            {
+                _visibilityConditer = Visibility.Collapsed;
+                _visibilityEmployer = Visibility.Collapsed;
+                OnPropertyChanged(nameof(VisibilityEmployer));
+            }
+            else if (role is "Продавец")
+            {
+                _visibilityEmployer = Visibility.Collapsed;
+                OnPropertyChanged(nameof(VisibilityEmployer));
+            }
+
+            return _visibilityConditer;
         }
     }
 
@@ -44,6 +75,7 @@ public class MainWindowViewModel : BaseViewModel
 
     public override void UpdateAllProperty()
     {
-        throw new NotImplementedException();
+        OnPropertyChanged(nameof(VisibilityEmployer));
+        OnPropertyChanged(nameof(VisibilityConditer));
     }
 }

@@ -36,6 +36,7 @@ public partial class App : Application
         {
             _roleUser = value;
             ServiceProvider.GetService<OrderViewModel>().PriceVisible = Visibility.Visible;
+            ServiceProvider.GetService<MainWindowViewModel>().UpdateAllProperty();
         }
     }
 

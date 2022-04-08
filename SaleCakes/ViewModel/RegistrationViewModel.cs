@@ -17,7 +17,7 @@ public class RegistrationViewModel : BaseViewModel
     public IAuthorizationUserRepositories UserRepositories { get; }
     private readonly AuthorizationUserModel _user = new AuthorizationUserModel(){AppUsers = new AppUsersModel()};
     private int _selectedRoleIndex;
-    private readonly IEnumerable<string> _roleValue = new[] {"Директор", "Администратор", "Продавец" };
+    private readonly IEnumerable<string> _roleValue = new[] {"Кондитер", "Администратор", "Продавец" };
 
     public RegistrationViewModel(IAppUserRepositories appUserRepositories, IAuthorizationUserRepositories authorizationUserRepositories)
     {
