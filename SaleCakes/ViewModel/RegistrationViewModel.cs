@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using Data.Dto;
@@ -12,17 +13,16 @@ namespace SaleCakes.ViewModel;
 
 public class RegistrationViewModel : BaseViewModel
 {
-    private readonly IAppUserRepositories _appUserRepositories;
-    private readonly IAuthorizationUserRepositories _authorizationUserRepositories;
+    public IAppUserRepositories AppUserRepositories { get; }
+    public IAuthorizationUserRepositories UserRepositories { get; }
     private readonly AuthorizationUserModel _user = new AuthorizationUserModel(){AppUsers = new AppUsersModel()};
     private int _selectedRoleIndex;
     private readonly IEnumerable<string> _roleValue = new[] {"Директор", "Администратор", "Продавец" };
 
     public RegistrationViewModel(IAppUserRepositories appUserRepositories, IAuthorizationUserRepositories authorizationUserRepositories)
     {
-        _appUserRepositories = appUserRepositories;
-        _authorizationUserRepositories = authorizationUserRepositories;
-        ContainerCommand = new RegistrationContainer(_user, _appUserRepositories,_authorizationUserRepositories);
+        AppUserRepositories = appUserRepositories;
+        UserRepositories = authorizationUserRepositories;
     }
 
     public AuthorizationUserModel User
@@ -38,14 +38,14 @@ public class RegistrationViewModel : BaseViewModel
         get => _selectedRoleIndex;
         set { _selectedRoleIndex = value; OnPropertyChanged(nameof(SelectedRoleIndex)); }
     }
-
-    public RegistrationContainer ContainerCommand { get; }
-
+    
     public ICommand RegistrationCommand { get; } = new RelayCommand(async (obj) =>
     {
-        var model = obj as RegistrationContainer;
+        var model = obj as RegistrationViewModel;
 
-        var roleDto = new RoleUserDto(model!.User.AppUsers.UserRole.Trim());
+        var listRole = model.RoleValue.ToList();
+
+        var roleDto = new RoleUserDto(listRole[model.SelectedRoleIndex].Trim());
         var userDto = new AuthorizationUserDto(roleDto, model.User.UserLogin.Trim(), model.User.UserPassword.Trim(), DateTime.Now);
 
         var roleCreated = await model.AppUserRepositories.GetByRoleAsync(roleDto.UserRole.Trim());
@@ -55,22 +55,10 @@ public class RegistrationViewModel : BaseViewModel
             await model.AppUserRepositories.AddEntryAsync(roleDto);
         }
 
-        var newUserId = await model.AuthorizationUserRepositories.AddEntryAsync(userDto);
+        var newUserId = await model.UserRepositories.AddEntryAsync(userDto);
 
         MessageBox.Show("Пользоваль зарегистрирован", "Информация", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
     });
 
-    public class RegistrationContainer
-    {
-        public RegistrationContainer(AuthorizationUserModel user, IAppUserRepositories appUserRepositories, IAuthorizationUserRepositories authorizationUserRepositories)
-        {
-            User = user;
-            AppUserRepositories = appUserRepositories;
-            AuthorizationUserRepositories = authorizationUserRepositories;
-        }
-
-        public AuthorizationUserModel User { get; }
-        public IAppUserRepositories AppUserRepositories { get; }
-        public IAuthorizationUserRepositories AuthorizationUserRepositories { get; }
-    }
+   
 }

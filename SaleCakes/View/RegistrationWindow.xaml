@@ -10,6 +10,7 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         WindowStyle="None"
+        x:Name="RegisterWindow"
         d:DataContext="{d:DesignInstance viewModel:RegistrationViewModel}"
         Title="Регистрация пользователя" Height="300" Width="350">
 
@@ -129,7 +130,7 @@
                     Padding="0,0"
                     HorizontalAlignment="Stretch"
                     Command="{Binding RegistrationCommand}"
-                    CommandParameter="{Binding ContainerCommand}"
+                    CommandParameter="{Binding  ElementName=RegisterWindow,Path=DataContext}"
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                     materialDesign:ButtonAssist.CornerRadius="15"
                     ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
