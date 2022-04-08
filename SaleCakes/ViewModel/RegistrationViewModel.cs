@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Input;
 using Data.Dto;
 using Data.Repositories;
@@ -44,10 +45,10 @@ public class RegistrationViewModel : BaseViewModel
     {
         var model = obj as RegistrationContainer;
 
-        var roleDto = new RoleUserDto(model!.User.AppUsers.UserRole);
-        var userDto = new AuthorizationUserDto(roleDto, model.User.UserLogin, model.User.UserPassword, DateTime.Now);
+        var roleDto = new RoleUserDto(model!.User.AppUsers.UserRole.Trim());
+        var userDto = new AuthorizationUserDto(roleDto, model.User.UserLogin.Trim(), model.User.UserPassword.Trim(), DateTime.Now);
 
-        var roleCreated = await model.AppUserRepositories.GetByRoleAsync(roleDto.UserRole);
+        var roleCreated = await model.AppUserRepositories.GetByRoleAsync(roleDto.UserRole.Trim());
 
         if (roleCreated.ResultOperation is null)
         {
@@ -55,6 +56,8 @@ public class RegistrationViewModel : BaseViewModel
         }
 
         var newUserId = await model.AuthorizationUserRepositories.AddEntryAsync(userDto);
+
+        MessageBox.Show("Пользоваль зарегистрирован", "Информация", MessageBoxButton.OK, MessageBoxImage.Information, MessageBoxResult.OK);
     });
 
     public class RegistrationContainer
