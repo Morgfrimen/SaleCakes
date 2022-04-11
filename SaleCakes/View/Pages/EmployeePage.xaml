@@ -30,7 +30,7 @@
                         <GridViewColumn Header="Отчество" DisplayMemberBinding="{Binding EmployeePatronymic}" Width="Auto"/>
                         <GridViewColumn Header="Телефон" DisplayMemberBinding="{Binding EmployeePhone}" Width="Auto" />
                         <GridViewColumn Header="e-mail" DisplayMemberBinding="{Binding EmployeeEmail}" Width="Auto"/>
-                        <!--<GridViewColumn Header="Должность" DisplayMemberBinding="{Binding Position}" Width="Auto"/>-->
+                        <GridViewColumn Header="Должность" DisplayMemberBinding="{Binding EmployeePosition}" Width="Auto"/>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -54,15 +54,11 @@
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" />
 
                 <ComboBox materialDesign:HintAssist.Hint="Должность"
-                          SelectedIndex="{Binding SelectedRoleIndex}"
+                          SelectedIndex="{Binding EmployeeModelNew.EmployeePosition}"
                           materialDesign:ComboBoxAssist.ShowSelectedItem="False"
                           Margin="10,10,10,0">
-                    <ComboBoxItem>
-                        <TextBlock Text="Администратор" ></TextBlock>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="Продавец" ></TextBlock>
-                    </ComboBoxItem>
+                    <ComboBoxItem Content="Администратор"/>
+                    <ComboBoxItem Content="Продавец"/>
                 </ComboBox>
                 <Button Content="Добавить"
                         Command="{Binding AddEmployee}"
@@ -73,7 +69,7 @@
                         FontWeight="Normal" 
                         Click="ButtonEdit_Click" Margin="10,20,10,0" />
             </StackPanel>
-            
+
         </Grid>
 
     </Grid>
