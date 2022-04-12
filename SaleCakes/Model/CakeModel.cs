@@ -1,17 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SaleCakes.Model;
 
 public class CakeModel
 {
-    public CakeModel(Guid id, double weight, Guid tier)
+    public CakeModel(Guid id, double weight, ICollection<TiersModel> tier)
     {
         Id = id;
         Weight = weight;
         Tier = tier;
     }
 
-    public CakeModel(Guid id, decimal weight, Guid tier)
+    public CakeModel(Guid id, decimal weight, ICollection<TiersModel> tier)
     {
         Id = id;
         Weight = Convert.ToDouble(weight);
@@ -27,5 +28,5 @@ public class CakeModel
     public Guid Id { get; set; }
     public double Weight { get; set; }
     public string Title { get; set; }
-    public Guid Tier { get; set; }
+    public ICollection<TiersModel> Tier { get; set; }
 }
