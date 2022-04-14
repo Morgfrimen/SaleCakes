@@ -11,10 +11,12 @@ namespace SaleCakes.View.Pages;
 public partial class OrdersPage : Page
 {
     private readonly OrderViewModel _orderViewModel;
+    private ComponentsCake _componentsCake;
 
-    public OrdersPage(OrderViewModel orderViewModel)
+    public OrdersPage(OrderViewModel orderViewModel,ComponentsCake componentsCake)
     {
         _orderViewModel = orderViewModel;
+        _componentsCake = componentsCake;
         InitializeComponent();
         DataContext = _orderViewModel;
         _orderViewModel.HiddenColumnsEvent += _orderViewModel_HiddenColumnsEvent;
@@ -30,5 +32,11 @@ public partial class OrdersPage : Page
     private void ButtonMainMenu_Click(object sender, RoutedEventArgs e)
     {
         NavigationService.GoBack();
+    }
+
+    private void Show_Component_OnClick(object sender, RoutedEventArgs e)
+    {
+        _componentsCake.Show();
+        _componentsCake = new ComponentsCake();
     }
 }

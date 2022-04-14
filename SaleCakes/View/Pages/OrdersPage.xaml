@@ -52,6 +52,7 @@
                                         <Button FontSize="14"
                                                 Margin="-20,0"
                                                 FontWeight="Normal"
+                                                Click="Show_Component_OnClick"
                                                 Content="Показать состовляющие"/>
                                     </Grid>
                                 </DataTemplate>

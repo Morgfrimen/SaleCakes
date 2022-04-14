@@ -67,6 +67,7 @@ public partial class App : Application
 
         //View
         _ = services.AddTransient<RegistrationWindow>();
+        _ = services.AddTransient<ComponentsCake>();
 
         //Repositories
         _ = services.AddTransient<IDecorRepositories, DecorRepositories>();
