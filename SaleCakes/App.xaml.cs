@@ -10,9 +10,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SaleCakes.View;
+using SaleCakes.View.Components;
 using SaleCakes.View.Pages;
 using SaleCakes.ViewModel;
-using SaleCakes.View.Components;
 
 namespace SaleCakes;
 
@@ -21,8 +21,8 @@ namespace SaleCakes;
 /// </summary>
 public partial class App : Application
 {
-    private static string _roleUser;
     private const string DefaultConnectionString = "Server=.\\SQLEXPRESS;Database=SaleCakes;Trusted_Connection=true;";
+    private static string _roleUser;
 
     public IServiceProvider ServiceProvider { get; private set; }
     public IConfiguration Configuration { get; private set; }
@@ -67,6 +67,7 @@ public partial class App : Application
 
         //View
         _ = services.AddTransient<RegistrationWindow>();
+        _ = services.AddTransient<ComponentsCakeWindow>();
 
         //Repositories
         _ = services.AddTransient<IDecorRepositories, DecorRepositories>();
@@ -113,7 +114,7 @@ public partial class App : Application
 
         if (dbContext!.Database.CanConnect() is false)
         {
-            MessageBox.Show("Ошибка подключения к базе данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
+            _ = MessageBox.Show("Ошибка подключения к базе данных", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK);
         }
     }
 

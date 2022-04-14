@@ -25,14 +25,16 @@ public partial class CakeAddView : Window
 
     private void CakeAddView_OnFocusableChanged(object sender, DependencyPropertyChangedEventArgs e)
     {
-        if(e.NewValue is false)
-            this.Close();
+        if (e.NewValue is false)
+        {
+            Close();
+        }
     }
 
     private void AddCakeOnClick(object sender, RoutedEventArgs e)
     {
         var random = new Random().Next(1, 4);
-        _cakeViewModel.ModelCakes.Add(new CakeModel(){Number = (uint)random, Title = $"Новый торт {random}",Weight = 100 * random});
+        _cakeViewModel.ModelCakes.Add(new CakeModel { Number = (uint)random, Title = $"Новый торт {random}", Weight = 100 * random });
         _cakeViewModel.UpdateAllProperty();
     }
 }

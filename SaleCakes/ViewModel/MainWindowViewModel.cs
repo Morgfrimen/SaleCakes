@@ -1,21 +1,21 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 
 namespace SaleCakes.ViewModel;
 
 public class MainWindowViewModel : BaseViewModel
 {
-    public AuthorizedViewModel AuthorizedViewModel { get; }
-    private Visibility _visibilityAutorized = Visibility.Visible;
-    private Visibility _visibilityMenu = Visibility.Hidden;
     private ResizeMode _resizeModeMainWindow = ResizeMode.NoResize;
+    private Visibility _visibilityAutorized = Visibility.Visible;
     private Visibility _visibilityConditer;
     private Visibility _visibilityEmployer;
+    private Visibility _visibilityMenu = Visibility.Hidden;
 
     public MainWindowViewModel()
     {
-        AuthorizedViewModel = ((App.Current as App).ServiceProvider.GetService(typeof(AuthorizedViewModel)) as AuthorizedViewModel)!;
+        AuthorizedViewModel = ((Application.Current as App).ServiceProvider.GetService(typeof(AuthorizedViewModel)) as AuthorizedViewModel)!;
     }
+
+    public AuthorizedViewModel AuthorizedViewModel { get; }
 
     public Visibility VisibilityAutorized
     {
@@ -30,15 +30,18 @@ public class MainWindowViewModel : BaseViewModel
     public Visibility VisibilityEmployer
     {
         get => _visibilityEmployer;
-        set { _visibilityEmployer = value; OnPropertyChanged(nameof(VisibilityEmployer)); }
+        set
+        {
+            _visibilityEmployer = value;
+            OnPropertyChanged(nameof(VisibilityEmployer));
+        }
     }
-
 
     public Visibility VisibilityConditer
     {
         get
         {
-            var role = (App.Current as App).RoleUser;
+            var role = (Application.Current as App).RoleUser;
 
             if (role is "Кондитер")
             {
@@ -59,8 +62,11 @@ public class MainWindowViewModel : BaseViewModel
     public ResizeMode ResizeModeMainWindow
     {
         get => _resizeModeMainWindow;
-        set { _resizeModeMainWindow = value;
-            OnPropertyChanged(nameof(ResizeModeMainWindow)); }
+        set
+        {
+            _resizeModeMainWindow = value;
+            OnPropertyChanged(nameof(ResizeModeMainWindow));
+        }
     }
 
     public Visibility VisibilityMenu

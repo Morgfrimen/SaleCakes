@@ -2,7 +2,7 @@
 
 namespace SaleCakes.Model;
 
-internal class ShortcakeModel
+public class ShortcakeModel
 {
     public ShortcakeModel(Guid id, string name, string price)
     {
@@ -11,9 +11,15 @@ internal class ShortcakeModel
         Price = price;
     }
 
-    public Guid Id { get; }
+    public ShortcakeModel(string name, string price)
+    {
+        Name = name;
+        Price = price;
+    }
 
-    public string Name { get; }
+    public Guid Id { get; set; }
 
-    public string Price { get; }
+    public string Name { get; set; }
+
+    public string Price { get; set; }
 }

@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Data.Context;
 using Data.Dto;
 using Data.Repositories.Abstract;
 using Microsoft.Extensions.DependencyInjection;
-using Shared.Dto;
 using UnitTestNew.TestSettings;
 using Xunit;
 
@@ -45,7 +43,7 @@ public class RepositoriesTest : IClassFixture<Startup>
         Assert.Equal(getDto.ResultOperation.Name, findDto.ResultOperation.Name);
         Assert.Equal(getDto.ResultOperation.Price, findDto.ResultOperation.Price);
 
-        Result<IEnumerable<DecorDto>>? collection = await decorRepos.GetAllAsync();
+        var collection = await decorRepos.GetAllAsync();
         Assert.Equal(collection.ResultOperation.First().Id, getDto.ResultOperation.Id);
 
         var delete = await decorRepos.DeleteEntryAsync(getDto.ResultOperation.Id);
@@ -78,7 +76,7 @@ public class RepositoriesTest : IClassFixture<Startup>
         Assert.Equal(getDto.ResultOperation.Name, findDto.ResultOperation.Name);
         Assert.Equal(getDto.ResultOperation.Price, findDto.ResultOperation.Price);
 
-        Result<IEnumerable<StuffingDto>>? collection = await stuffingRepositories.GetAllAsync();
+        var collection = await stuffingRepositories.GetAllAsync();
         Assert.Equal(collection.ResultOperation.First().Id, getDto.ResultOperation.Id);
 
         var delete = await stuffingRepositories.DeleteEntryAsync(getDto.ResultOperation.Id);
@@ -111,7 +109,7 @@ public class RepositoriesTest : IClassFixture<Startup>
         Assert.Equal(getDto.ResultOperation.Name, findDto.ResultOperation.Name);
         Assert.Equal(getDto.ResultOperation.Price, findDto.ResultOperation.Price);
 
-        Result<IEnumerable<ShortcakeDto>>? collection = await shortcakeRepositories.GetAllAsync();
+        var collection = await shortcakeRepositories.GetAllAsync();
         Assert.Equal(collection.ResultOperation.First().Id, getDto.ResultOperation.Id);
 
         var delete = await shortcakeRepositories.DeleteEntryAsync(getDto.ResultOperation.Id);
@@ -144,7 +142,7 @@ public class RepositoriesTest : IClassFixture<Startup>
         Assert.Equal(getDto.ResultOperation.Id, findDto.ResultOperation.Id);
         Assert.Equal(getDto.ResultOperation.UserRole, findDto.ResultOperation.UserRole);
 
-        Result<IEnumerable<RoleUserDto>>? collection = await shortcakeRepositories.GetAllAsync();
+        var collection = await shortcakeRepositories.GetAllAsync();
         Assert.Equal(collection.ResultOperation.First().Id, getDto.ResultOperation.Id);
 
         var delete = await shortcakeRepositories.DeleteEntryAsync(getDto.ResultOperation.Id);

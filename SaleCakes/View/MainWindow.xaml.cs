@@ -1,9 +1,5 @@
-﻿using System.Diagnostics;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Navigation;
-using SaleCakes.View.Components;
 using SaleCakes.View.Pages;
 using SaleCakes.ViewModel;
 
@@ -15,13 +11,13 @@ namespace SaleCakes.View;
 public partial class MainWindow : Window
 {
     private readonly CakesPage _cakesPage;
-    private readonly EmployeePage _employeePage;
     private readonly ClientsPage _clientsPage;
     private readonly DecorPage _decorPage;
-    private readonly OrdersPage _ordersPage;
+    private readonly EmployeePage _employeePage;
     private readonly MainWindowViewModel _mainWindow;
+    private readonly OrdersPage _ordersPage;
 
-    public MainWindow(CakesPage cakesPage, EmployeePage employeePage, ClientsPage clientsPage, DecorPage decorPage, OrdersPage ordersPage,MainWindowViewModel mainWindow)
+    public MainWindow(CakesPage cakesPage, EmployeePage employeePage, ClientsPage clientsPage, DecorPage decorPage, OrdersPage ordersPage, MainWindowViewModel mainWindow)
     {
         _cakesPage = cakesPage;
         _employeePage = employeePage;
@@ -36,36 +32,41 @@ public partial class MainWindow : Window
     private void NavigateToCakesPageOnClick(object sender, RoutedEventArgs e)
     {
         while (FrameMenuPage.NavigationService.CanGoBack) FrameMenuPage.NavigationService.GoBack();
+
         _ = FrameMenuPage.Navigate(_cakesPage);
     }
 
     private void NavigateToClientsPageOnClick(object sender, RoutedEventArgs e)
     {
         while (FrameMenuPage.NavigationService.CanGoBack) FrameMenuPage.NavigationService.GoBack();
+
         _ = FrameMenuPage.Navigate(_clientsPage);
     }
 
     private void NavigateToDecorsPageOnClick(object sender, RoutedEventArgs e)
     {
         while (FrameMenuPage.NavigationService.CanGoBack) FrameMenuPage.NavigationService.GoBack();
+
         _ = FrameMenuPage.Navigate(_decorPage);
     }
 
     private void NavigateToOrdersPageOnClick(object sender, RoutedEventArgs e)
     {
         while (FrameMenuPage.NavigationService.CanGoBack) FrameMenuPage.NavigationService.GoBack();
+
         _ = FrameMenuPage.Navigate(_ordersPage);
     }
 
     private void NavigateToEmployeesPageOnClick(object sender, RoutedEventArgs e)
     {
         while (FrameMenuPage.NavigationService.CanGoBack) FrameMenuPage.NavigationService.GoBack();
+
         _ = FrameMenuPage.Navigate(_employeePage);
     }
 
     private void Exit(object sender, RoutedEventArgs e)
     {
-        App.Current.Shutdown(0);
+        Application.Current.Shutdown(0);
     }
 
     private void MainWindow_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)

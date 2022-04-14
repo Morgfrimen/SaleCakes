@@ -18,7 +18,6 @@ public partial class EmployeePage : Page
         DataContext = _employeeViewModel;
     }
 
-
     private void ButtonEdit_Click(object sender, RoutedEventArgs e)
     {
     }

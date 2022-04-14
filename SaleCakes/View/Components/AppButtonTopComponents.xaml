@@ -16,14 +16,12 @@
              d:Background="White">
     <UserControl.Resources>
         <ResourceDictionary>
-            <sysControl:Thickness x:Key="ButtonPadding" 
+            <sysControl:Thickness x:Key="ButtonPadding"
                                   Right="10"
-                                  Left="10"/>
-            <sysControl:Thickness x:Key="ButtonMargin" 
+                                  Left="10" />
+            <sysControl:Thickness x:Key="ButtonMargin"
                                   Right="2.5"
-                                  Left="2.5"/>
-            <materialDesign:PackIcon x:Key="Close"
-                                     Kind="CloseBox" />
+                                  Left="2.5" />
 
             <ResourceDictionary.MergedDictionaries>
 
@@ -35,7 +33,7 @@
                     Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-        
+
     </UserControl.Resources>
     <StackPanel Orientation="Horizontal"
                 VerticalAlignment="Top"

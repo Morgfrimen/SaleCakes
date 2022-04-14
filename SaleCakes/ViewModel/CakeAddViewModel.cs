@@ -71,7 +71,7 @@ public class CakeAddViewModel : BaseViewModel
         //var tiersDto = new TiersDto(tierContainer.Stuffig, tierContainer.Decor, tierContainer.Shortcake);
         //await tierRepos.AddAsync(tiersDto);
         //var collection = await tierRepos.GetAllAsync();
-        //var tierDto = collection.FirstOrDefault(item => item.DecorId == tierContainer.Decor);
+        //var tierDto = collection.FirstOrDefault(item => item.DecorModel == tierContainer.Decor);
         //tierContainer.TierdId.Add(tierDto.Id);
         //tierContainer.Count++;
     });

@@ -1,27 +1,26 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace SaleCakes.View.Components
+namespace SaleCakes.View.Components;
+
+/// <summary>
+///     Логика взаимодействия для AppButtonTopComponents.xaml
+/// </summary>
+public partial class AppButtonTopComponents : UserControl
 {
-    /// <summary>
-    /// Логика взаимодействия для AppButtonTopComponents.xaml
-    /// </summary>
-    public partial class AppButtonTopComponents : UserControl
+    public AppButtonTopComponents()
     {
-        public AppButtonTopComponents()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        private void ExitClick(object sender, RoutedEventArgs e) => App.Current.Shutdown(0);
+    private void ExitClick(object sender, RoutedEventArgs e)
+    {
+        Application.Current.Shutdown(0);
+    }
 
-        private void HideClick(object sender, RoutedEventArgs e)
-        {
-            foreach (Window currentWindow in Application.Current.Windows)
-            {
-                currentWindow.WindowState = WindowState.Minimized;
-            }
-            //App.Current.MainWindow.Hide();
-        }
+    private void HideClick(object sender, RoutedEventArgs e)
+    {
+        foreach (Window currentWindow in Application.Current.Windows) currentWindow.WindowState = WindowState.Minimized;
+        //App.Current.MainWindow.Hide();
     }
 }

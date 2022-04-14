@@ -23,12 +23,12 @@ public partial class MainMenuComponent : UserControl
     {
         if (_stateClosed)
         {
-            Storyboard sb = this.FindResource("OpenMenu") as Storyboard;
+            var sb = FindResource("OpenMenu") as Storyboard;
             sb.Begin();
         }
         else
         {
-            Storyboard sb = this.FindResource("CloseMenu") as Storyboard;
+            var sb = FindResource("CloseMenu") as Storyboard;
             sb.Begin();
         }
 
