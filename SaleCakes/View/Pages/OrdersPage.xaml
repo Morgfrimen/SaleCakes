@@ -9,19 +9,18 @@
       Background="{x:Null}"
       d:Background="Gray"
       d:DataContext="{d:DesignInstance viewModel:OrderViewModel}"
-      d:DesignHeight="450" d:DesignWidth="800">
+      d:DesignHeight="450" d:DesignWidth="900">
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="70*" />
-            <ColumnDefinition Width="30*" />
+            <ColumnDefinition Width="75*" />
+            <ColumnDefinition Width="25*" />
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="0">
             <ListView x:Name="listOrdersView"
                       d:ItemsSource="{d:SampleData ItemCount=5}"
-                      ItemsSource="{Binding Orders}"
-                      >
+                      ItemsSource="{Binding Orders}">
                 <ListView.View>
                     <GridView x:Name="GridView2">
                         <GridViewColumn Header="№" DisplayMemberBinding="{Binding OrderAdress  }"
@@ -29,12 +28,33 @@
                         <GridViewColumn Header="Торт" DisplayMemberBinding="{Binding OrderCakeTitle  }"
                                         Width="Auto" />
                         <GridViewColumn Header="Дата продажи"
-
                                         DisplayMemberBinding="{Binding OrderCreatedAt,StringFormat=dd.MM.HH}"
                                         Width="Auto" />
                         <GridViewColumn Header="Цена"
                                         DisplayMemberBinding="{Binding Price}"
                                         Width="Auto" />
+                        <GridViewColumn Header="Состовляющие"
+                                        Width="175">
+                            <GridViewColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock TextWrapping="Wrap"
+                                               MinWidth="150"
+                                               HorizontalAlignment="Stretch"
+                                               Text="{TemplateBinding Content}" />
+                                </DataTemplate>
+                            </GridViewColumn.HeaderTemplate>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Button FontSize="14"
+                                                Margin="-20,0"
+                                                FontWeight="Normal"
+                                                Click="Show_Component_OnClick"
+                                                Content="Показать состовляющие" />
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -55,11 +75,11 @@
                 <Button Content="Добавить"
                         VerticalAlignment="Center"
                         Height="40"
-                        FontSize="14" 
-                        FontWeight="Normal" 
-                        Margin="10,20,10,0" 
+                        FontSize="14"
+                        FontWeight="Normal"
+                        Margin="10,20,10,0"
                         Command="{Binding AddOrder }"
-                        CommandParameter="{Binding ContainerCommand}"/>
+                        CommandParameter="{Binding ContainerCommand}" />
             </StackPanel>
         </Grid>
     </Grid>

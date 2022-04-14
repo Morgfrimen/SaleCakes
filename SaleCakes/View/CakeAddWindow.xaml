@@ -11,14 +11,14 @@
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         Title="CakeAddView" Width="450"
-        Height="450" 
+        Height="450"
         WindowStyle="None"
-        MinWidth="450" MinHeight="450" 
+        MinWidth="450" MinHeight="450"
         MaxWidth="450" MaxHeight="450">
     <Window.Template>
         <ControlTemplate TargetType="Window">
             <Border CornerRadius="300" Background="Transparent">
-                <ContentControl Content="{TemplateBinding Content}"></ContentControl>
+                <ContentControl Content="{TemplateBinding Content}" />
             </Border>
         </ControlTemplate>
     </Window.Template>
@@ -28,7 +28,7 @@
             <Border Background="#FFE2E2E2" MinWidth="100"
                     Padding="30"
                     VerticalAlignment="Stretch"
-                    CornerRadius="30" >
+                    CornerRadius="30">
 
 
                 <StackPanel>
@@ -63,7 +63,7 @@
                                              HorizontalAlignment="Center" />
 
                     <Button Content="Добавить торт"
-                            Click="AddCakeOnClick"/>
+                            Click="AddCakeOnClick" />
                     <materialDesign:PackIcon Kind="ArrowDownBold" VerticalAlignment="Center"
                                              HorizontalAlignment="Center" />
                     <Button

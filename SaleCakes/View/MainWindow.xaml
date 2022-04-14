@@ -7,7 +7,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:showMeTheXaml="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
         xmlns:components="clr-namespace:SaleCakes.View.Components"
-        xmlns:sysWin="clr-namespace:System.Windows;assembly=PresentationCore"
         mc:Ignorable="d"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="Transparent"
@@ -63,9 +62,7 @@
                            Grid.ColumnSpan="2"
                            x:Name="FrameMenuPage"
                            Visibility="{Binding VisibilityMenu,UpdateSourceTrigger=PropertyChanged}"
-                           NavigationUIVisibility="Hidden">
-                       
-                    </Frame>
+                           NavigationUIVisibility="Hidden" />
 
                     <components:AppButtonTopComponents
                         Grid.Row="0" Grid.Column="1" />

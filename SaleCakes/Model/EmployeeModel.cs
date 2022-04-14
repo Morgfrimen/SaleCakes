@@ -5,6 +5,7 @@ namespace SaleCakes.Model;
 public class EmployeeModel
 {
     private string _employeePosition;
+
     public EmployeeModel(Guid id, Guid autorizedDataId, string employeeName, string employeeSurname, string employeePatronymic, string employeePhone, string employeeEmail, string employeePosition)
     {
         Id = id;
@@ -28,11 +29,13 @@ public class EmployeeModel
     public string EmployeePatronymic { get; set; }
     public string EmployeePhone { get; set; }
     public string EmployeeEmail { get; set; }
-    public string EmployeePosition {
+
+    public string EmployeePosition
+    {
         get => _employeePosition;
         set
         {
-            if (value=="0")
+            if (value == "0")
             {
                 _employeePosition = "Администратор";
             }

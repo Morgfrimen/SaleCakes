@@ -39,7 +39,7 @@ public class TierRepositories : RepositoriesBase, ITierRepositories
                 Price = entity.DecorDto.Price
             };
 
-            var tierEntry = new TierEntry
+            TierEntry? tierEntry = new()
             {
                 Id = entity.Id,
                 StuffingEntry = stuffingEntry,

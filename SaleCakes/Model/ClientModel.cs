@@ -17,7 +17,6 @@ public class ClientModel
 
     public ClientModel()
     {
-
     }
 
     public Guid Id { get; set; }

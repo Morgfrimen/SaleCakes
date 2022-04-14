@@ -9,39 +9,69 @@ namespace SaleCakes.ViewModel;
 
 public class OrderViewModel : BaseViewModel
 {
-    private ObservableCollection<OrderClientModel> _orders = new ObservableCollection<OrderClientModel>()
+    private Container _containerCommand;
+    private OrderClientModel _orderNew;
+
+    private ObservableCollection<OrderClientModel> _orders = new()
     {
-        new OrderClientModel(Guid.NewGuid(), DateTime.Now, "Мсоква,Речная 34", Guid.NewGuid(),
-            Guid.NewGuid(), Guid.NewGuid(), "500") { OrderCakeTitle = "Панчо", Price = 300},
-        new OrderClientModel(Guid.NewGuid(), DateTime.Now, "Мсоква,Речная 34", Guid.NewGuid(), Guid.NewGuid(),
-            Guid.NewGuid(), "500") { OrderCakeTitle = "Напалеон", Price = 600 },
-        new OrderClientModel(Guid.NewGuid(), DateTime.Now, "Мсоква,Речная 34", Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(),
-            "500") { OrderCakeTitle = "Ягодный" , Price = 3200},
-        new OrderClientModel(Guid.NewGuid(), DateTime.Now, "Мсоква,Речная 34", Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(),
-            "500") { OrderCakeTitle = "Творожный" , Price = 670},
+        new OrderClientModel(Guid.NewGuid(),
+            DateTime.Now,
+            "Мсоква,Речная 34",
+            Guid.NewGuid(),
+            Guid.NewGuid(),
+            Guid.NewGuid(),
+            "500") { OrderCakeTitle = "Панчо", Price = 300 },
+        new OrderClientModel(Guid.NewGuid(),
+            DateTime.Now,
+            "Мсоква,Речная 34",
+            Guid.NewGuid(),
+            Guid.NewGuid(),
+            Guid.NewGuid(),
+            "500") { OrderCakeTitle = "Напалеон", Price = 600 },
+        new OrderClientModel(Guid.NewGuid(),
+            DateTime.Now,
+            "Мсоква,Речная 34",
+            Guid.NewGuid(),
+            Guid.NewGuid(),
+            Guid.NewGuid(),
+            "500") { OrderCakeTitle = "Ягодный", Price = 3200 },
+        new OrderClientModel(Guid.NewGuid(),
+            DateTime.Now,
+            "Мсоква,Речная 34",
+            Guid.NewGuid(),
+            Guid.NewGuid(),
+            Guid.NewGuid(),
+            "500") { OrderCakeTitle = "Творожный", Price = 670 },
         new OrderClientModel(Guid.NewGuid(), DateTime.Now, "Мсоква,Речная 34", Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), "500")
-            { OrderCakeTitle = "Блинный" , Price = 200},
-        new OrderClientModel(Guid.NewGuid(), DateTime.Now, "Мсоква,Речная 34", Guid.NewGuid(), Guid.NewGuid(),
-            Guid.NewGuid(), "500") { OrderCakeTitle = "Шоколадный", Price = 3400 },
+            { OrderCakeTitle = "Блинный", Price = 200 },
+        new OrderClientModel(Guid.NewGuid(),
+            DateTime.Now,
+            "Мсоква,Речная 34",
+            Guid.NewGuid(),
+            Guid.NewGuid(),
+            Guid.NewGuid(),
+            "500") { OrderCakeTitle = "Шоколадный", Price = 3400 },
         new OrderClientModel(Guid.NewGuid(), DateTime.Now, "Мсоква,Речная 34", Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid(), "500")
         {
             OrderCakeTitle = "Панчо", Price = 870
-        },
+        }
     };
 
-    public event Action HiddenColumnsEvent;
-    private OrderClientModel _orderNew;
+    private Visibility _priceVisible;
+
+    public OrderViewModel()
+    {
+        _orderNew = new OrderClientModel();
+        ContainerCommand = new Container { NewClientModel = _orderNew, ViewModel = this };
+    }
 
     public Visibility PriceVisible
     {
-        get
-        {
-            return _priceVisible;
-        }
+        get => _priceVisible;
         set
         {
             _priceVisible = value;
-            var boolean = (App.Current as App).RoleUser is "Продавец";
+            var boolean = (Application.Current as App).RoleUser is "Продавец";
             _priceVisible = boolean ? Visibility.Visible : Visibility.Hidden;
 
             if (!boolean)
@@ -51,12 +81,6 @@ public class OrderViewModel : BaseViewModel
 
             OnPropertyChanged(nameof(PriceVisible));
         }
-    }
-
-    public OrderViewModel()
-    {
-        _orderNew = new OrderClientModel();
-        ContainerCommand = new Container() { NewClientModel = _orderNew, ViewModel = this };
     }
 
     public ObservableCollection<OrderClientModel> Orders
@@ -79,18 +103,15 @@ public class OrderViewModel : BaseViewModel
         }
     }
 
-    public ICommand AddOrder { get; } = new RelayCommand((obj) =>
+    public ICommand AddOrder { get; } = new RelayCommand(obj =>
     {
         var container = obj as Container;
         container.NewClientModel.OrderCreatedAt = DateTime.Now;
         container.ViewModel.Orders.Add(container.NewClientModel);
         container.ViewModel.OrderNew = new OrderClientModel();
         container.ViewModel.UpdateAllProperty();
-        container.ViewModel.ContainerCommand = new Container() { NewClientModel = container.ViewModel.OrderNew, ViewModel = container.ViewModel };
+        container.ViewModel.ContainerCommand = new Container { NewClientModel = container.ViewModel.OrderNew, ViewModel = container.ViewModel };
     });
-
-    private Container _containerCommand;
-    private Visibility _priceVisible;
 
     public Container ContainerCommand
     {
@@ -102,15 +123,17 @@ public class OrderViewModel : BaseViewModel
         }
     }
 
-    public class Container
-    {
-        public OrderViewModel ViewModel { get; set; }
-        public OrderClientModel NewClientModel { get; set; }
-    }
+    public event Action HiddenColumnsEvent;
 
     public override void UpdateAllProperty()
     {
         OnPropertyChanged(nameof(OrderNew));
         OnPropertyChanged(nameof(Orders));
+    }
+
+    public class Container
+    {
+        public OrderViewModel ViewModel { get; set; }
+        public OrderClientModel NewClientModel { get; set; }
     }
 }

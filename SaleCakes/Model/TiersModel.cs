@@ -4,16 +4,8 @@ namespace SaleCakes.Model;
 
 public class TiersModel
 {
-    public TiersModel(Guid id, Guid stuffingId, Guid decorId, Guid shortcakeId)
-    {
-        Id = id;
-        StuffingId = stuffingId;
-        DecorId = decorId;
-        ShortcakeId = shortcakeId;
-    }
-
-    public Guid Id { get; }
-    public Guid StuffingId { get; }
-    public Guid DecorId { get; }
-    public Guid ShortcakeId { get; }
+    public Guid Id { get; set; }
+    public StuffingModel StuffingModel { get; set; }
+    public DecorModel DecorModel { get; set; }
+    public ShortcakeModel ShortcakeModel { get; set; }
 }

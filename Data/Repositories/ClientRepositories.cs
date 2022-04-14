@@ -1,8 +1,6 @@
 ﻿using Data.Context;
 using Data.Dto;
-using Data.Entries;
 using Data.Repositories.Abstract;
-using Microsoft.EntityFrameworkCore;
 using Shared.Dto;
 
 namespace Data.Repositories;
