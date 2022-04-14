@@ -1,4 +1,4 @@
-﻿<Window x:Class="SaleCakes.View.ComponentsCake"
+﻿<Window x:Class="SaleCakes.View.ComponentsCakeWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,7 +9,7 @@
         Title="Состовляющие" MaxHeight="450" MaxWidth="550">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30*"/>
+            <ColumnDefinition Width="30*" />
             <ColumnDefinition Width="70*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>

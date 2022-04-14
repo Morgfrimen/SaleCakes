@@ -18,7 +18,7 @@ public class AppUserRepositories : RepositoriesBase, IAppUserRepositories
     {
         try
         {
-            var appUserEntry = new AppUserEntry
+            AppUserEntry? appUserEntry = new()
             {
                 UserRole = entity.UserRole
             };

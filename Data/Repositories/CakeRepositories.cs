@@ -18,42 +18,43 @@ public class CakeRepositories : RepositoriesBase, ICakeRepositories
     {
         try
         {
-            var decorEntry = new CakeEntry()
+            CakeEntry? decorEntry = new()
             {
                 Id = entity.Id,
                 Weight = entity.Weight,
                 Name = entity.Name
             };
 
-            var cakeDesigns = new List<CakeDesign>();
+            List<CakeDesign>? cakeDesigns = new();
 
             foreach (var tiersDto in entity.TiersId)
             {
-                var cakeDesign = new CakeDesign();
-
-                cakeDesign.Tier = new TierEntry()
+                CakeDesign? cakeDesign = new()
                 {
-                    Id = tiersDto.Id,
-                    DecorEntry = new DecorEntry()
+                    Tier = new TierEntry
                     {
-                        Id = tiersDto.DecorDto.Id,
-                        Name = tiersDto.DecorDto.Name,
-                        Price = tiersDto.DecorDto.Price
+                        Id = tiersDto.Id,
+                        DecorEntry = new DecorEntry
+                        {
+                            Id = tiersDto.DecorDto.Id,
+                            Name = tiersDto.DecorDto.Name,
+                            Price = tiersDto.DecorDto.Price
+                        },
+                        ShortcakeEntry = new ShortcakeEntry
+                        {
+                            Id = tiersDto.ShortcakeDto.Id,
+                            Name = tiersDto.ShortcakeDto.Name,
+                            Price = tiersDto.ShortcakeDto.Price
+                        },
+                        StuffingEntry = new StuffingEntry
+                        {
+                            Id = tiersDto.StuffingDto.Id,
+                            Name = tiersDto.StuffingDto.Name,
+                            Price = tiersDto.StuffingDto.Price
+                        }
                     },
-                    ShortcakeEntry = new ShortcakeEntry()
-                    {
-                        Id = tiersDto.ShortcakeDto.Id,
-                        Name = tiersDto.ShortcakeDto.Name,
-                        Price = tiersDto.ShortcakeDto.Price
-                    },
-                    StuffingEntry = new StuffingEntry()
-                    {
-                        Id = tiersDto.StuffingDto.Id,
-                        Name = tiersDto.StuffingDto.Name,
-                        Price = tiersDto.StuffingDto.Price
-                    }
+                    Cake = decorEntry
                 };
-                cakeDesign.Cake = decorEntry;
                 cakeDesigns.Add(cakeDesign);
             }
 
@@ -102,7 +103,7 @@ public class CakeRepositories : RepositoriesBase, ICakeRepositories
         {
             var resultEntry = DbContext.CakesEntries.AsNoTracking()
                 .Where(item => item.Id == id)
-                .Select(item => new CakeDto(item.Id, item.Weight,default,item.Name))
+                .Select(item => new CakeDto(item.Id, item.Weight, default, item.Name))
                 .FirstOrDefault();
             //TODO: Tiers
 

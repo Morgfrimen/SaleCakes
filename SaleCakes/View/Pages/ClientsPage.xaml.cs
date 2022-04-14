@@ -9,14 +9,14 @@ namespace SaleCakes.View.Pages;
 /// </summary>
 public partial class ClientsPage : Page
 {
-    private ClientsViewModel? _clientsViewModel = new();
+    private readonly ClientsViewModel? _clientsViewModel = new();
+
     public ClientsPage(ClientsViewModel clientsViewModel)
     {
         InitializeComponent();
         _clientsViewModel = clientsViewModel;
         DataContext = _clientsViewModel;
     }
-
 
     private void ButtonEdit_Click(object sender, RoutedEventArgs e)
     {

@@ -8,7 +8,7 @@ using Shared.Dto;
 
 namespace Data.Repositories;
 
-public class AuthorizationUserRepositories : RepositoriesBase,IAuthorizationUserRepositories
+public class AuthorizationUserRepositories : RepositoriesBase, IAuthorizationUserRepositories
 {
     public AuthorizationUserRepositories(SaleCakesDbContext context) : base(context)
     {
@@ -18,11 +18,15 @@ public class AuthorizationUserRepositories : RepositoriesBase,IAuthorizationUser
     {
         try
         {
-            var roleEntry = new AppUserEntry() { Id = entity.AppUsers.Id, UserRole = entity.AppUsers.UserRole };
+            AppUserEntry? roleEntry = new() { Id = entity.AppUsers.Id, UserRole = entity.AppUsers.UserRole };
             var resultRole = await DbContext.AppUsersEntries.FirstOrDefaultAsync(item => item.UserRole == roleEntry.UserRole);
-            if (resultRole is null) return new Result<Guid>(new Error("Такой роли не найдено"));
 
-            var authorizationEntry = new AuthorizationUserEntry()
+            if (resultRole is null)
+            {
+                return new Result<Guid>(new Error("Такой роли не найдено"));
+            }
+
+            AuthorizationUserEntry? authorizationEntry = new()
             {
                 CreatedAt = DateTime.Now,
                 UserLogin = entity.UserLogin,
@@ -31,10 +35,9 @@ public class AuthorizationUserRepositories : RepositoriesBase,IAuthorizationUser
             };
 
             var result = await DbContext.AuthorizationUsersEntries.AddAsync(authorizationEntry);
-            await DbContext.SaveChangesAsync();
+            _ = await DbContext.SaveChangesAsync();
             result.State = EntityState.Detached;
             return new Result<Guid>(result.Entity.Id);
-
         }
         catch (Exception ex)
         {
@@ -47,11 +50,14 @@ public class AuthorizationUserRepositories : RepositoriesBase,IAuthorizationUser
         try
         {
             var first = await DbContext.AuthorizationUsersEntries.FindAsync(id);
-            if(first is null) 
+
+            if (first is null)
+            {
                 return new Result<bool>(false);
+            }
 
             _ = DbContext.AuthorizationUsersEntries.Remove(first);
-            await DbContext.SaveChangesAsync();
+            _ = await DbContext.SaveChangesAsync();
             return new Result<bool>(true);
         }
         catch (Exception ex)
@@ -67,14 +73,16 @@ public class AuthorizationUserRepositories : RepositoriesBase,IAuthorizationUser
             var firstEntry = await DbContext.AuthorizationUsersEntries.FirstOrDefaultAsync(item => item.Id == entityDto.Id);
 
             if (firstEntry == null)
+            {
                 return new Result<Guid>(new Error("Такого пользователя не найдено"));
+            }
 
             firstEntry.UserLogin = entityDto.UserLogin;
             firstEntry.UserPassword = entityDto.UserPassword;
             firstEntry.CreatedAt = entityDto.CreatedAt;
 
             var result = DbContext.AuthorizationUsersEntries.Update(firstEntry);
-            await DbContext.SaveChangesAsync();
+            _ = await DbContext.SaveChangesAsync();
             result.State = EntityState.Detached;
             return new Result<Guid>(result.Entity.Id);
         }
@@ -91,10 +99,12 @@ public class AuthorizationUserRepositories : RepositoriesBase,IAuthorizationUser
             var result = await DbContext.AuthorizationUsersEntries.FirstOrDefaultAsync(item => item.Id == id);
 
             if (result == null)
+            {
                 return new Result<AuthorizationUserDto?>(default(AuthorizationUserDto));
+            }
 
-            var dtoRole = new RoleUserDto(result.UserGu.Id, result.UserGu.UserRole);
-            var dtoUser = new AuthorizationUserDto(dtoRole, result.UserLogin, result.UserPassword, result.CreatedAt ?? default);
+            RoleUserDto? dtoRole = new(result.UserGu.Id, result.UserGu.UserRole);
+            AuthorizationUserDto? dtoUser = new(dtoRole, result.UserLogin, result.UserPassword, result.CreatedAt ?? default);
             return new Result<AuthorizationUserDto?>(dtoUser);
         }
         catch (Exception ex)
@@ -122,7 +132,7 @@ public class AuthorizationUserRepositories : RepositoriesBase,IAuthorizationUser
         try
         {
             DbContext.AuthorizationUsersEntries.RemoveRange(DbContext.AuthorizationUsersEntries);
-            await DbContext.SaveChangesAsync();
+            _ = await DbContext.SaveChangesAsync();
             return new Result<bool>(true);
         }
         catch (Exception ex)
@@ -137,9 +147,13 @@ public class AuthorizationUserRepositories : RepositoriesBase,IAuthorizationUser
         {
             var result = await DbContext.AuthorizationUsersEntries.FirstOrDefaultAsync(item => item.UserLogin == login);
             var role = await DbContext.AppUsersEntries.FirstOrDefaultAsync(item => item.Id == result.UserGuid.Value);
+
             if (result is null)
+            {
                 return new Result<AuthorizationUserDto?>(default(AuthorizationUserDto));
-            var dto = new AuthorizationUserDto(new RoleUserDto(role.Id, role.UserRole), result.UserLogin, result.UserPassword, result.CreatedAt ?? default);
+            }
+
+            AuthorizationUserDto? dto = new(new RoleUserDto(role.Id, role.UserRole), result.UserLogin, result.UserPassword, result.CreatedAt ?? default);
             return new Result<AuthorizationUserDto?>(dto);
         }
         catch (Exception e)

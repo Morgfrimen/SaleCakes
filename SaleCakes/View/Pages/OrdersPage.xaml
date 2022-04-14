@@ -20,8 +20,7 @@
         <Grid Grid.Column="0">
             <ListView x:Name="listOrdersView"
                       d:ItemsSource="{d:SampleData ItemCount=5}"
-                      ItemsSource="{Binding Orders}"
-                      >
+                      ItemsSource="{Binding Orders}">
                 <ListView.View>
                     <GridView x:Name="GridView2">
                         <GridViewColumn Header="№" DisplayMemberBinding="{Binding OrderAdress  }"
@@ -41,9 +40,7 @@
                                     <TextBlock TextWrapping="Wrap"
                                                MinWidth="150"
                                                HorizontalAlignment="Stretch"
-                                               Text="{TemplateBinding Content}">
-
-                                    </TextBlock>
+                                               Text="{TemplateBinding Content}" />
                                 </DataTemplate>
                             </GridViewColumn.HeaderTemplate>
                             <GridViewColumn.CellTemplate>
@@ -53,7 +50,7 @@
                                                 Margin="-20,0"
                                                 FontWeight="Normal"
                                                 Click="Show_Component_OnClick"
-                                                Content="Показать состовляющие"/>
+                                                Content="Показать состовляющие" />
                                     </Grid>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
@@ -78,11 +75,11 @@
                 <Button Content="Добавить"
                         VerticalAlignment="Center"
                         Height="40"
-                        FontSize="14" 
-                        FontWeight="Normal" 
-                        Margin="10,20,10,0" 
+                        FontSize="14"
+                        FontWeight="Normal"
+                        Margin="10,20,10,0"
                         Command="{Binding AddOrder }"
-                        CommandParameter="{Binding ContainerCommand}"/>
+                        CommandParameter="{Binding ContainerCommand}" />
             </StackPanel>
         </Grid>
     </Grid>

@@ -8,9 +8,9 @@ namespace SaleCakes.ViewModel;
 public class AuthorizedViewModel : BaseViewModel
 {
     private readonly IAuthorizationUserRepositories _authorizationUserRepositories;
+    private Container _containers;
     private string _login;
     private string _password;
-    private Container _containers ;
 
     public AuthorizedViewModel(IAuthorizationUserRepositories authorizationUserRepositories)
     {
@@ -40,27 +40,25 @@ public class AuthorizedViewModel : BaseViewModel
         }
     }
 
-    public ICommand LogInCommand { get; } = new RelayCommand(async (obj) =>
+    public ICommand LogInCommand { get; } = new RelayCommand(async obj =>
     {
         var container = obj as Container;
 
         var resultDto = await container!.AuthorizationUserRepositories.GetAuthorizationUserDtoByLoginAsync(container?.Login?.Trim() ?? string.Empty);
 
-        if(resultDto.ResultOperation is null || resultDto.ResultOperation.UserPassword != container.Password)
+        if (resultDto.ResultOperation is null || resultDto.ResultOperation.UserPassword != container.Password)
         {
-            MessageBox.Show("Неверный пароль");
+            _ = MessageBox.Show("Неверный пароль");
             return;
         }
 
-        var mainVM = (App.Current as App).ServiceProvider.GetService(typeof(MainWindowViewModel)) as MainWindowViewModel;
+        var mainVM = (Application.Current as App).ServiceProvider.GetService(typeof(MainWindowViewModel)) as MainWindowViewModel;
 
         mainVM.VisibilityAutorized = Visibility.Collapsed;
         mainVM.VisibilityMenu = Visibility.Visible;
         mainVM.ResizeModeMainWindow = ResizeMode.CanResizeWithGrip;
 
-        (App.Current as App).RoleUser = resultDto.ResultOperation.AppUsers.UserRole;
-
-
+        (Application.Current as App).RoleUser = resultDto.ResultOperation.AppUsers.UserRole;
     });
 
     public Container Containers

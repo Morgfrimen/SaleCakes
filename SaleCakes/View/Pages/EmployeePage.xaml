@@ -25,12 +25,14 @@
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Имя"
-                                        DisplayMemberBinding="{Binding  EmployeeName}" Width="Auto"/>
-                        <GridViewColumn Header="Фамилия" DisplayMemberBinding="{Binding  EmployeeSurname}" Width="Auto"/>
-                        <GridViewColumn Header="Отчество" DisplayMemberBinding="{Binding EmployeePatronymic}" Width="Auto"/>
+                                        DisplayMemberBinding="{Binding  EmployeeName}" Width="Auto" />
+                        <GridViewColumn Header="Фамилия" DisplayMemberBinding="{Binding  EmployeeSurname}" Width="Auto" />
+                        <GridViewColumn Header="Отчество" DisplayMemberBinding="{Binding EmployeePatronymic}"
+                                        Width="Auto" />
                         <GridViewColumn Header="Телефон" DisplayMemberBinding="{Binding EmployeePhone}" Width="Auto" />
-                        <GridViewColumn Header="e-mail" DisplayMemberBinding="{Binding EmployeeEmail}" Width="Auto"/>
-                        <GridViewColumn Header="Должность" DisplayMemberBinding="{Binding EmployeePosition}" Width="Auto"/>
+                        <GridViewColumn Header="e-mail" DisplayMemberBinding="{Binding EmployeeEmail}" Width="Auto" />
+                        <GridViewColumn Header="Должность" DisplayMemberBinding="{Binding EmployeePosition}"
+                                        Width="Auto" />
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -57,16 +59,16 @@
                           SelectedIndex="{Binding EmployeeModelNew.EmployeePosition}"
                           materialDesign:ComboBoxAssist.ShowSelectedItem="False"
                           Margin="10,10,10,0">
-                    <ComboBoxItem Content="Администратор"/>
-                    <ComboBoxItem Content="Продавец"/>
+                    <ComboBoxItem Content="Администратор" />
+                    <ComboBoxItem Content="Продавец" />
                 </ComboBox>
                 <Button Content="Добавить"
                         Command="{Binding AddEmployee}"
                         CommandParameter="{Binding Containers}"
                         VerticalAlignment="Center"
                         Height="40"
-                        FontSize="14" 
-                        FontWeight="Normal" 
+                        FontSize="14"
+                        FontWeight="Normal"
                         Click="ButtonEdit_Click" Margin="10,20,10,0" />
             </StackPanel>
 

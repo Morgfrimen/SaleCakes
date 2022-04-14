@@ -17,7 +17,7 @@
     <Window.Template>
         <ControlTemplate TargetType="Window">
             <Border CornerRadius="30" Background="White">
-                <ContentControl Content="{TemplateBinding Content}"></ContentControl>
+                <ContentControl Content="{TemplateBinding Content}" />
             </Border>
         </ControlTemplate>
     </Window.Template>
@@ -56,13 +56,11 @@
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center" />
 
-            <ComboBox Grid.Column="1" 
+            <ComboBox Grid.Column="1"
                       SelectedIndex="{Binding SelectedRoleIndex}"
                       ItemsSource="{Binding RoleValue}"
                       VerticalAlignment="Center"
-                      materialDesign:ComboBoxAssist.ShowSelectedItem="False">
-                
-            </ComboBox>
+                      materialDesign:ComboBoxAssist.ShowSelectedItem="False" />
 
         </Grid>
 
@@ -83,13 +81,12 @@
                        VerticalAlignment="Center" />
 
             <TextBox Grid.Column="1"
-                materialDesign:HintAssist.Hint="Логин"
-                materialDesign:HintAssist.HelperText="Введите логин пользователя">
+                     materialDesign:HintAssist.Hint="Логин"
+                     materialDesign:HintAssist.HelperText="Введите логин пользователя">
                 <TextBox.Text>
                     <Binding
                         Path="User.UserLogin"
-                        UpdateSourceTrigger="PropertyChanged">
-                    </Binding>
+                        UpdateSourceTrigger="PropertyChanged" />
                 </TextBox.Text>
             </TextBox>
 
@@ -117,8 +114,7 @@
                 <TextBox.Text>
                     <Binding
                         Path="User.UserPassword"
-                        UpdateSourceTrigger="PropertyChanged">
-                    </Binding>
+                        UpdateSourceTrigger="PropertyChanged" />
                 </TextBox.Text>
             </TextBox>
 
@@ -134,7 +130,8 @@
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                     materialDesign:ButtonAssist.CornerRadius="15"
                     ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
-                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Cursor="Hand">
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Cursor="Hand">
                 <TextBlock
                     Text="Зарегистрироваться" />
             </Button>

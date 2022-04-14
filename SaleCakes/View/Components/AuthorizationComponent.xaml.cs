@@ -10,14 +10,14 @@ namespace SaleCakes.View.Components;
 /// </summary>
 public partial class AuthorizationComponent : UserControl
 {
+    private readonly RegistrationViewModel _vm;
     private RegistrationWindow _registrationWindow;
-    private RegistrationViewModel _vm;
 
     public AuthorizationComponent()
     {
-        _registrationWindow = (App.Current as App).ServiceProvider.GetService<RegistrationWindow>()!;
+        _registrationWindow = (Application.Current as App).ServiceProvider.GetService<RegistrationWindow>()!;
         _vm = _registrationWindow.DataContext as RegistrationViewModel;
-        DataContext = (App.Current as App).ServiceProvider.GetService<MainWindowViewModel>();
+        DataContext = (Application.Current as App).ServiceProvider.GetService<MainWindowViewModel>();
         InitializeComponent();
     }
 
@@ -35,7 +35,7 @@ public partial class AuthorizationComponent : UserControl
 
     private void PasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
     {
-        if (this.DataContext != null)
+        if (DataContext != null)
         {
             ((MainWindowViewModel)DataContext).AuthorizedViewModel.Password = ((PasswordBox)sender).Password;
         }

@@ -11,13 +11,17 @@ public class CakeViewModel : BaseViewModel
 {
     private ObservableCollection<CakeModel> _modelCakes = new()
     {
-        new CakeModel(Guid.NewGuid(), 500m, 
-            new List<TiersModel>(){new TiersModel(){DecorModel = new DecorModel("Десор1",100m)}}){Number = 1,Title = "Блинный"},
-        new CakeModel(Guid.NewGuid(), 500m,
-            new List<TiersModel>(){new TiersModel(){DecorModel = new DecorModel("Десор2",200m)}}){Number = 2,Title = "Шоколадный"},
-        new CakeModel(Guid.NewGuid(), 500m,
-            new List<TiersModel>(){new TiersModel(){DecorModel = new DecorModel("Десор3",500m)}}){Number = 3,Title = "Панчо"}
+        new CakeModel(Guid.NewGuid(),
+            500m,
+            new List<TiersModel> { new() { DecorModel = new DecorModel("Десор1", 100m) } }) { Number = 1, Title = "Блинный" },
+        new CakeModel(Guid.NewGuid(),
+            500m,
+            new List<TiersModel> { new() { DecorModel = new DecorModel("Десор2", 200m) } }) { Number = 2, Title = "Шоколадный" },
+        new CakeModel(Guid.NewGuid(),
+            500m,
+            new List<TiersModel> { new() { DecorModel = new DecorModel("Десор3", 500m) } }) { Number = 3, Title = "Панчо" }
     };
+
     private ObservableCollection<StuffingModel> _stuffings = null!;
 
     public ObservableCollection<CakeModel> ModelCakes
