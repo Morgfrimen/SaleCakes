@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using SaleCakes.ViewModel;
@@ -12,6 +13,8 @@ public partial class OrdersPage : Page
 {
     private readonly OrderViewModel _orderViewModel;
     private ComponentsCakeWindow _componentsCakeWindow;
+    private int _selectedIndex;
+
 
     public OrdersPage(OrderViewModel orderViewModel, ComponentsCakeWindow componentsCakeWindow)
     {
@@ -41,5 +44,31 @@ public partial class OrdersPage : Page
     {
         _componentsCakeWindow.Show();
         _componentsCakeWindow = new ComponentsCakeWindow();
+    }
+
+    private void listOrdersView_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        OrderViewModel orderViewModel = new OrderViewModel();
+        _selectedIndex = listOrdersView.SelectedIndex;
+        orderViewModel.ItemId = _selectedIndex;
+        cakeNameTextBox.Text = orderViewModel.Orders[orderViewModel.ItemId].OrderCakeTitle.ToString();
+        cakeAddressTextBox.Text = orderViewModel.Orders[orderViewModel.ItemId].OrderAdress.ToString();
+        cakePriceTextBox.Text = orderViewModel.Orders[orderViewModel.ItemId].Price.ToString();
+        cakeIdTextBox.Text = orderViewModel.Orders[orderViewModel.ItemId].Id.ToString();
+    }
+
+    //private void Button_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    //{
+    //    OrderViewModel orderViewModel = new OrderViewModel();
+    //    orderViewModel.DeleteOrders(sender, Convert.ToInt32(cakeIdTextBox.Text));
+    //}
+
+
+    private void Button_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        foreach (ListViewItem item in listOrdersView.SelectedItems)
+        {
+            listOrdersView.Items.Remove(item);
+        }
     }
 }

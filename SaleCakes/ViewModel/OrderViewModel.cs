@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using SaleCakes.Command;
 using SaleCakes.Model;
+using Xunit;
 
 namespace SaleCakes.ViewModel;
 
@@ -11,6 +12,8 @@ public class OrderViewModel : BaseViewModel
 {
     private Container _containerCommand;
     private OrderClientModel _orderNew;
+    private OrderClientModel _orderItemId;
+    private int _itemId;
 
     private ObservableCollection<OrderClientModel> _orders = new()
     {
@@ -103,15 +106,43 @@ public class OrderViewModel : BaseViewModel
         }
     }
 
+    public int ItemId { get; set; }
+
     public ICommand AddOrder { get; } = new RelayCommand(obj =>
     {
         var container = obj as Container;
         container.NewClientModel.OrderCreatedAt = DateTime.Now;
         container.ViewModel.Orders.Add(container.NewClientModel);
         container.ViewModel.OrderNew = new OrderClientModel();
-        container.ViewModel.UpdateAllProperty();
         container.ViewModel.ContainerCommand = new Container { NewClientModel = container.ViewModel.OrderNew, ViewModel = container.ViewModel };
+        container.ViewModel.UpdateAllProperty();
     });
+
+    
+
+    //public ICommand DeleteOrder { get; } = new RelayCommand(obj =>
+    //{
+    //    var container = obj as Container;
+        
+    //    var item = 0;
+    //    if (item < container.ViewModel.Orders.Count)
+    //    {
+    //        container.ViewModel.Orders.RemoveAt(item);
+    //    }
+    //    container.ViewModel.UpdateAllProperty();
+    //});
+
+    //public void DeleteOrders(object obj, int itemId)
+    //{
+    //    var container = obj as Container;
+    //    if (itemId < container.ViewModel.Orders.Count)
+    //    {
+    //        container.ViewModel.Orders.RemoveAt(itemId);
+    //    }
+    //    container.ViewModel.UpdateAllProperty();
+    //}
+
+
 
     public Container ContainerCommand
     {
@@ -136,4 +167,5 @@ public class OrderViewModel : BaseViewModel
         public OrderViewModel ViewModel { get; set; }
         public OrderClientModel NewClientModel { get; set; }
     }
+
 }

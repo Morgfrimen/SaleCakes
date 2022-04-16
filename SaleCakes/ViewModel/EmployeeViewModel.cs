@@ -12,13 +12,13 @@ public class EmployeeViewModel : BaseViewModel
 
     private ObservableCollection<EmployeeModel> _employee = new()
     {
-        new EmployeeModel(Guid.NewGuid(), Guid.NewGuid(), "Александр", "Шветцов", "Михайлович", "8-922-333-22-33", "mos@metro.рф", "пекарь"),
-        new EmployeeModel(Guid.NewGuid(), Guid.NewGuid(), "Михаил", "Шветцов", "Михайлович", "8-922-333-22-33", "mos@metro.рф", "пекарь"),
-        new EmployeeModel(Guid.NewGuid(), Guid.NewGuid(), "Максим", "Шветцов", "Михайлович", "8-922-333-22-33", "mos@metro.рф", "пекарь"),
-        new EmployeeModel(Guid.NewGuid(), Guid.NewGuid(), "Екатерина", "Шветцов", "Михайлович", "8-922-333-22-33", "mos@metro.рф", "пекарь"),
+        new EmployeeModel(Guid.NewGuid(), Guid.NewGuid(), "Александр", "Шветцов", "Михайлович", "8-922-333-22-33", "mos@metro.рф", "продавец"),
+        new EmployeeModel(Guid.NewGuid(), Guid.NewGuid(), "Михаил", "Шветцов", "Михайлович", "8-922-333-22-33", "mos@metro.рф", "продавец"),
+        new EmployeeModel(Guid.NewGuid(), Guid.NewGuid(), "Максим", "Шветцов", "Михайлович", "8-922-333-22-33", "mos@metro.рф", "продавец"),
+        new EmployeeModel(Guid.NewGuid(), Guid.NewGuid(), "Екатерина", "Шветцов", "Михайлович", "8-922-333-22-33", "mos@metro.рф", "продавец"),
         new EmployeeModel(Guid.NewGuid(), Guid.NewGuid(), "Вероника", "Шветцов", "Михайлович", "8-922-333-22-33", "mos@metro.рф", "администратор"),
-        new EmployeeModel(Guid.NewGuid(), Guid.NewGuid(), "Алина", "Шветцов", "Михайлович", "8-922-333-22-33", "mos@metro.рф", "пекарь"),
-        new EmployeeModel(Guid.NewGuid(), Guid.NewGuid(), "Ольга", "Мосвина", "Михайлович", "8-922-333-22-33", "mos@metro.рф", "пекарь")
+        new EmployeeModel(Guid.NewGuid(), Guid.NewGuid(), "Алина", "Шветцов", "Михайлович", "8-922-333-22-33", "mos@metro.рф", "продавец"),
+        new EmployeeModel(Guid.NewGuid(), Guid.NewGuid(), "Ольга", "Мосвина", "Михайлович", "8-922-333-22-33", "mos@metro.рф", "продавец")
     };
 
     private EmployeeModel _employeeModelNew;
@@ -59,6 +59,7 @@ public class EmployeeViewModel : BaseViewModel
         }
     }
 
+
     public ObservableCollection<EmployeeModel> Employee
     {
         get => _employee;
@@ -92,4 +93,5 @@ public class EmployeeViewModel : BaseViewModel
         public ObservableCollection<EmployeeModel> Collection { get; set; }
         public EmployeeViewModel ViewModel { get; set; }
     }
+    
 }

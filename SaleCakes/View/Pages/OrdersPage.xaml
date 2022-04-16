@@ -20,7 +20,7 @@
         <Grid Grid.Column="0">
             <ListView x:Name="listOrdersView"
                       d:ItemsSource="{d:SampleData ItemCount=5}"
-                      ItemsSource="{Binding Orders}">
+                      ItemsSource="{Binding Orders}" MouseDoubleClick="listOrdersView_MouseDoubleClick">
                 <ListView.View>
                     <GridView x:Name="GridView2">
                         <GridViewColumn Header="№" DisplayMemberBinding="{Binding OrderAdress  }"
@@ -60,26 +60,42 @@
             </ListView>
         </Grid>
         <Grid Grid.Column="1">
+            <TextBox x:Name="cakeIdTextBox"
+                     Text="{Binding OrderNew.Id}" Width="1" Height="1" Visibility="Hidden"/>
             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
-                <TextBox materialDesign:HintAssist.Hint="Название торта"
+                <TextBox x:Name="cakeNameTextBox" materialDesign:HintAssist.Hint="Название торта"
                          Text="{Binding OrderNew.OrderCakeTitle}"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" />
-                <TextBox materialDesign:HintAssist.Hint="Адрес"
+                <TextBox x:Name="cakeAddressTextBox" materialDesign:HintAssist.Hint="Адрес"
                          Text="{Binding OrderNew.OrderAdress}"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" />
-                <TextBox materialDesign:HintAssist.Hint="Цена"
+                <TextBox x:Name="cakePriceTextBox" materialDesign:HintAssist.Hint="Цена"
                          Visibility="{Binding PriceVisible}"
                          Text="{Binding OrderNew.Price}"
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="10,0,10,0" />
 
                 <Button Content="Добавить"
+                    Height="40"
+                    FontSize="14"
+                    FontWeight="Normal"
+                    Command="{Binding AddOrder}"
+                    CommandParameter="{Binding ContainerCommand}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10,20,10,0" />
+
+                <Button Content="Изменить"
                         VerticalAlignment="Center"
                         Height="40"
                         FontSize="14"
                         FontWeight="Normal"
                         Margin="10,20,10,0"
-                        Command="{Binding AddOrder }"
-                        CommandParameter="{Binding ContainerCommand}" />
+                        Command="{Binding DeleteOrder }"
+                        CommandParameter="{Binding I}" />
+
+                <Button Content="Удалить"
+                        VerticalAlignment="Center"
+                        Height="40"
+                        FontSize="14"
+                        FontWeight="Normal"
+                        Margin="10,20,10,0" MouseLeftButtonUp="Button_MouseLeftButtonUp"/>
             </StackPanel>
         </Grid>
     </Grid>

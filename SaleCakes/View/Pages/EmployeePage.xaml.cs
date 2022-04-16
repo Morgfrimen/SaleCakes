@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using SaleCakes.ViewModel;
 
@@ -20,5 +21,12 @@ public partial class EmployeePage : Page
 
     private void ButtonEdit_Click(object sender, RoutedEventArgs e)
     {
+    }
+
+    private void ListViewItem_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        EmployeeEditDeleteWindow employeeEditDeleteWindow = new EmployeeEditDeleteWindow();
+        employeeEditDeleteWindow.Show();
+        //var id = ListViewItem.FocusedItem.SubItems[5].Text;
     }
 }

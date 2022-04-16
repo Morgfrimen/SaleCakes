@@ -19,6 +19,11 @@ public class OrderClientModel
     {
     }
 
+    public OrderClientModel(int itemId)
+    {
+        ItemId = itemId;
+    }
+
     public Guid Id { get; set; }
     public DateTime OrderCreatedAt { get; set; }
     public string OrderAdress { get; set; }
@@ -28,4 +33,5 @@ public class OrderClientModel
     public string OrderSeller { get; set; }
     public string OrderCakeTitle { get; set; }
     public decimal Price { get; set; }
+    public int ItemId { get; set; }
 }
