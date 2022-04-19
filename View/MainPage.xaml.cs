@@ -1,4 +1,4 @@
-﻿namespace SaleCake;
+﻿namespace SaleCake.View;
 
 public partial class MainPage : ContentPage
 {

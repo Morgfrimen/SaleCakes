@@ -3,12 +3,27 @@
     x:Class="SaleCake.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:SaleCake"
-    Shell.FlyoutBehavior="Disabled">
+    xmlns:local="clr-namespace:SaleCake.View"
+    Shell.FlyoutBehavior="Flyout">
 
-    <ShellContent
+    <FlyoutItem Title="Авторизация">
+        <ShellContent 
+        Title="Авторизация"
+        Route="LoginPage"
+        ContentTemplate="{DataTemplate local:LoginPage}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="ОСнова1">
+        <ShellContent
+        Title="Hello, World!"        
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+    </FlyoutItem>
+    <FlyoutItem Title="Основа 2">
+
+        <ShellContent
         Title="Hello, World!"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
+    </FlyoutItem>
 
 </Shell>
