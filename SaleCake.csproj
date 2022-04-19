@@ -46,7 +46,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove=".gitattributes" />
+	  <None Remove=".gitignore" />
 	  <None Remove="global.json" />
+	  <None Remove="README.md" />
 	</ItemGroup>
 
 </Project>
