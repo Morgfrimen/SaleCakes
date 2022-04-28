@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  webapi:
+    image: ${DOCKER_REGISTRY-}webapi
+    build:
+      context: .
+      dockerfile: src/WebApi/Dockerfile
+    ports:
+        - "8000:80" 
+    depends_on:
+        - sql_server
+
+#в SSMS нудно указать что-то такое: localhost,1434\sqlexpress и тогда подлючение будет
+  sql_server:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    environment:
+      SA_PASSWORD: "Drozhkin97"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1434:1433" 

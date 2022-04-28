@@ -8,7 +8,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решен
 		global.json = global.json
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SaleCake", "SaleCake.csproj", "{55AF999D-161A-4810-96CA-5109D9858C28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SaleCake", "src\MAUI\SaleCake.csproj", "{55AF999D-161A-4810-96CA-5109D9858C28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "src\WebApi\WebApi.csproj", "{377A7CCE-3E0D-4E91-B749-EFBAD92EED11}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{08DD0561-4709-4902-AA85-F70D6754237C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,6 +26,14 @@ Global
 		{55AF999D-161A-4810-96CA-5109D9858C28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55AF999D-161A-4810-96CA-5109D9858C28}.Release|Any CPU.Build.0 = Release|Any CPU
 		{55AF999D-161A-4810-96CA-5109D9858C28}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{377A7CCE-3E0D-4E91-B749-EFBAD92EED11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{377A7CCE-3E0D-4E91-B749-EFBAD92EED11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{377A7CCE-3E0D-4E91-B749-EFBAD92EED11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{377A7CCE-3E0D-4E91-B749-EFBAD92EED11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08DD0561-4709-4902-AA85-F70D6754237C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08DD0561-4709-4902-AA85-F70D6754237C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08DD0561-4709-4902-AA85-F70D6754237C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08DD0561-4709-4902-AA85-F70D6754237C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
